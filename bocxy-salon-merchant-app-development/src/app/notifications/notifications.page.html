@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Notifications ({{totalNotficationsCount}})</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="[notficationList].length > 0">
+    <div *ngFor="let req of notficationList">
+      <div *ngIf="req.type == 'APPOINTMENT'">
+        <ion-card
+          (click)="gotToAppointment(req.notificationId,req.read,req.appointmentId)"
+        >
+          <ion-item>
+            <ion-button fill="clear" class="notify-button">
+              <ion-icon
+                name="notifications-outline"
+                color="primary"
+                slot="start"
+              ></ion-icon>
+              <ion-badge
+                color="danger"
+                class="notify-badge ion-text-center"
+                slot="end"
+                *ngIf="req.read == 'N'"
+              >
+                New</ion-badge
+              >
+            </ion-button>
+
+            <ion-label>New Appointment!</ion-label>
+            <span slot="end" class="time-stamp"
+              >{{req.appointmentCreatedTime ? req.appointmentCreatedTime :
+              req.appointmentCreatedTimeCanceled}}</span
+            >
+          </ion-item>
+
+          <ion-card-content>
+            Hello! You have have a new appointment request from
+            {{req.customerName ? req.customerName : req.customerNameCanceled}}.
+            <!-- <ion-item lines="none">
+        <ion-button
+          color="secondary"
+          class="custom"
+          fill="outline"
+          size="small"
+          slot="end"
+          >Accept</ion-button
+        >
+        <ion-button
+          class="custom"
+          fill="outline"
+          color="medium"
+          size="small"
+          slot="end"
+          >Decline</ion-button
+        >
+      </ion-item> -->
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngIf="req.type == 'UPDATE'">
+        <ion-card>
+          <ion-item>
+            <ion-icon
+              name="notifications-outline"
+              color="primary"
+              slot="start"
+            ></ion-icon>
+            <ion-label>Bocxy Update!</ion-label>
+            <span slot="end" class="time-stamp">2 hours ago</span>
+          </ion-item>
+
+          <ion-card-content>
+            Dear customer, important feature has been added please update Bocxy
+            App. Visit <a>www.bocxy.com </a>for more details.
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  <div class="no-notification" *ngIf="[notficationList].length == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no Notifications to show
+    </h5>
+  </div>
+</ion-content>

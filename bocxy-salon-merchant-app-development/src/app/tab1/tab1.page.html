@@ -1,0 +1,312 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Home </ion-title>
+    <ion-buttons slot="end" id="notify-btn" class="notification-btn">
+      <!-- (click)="gotToNotifications()" -->
+      <ion-button
+        size="small"
+        fill="clear"
+        color="primary"
+        (click)="gotToNotifications()"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-badge
+          *ngIf="totalNotficationsCount > 0"
+          color="danger"
+          id="iosbadge"
+          class="notify-badge ion-text-center"
+          slot="end"
+        >
+          {{totalNotficationsCount}}</ion-badge
+        >
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- <ion-toolbar>
+    <ion-item lines="none">
+        <ion-input placeholder="Search for services and packages">
+            <ion-icon class="search-icon" name="search-outline" slot="end"></ion-icon>
+        </ion-input>
+
+    </ion-item>
+</ion-toolbar> -->
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="ion-no-padding">
+    <div class="heading">
+      <!-- <ion-icon
+        name="today-outline"
+        color="secondary"
+        class="icon-space"
+      ></ion-icon> -->
+      Appointment Status
+    </div>
+    <ion-grid class="services-grid">
+      <ion-row>
+        <ion-col size="6">
+          <!-- routerLink="/stylist-profile-complete/jksdfhjsdfjksdfksdfjhsfgksdfgkjdsfghjksdfghjksfg" -->
+          <ion-card
+            class="item-1"
+            color="light"
+            routerLink="/newappointmentlist"
+          >
+            <!-- <ion-card class="item-1" color="light"> -->
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon name="calendar" size="large"></ion-icon>
+                </h3>
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{newAppointmentCount}}</h1>
+                </ion-thumbnail>
+                <ion-label> </ion-label>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>New Appointments</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <!-- routerLink="/stylist-profile-complete/jksdfhjsdfjksdfksdfjhsfgksdfgkjdsfghjksdfghjksfg" -->
+          <ion-card class="item-2" color="light" routerLink="/appointmentlist">
+            <!-- <ion-card class="item-1" color="light"> -->
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon name="today-outline" size="large"></ion-icon>
+                </h3>
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{upComingAppoinmentCount}}</h1>
+                </ion-thumbnail>
+                <ion-label> </ion-label>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>Upcoming</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="item-3" color="light" routerLink="/walkincustomers">
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon
+                    name="walk-outline"
+                    size="large"
+                    slot="start"
+                  ></ion-icon>
+                </h3>
+
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{walkinAppoinmentCount}}</h1>
+                </ion-thumbnail>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>Walkin Customers</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="item-4" color="light" routerLink="/cancelled">
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon name="close-circle-outline" size="large"></ion-icon>
+                </h3>
+
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{cancelledAppointmentCount}}</h1>
+                </ion-thumbnail>
+                <ion-label> </ion-label>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>Cancelled</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <!--Ongoing-->
+      <!-- <ion-row>
+        <ion-col size="6">
+          <ion-card class="item-5" color="light" routerLink="/walkincustomers">
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon
+                    name="hourglass-outline"
+                    size="large"
+                    slot="start"
+                  ></ion-icon>
+                </h3>
+
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{walkinAppoinmentCount}}</h1>
+                </ion-thumbnail>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>Ongoing</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="item-6" color="light" routerLink="/cancelled">
+            <ion-card-header>
+              <div color="light">
+                <h3>
+                  <ion-icon name="calculator-outline" size="large"></ion-icon>
+                </h3>
+
+                <ion-thumbnail class="appointments" slot="end">
+                  <h1>{{cancelledAppointmentCount}}</h1>
+                </ion-thumbnail>
+                <ion-label> </ion-label>
+              </div>
+            </ion-card-header>
+            <ion-card-content>
+              <h4>Total</h4>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row> -->
+      <!--//Ongoing-->
+    </ion-grid>
+
+    <div *ngIf="false">
+      <div class="heading">Earning Revenue</div>
+
+      <ion-grid class="revenu-grid">
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-item color="light" lines="none">
+                <ion-thumbnail class="revenue" slot="end">
+                  <img src="./assets/img/graph-g.svg" />
+                </ion-thumbnail>
+                <ion-label>
+                  <p color="dark">Daily Revenue</p>
+                  <h2>
+                    <img class="inr-icon" src="./assets/icon/rupee.svg" /> 0,000
+                  </h2>
+                </ion-label>
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-item color="light" lines="none">
+                <ion-thumbnail class="revenue" slot="end">
+                  <img src="./assets/img/graph-y.svg" />
+                </ion-thumbnail>
+                <ion-label>
+                  <p color="dark">Weekly Revenue</p>
+                  <h2>
+                    <img class="inr-icon" src="./assets/icon/rupee.svg" /> 0,000
+                  </h2>
+                </ion-label>
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-item color="light" lines="none">
+                <ion-thumbnail class="revenue" slot="end">
+                  <img src="./assets/img/graph-p.svg" />
+                </ion-thumbnail>
+                <ion-label>
+                  <p color="dark">Monthly Revenue</p>
+                  <h2>
+                    <img class="inr-icon" src="./assets/icon/rupee.svg" /> 0,000
+                  </h2>
+                </ion-label>
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+
+  <!--Timeline-->
+  <ion-list>
+    <ion-list-header class="list-header">
+      Today Schedules
+      <div class="stylist-filter">
+        <ion-select
+          mode="ios"
+          placeholder="Filter"
+          interface="action-sheet"
+          [(ngModel)]="selectedStylist"
+          (ionChange)="onStylistchange()"
+        >
+          <ion-select-option
+            *ngFor="let stylist of stylistList"
+            [value]="stylist.accountId"
+            >{{stylist.firstName}}</ion-select-option
+          >
+        </ion-select>
+      </div>
+    </ion-list-header>
+    <ion-item class="ion-no-padding" lines="none">
+      <div class="history-tl-container">
+        <ul class="tl">
+          <ng-template
+            ngFor
+            let-item
+            [ngForOf]="onGoingAppointments"
+            let-i="index"
+          >
+            <li
+              [ngClass]="{'active': checkCurrentTimeSlot(item.slotStartTime, item.slotEndTime), 'tl-item': true}"
+            >
+              <div class="item-list" (click)="openDetail(item.appointmentId)">
+                <div class="item-title">{{item.services}}</div>
+                <div class="item-detail">Stylist - {{item.stylistName}}</div>
+                <div class="timestamp">
+                  <ion-badge [color]="item.color">
+                    {{item.bookingDate}}
+                  </ion-badge>
+                </div>
+              </div>
+            </li>
+          </ng-template>
+        </ul>
+      </div>
+      <ion-infinite-scroll
+        *ngIf="onGoingPage < onGoingAppointmentTotalPage"
+        threshold="100px"
+        (ionInfinite)="loadMoreOnGoingAppointmentData($event)"
+      >
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-item>
+    <!--Show If No Appointments-->
+    <div class="no-appointments" *ngIf="onGoingAppointmentTotalCount === 0">
+      <h5>
+        <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+        Currently no appointments to show
+      </h5>
+    </div>
+  </ion-list>
+  <!--//Timeline-->
+</ion-content>

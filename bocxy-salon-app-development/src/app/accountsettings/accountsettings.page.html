@@ -1,0 +1,240 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/tab4')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title
+      >{{'ACCOUNT_SETTINGS_ITEMS.ACCOUNT_SETTINGS_TITLE' |
+      translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="account-banner">
+    <ion-button
+      fill="clear"
+      size="small"
+      class="edit-btn"
+      (click)="editGenderIcon()"
+      *ngIf="!changeGender"
+    >
+      <ion-icon name="pencil" color="light"></ion-icon>
+    </ion-button>
+    <ion-item lines="none" class="bg-trans" *ngIf="changeGender">
+      <div class="switch-avatar">
+        <ion-avatar
+          class="animate__animated animate__fadeIn"
+          *ngFor="let icon of genderIcons"
+          (click)="getGender(icon)"
+        >
+          <img [src]="icon.name" />
+          <ion-text>{{icon.title}}</ion-text>
+        </ion-avatar>
+        <br />
+      </div>
+    </ion-item>
+    <div class="switch-avatar">
+      <ion-avatar
+        (click)="editGenderIcon()"
+        class="account-avatar animate__animated animate__fadeIn"
+        *ngIf="!changeGender"
+      >
+        <img *ngIf="selectedIcon" [src]="selectedIcon" />
+      </ion-avatar>
+    </div>
+  </div>
+
+  <div id="container" class="">
+    <!-- <h4 class="ion-text-center">Register</h4> -->
+    <div class="form-card">
+      <ion-card class="ac-setting-card">
+        <form *ngIf="profileForm" [formGroup]="profileForm">
+          <div class="form">
+            <div class="input-block">
+              <ion-label
+                >{{'ACCOUNT_SETTINGS_ITEMS.FIRST_NAME' | translate}}</ion-label
+              >
+              <ion-input
+                placeholder="Rakesh"
+                formControlName="firstName"
+              ></ion-input>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('firstName').touched) &&  profileForm.get('firstName').hasError('required')"
+              >
+                *Name is required
+              </p>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('firstName').touched) &&  profileForm.get('firstName').hasError('pattern')"
+              >
+                *Please enter valid name
+              </p>
+            </div>
+            <div class="input-block">
+              <ion-label
+                >{{'ACCOUNT_SETTINGS_ITEMS.LAST_NAME' | translate}}</ion-label
+              >
+              <ion-input placeholder="M" formControlName="lastName"></ion-input>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('lastName').touched) &&  profileForm.get('lastName').hasError('required')"
+              >
+                *Name is required
+              </p>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('lastName').touched) &&  profileForm.get('lastName').hasError('pattern')"
+              >
+                *Please enter valid name
+              </p>
+            </div>
+            <div
+              class="input-block sign-input"
+              *ngIf="userData && userData.roleCodes.includes('MR')"
+            >
+              <ion-label>Alternate Mobile number</ion-label>
+              <input
+                appBlockCopyPaste
+                class="ng2-tel-input"
+                type="tel"
+                ng2TelInput
+                [ng2TelInputOptions]="telInputOptions"
+                (hasError)="hasError($event)"
+                (ng2TelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+                formControlName="mobileNo"
+                name="mobileNo"
+                (input)="changePhone()"
+                (keypress)="numberValidate($event)"
+                #ngTelInput
+              />
+              <p
+                ion-text
+                class="field-err error-fix"
+                *ngIf="(formSubmitted || profileForm.get('mobileNo').touched) && profileForm.get('mobileNo').hasError('invalid_cell_phone')"
+              >
+                Please enter valid mobile number
+              </p>
+            </div>
+            <div class="input-block">
+              <ion-label
+                >{{'ACCOUNT_SETTINGS_ITEMS.EMAIL' | translate}}</ion-label
+              >
+              <ion-input
+                placeholder="rakesh12@gmail.com"
+                formControlName="email"
+              ></ion-input>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('email').touched) &&  profileForm.get('email').hasError('email')"
+              >
+                *Please enter valid email
+              </p>
+            </div>
+            <div
+              class="input-block"
+              (click)="openModal()"
+              [ngClass]="
+            translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+            >
+              <ion-button color="success" expand="block">
+                <ion-icon name="location" class="font-m"></ion-icon>
+                {{'ACCOUNT_SETTINGS_ITEMS.PICK_ADDRESS' | translate}}
+              </ion-button>
+            </div>
+            <div class="input-block">
+              <ion-label
+                >{{'ACCOUNT_SETTINGS_ITEMS.ADDRESS' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-textarea
+                rows="3"
+                formControlName="address"
+                [(ngModel)]="dataReturned.address"
+              ></ion-textarea>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('address').touched) &&  profileForm.get('address').hasError('required')"
+              >
+                *Address is required
+              </p>
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || profileForm.get('address').touched) &&  profileForm.get('address').hasError('pattern')"
+              >
+                *Please enter valid address
+              </p>
+            </div>
+
+            <ion-row>
+              <ion-col>
+                <ion-button
+                  expand="block"
+                  shape="round"
+                  color="light"
+                  (click)="goBack('/home/tabs/tab4')"
+                  class="ion-margin-top"
+                  >{{'COMMON.CANCEL' | translate}}</ion-button
+                >
+              </ion-col>
+              <ion-col>
+                <ion-button
+                  expand="block"
+                  color="primary"
+                  shape="round"
+                  type="submit"
+                  class="ion-margin-top"
+                  (click)="updateProfile()"
+                  >{{'COMMON.SAVE' | translate}}</ion-button
+                ></ion-col
+              >
+            </ion-row>
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-footer class="ion-no-border" position="bottom">
+  <ion-row class="ion-text-center button-row ion-margin-bottom">
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="light"
+        type="submit"
+        (click)="previous()"
+        class="ion-margin-top"
+        >Cancel</ion-button
+      >
+    </ion-col>
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        color="primary"
+        shape="round"
+        type="submit"
+        class="ion-margin-top"
+        (click)="previous()"
+        >Save</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer> -->

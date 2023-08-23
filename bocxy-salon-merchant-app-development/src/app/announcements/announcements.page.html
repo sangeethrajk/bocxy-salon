@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/tab1')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Announcement</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="heading">
+      <ion-icon
+        name="megaphone-outline"
+        color="secondary"
+        class="icon-space"
+      ></ion-icon>
+      Create Alerts/Announcements
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form
+    *ngIf="annoucementsServiceForm"
+    [formGroup]="annoucementsServiceForm"
+    (keyup.enter)="formSubmit()"
+    (submit)="formSubmit()"
+  >
+    <ion-list class="ion-no-padding">
+      <div class="form">
+        <div class="input-block">
+          <ion-label>Title</ion-label>
+          <ion-input type="text" formControlName="Title"></ion-input>
+        </div>
+        <p
+          ion-text
+          class="field-err error-fix"
+          *ngIf="(formSubmitted || annoucementsServiceForm.get('Title').dirty) &&  annoucementsServiceForm.get('Title').hasError('required')"
+        >
+          *Title is Required
+        </p>
+        <div class="input-block">
+          <ion-label>Customers</ion-label>
+          <ion-select
+            mode="ios"
+            placeholder="Select Customers"
+            interface="action-sheet"
+            formControlName="Customers"
+            class="ion-text-wrap"
+          >
+            <ion-select-option value="ALL" selected
+              >All Customers</ion-select-option
+            >
+            <ion-select-option value="REGULAR" selected
+              >Regular Customers</ion-select-option
+            >
+          </ion-select>
+        </div>
+        <p
+          ion-text
+          class="field-err"
+          *ngIf="(formSubmitted || annoucementsServiceForm.get('Customers').dirty) &&  annoucementsServiceForm.get('Customers').hasError('required')"
+        >
+          *Customers is Required
+        </p>
+
+        <div class="input-block mt-10">
+          <ion-label>Description </ion-label>
+          <ion-textarea
+            formControlName="Description"
+            type="text"
+          ></ion-textarea>
+        </div>
+      </div>
+      <p
+        ion-text
+        class="field-err Description"
+        *ngIf="( formSubmitted ||annoucementsServiceForm.get('Description').dirty ) && annoucementsServiceForm.get('Description').hasError('required')"
+      >
+        *Description is Required
+      </p>
+    </ion-list>
+    <ion-row class="ion-text-center button-row">
+      <ion-col size="6">
+        <ion-button
+          expand="block"
+          color="light"
+          shape="round"
+          type="submit"
+          (click)="goBack('/home/tabs/tab1')"
+          >Cancel</ion-button
+        >
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="block" shape="round" color="primary" type="submit"
+          >Save</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

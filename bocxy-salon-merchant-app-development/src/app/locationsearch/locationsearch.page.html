@@ -1,0 +1,99 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title>{{modalTitle}}</ion-title>
+    <ion-buttons
+      slot="end"
+      id="notify-btn"
+      class="notification-btn"
+      (click)="closeModal()"
+    >
+      <ion-button> Close </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-searchbar
+      [(ngModel)]="autocomplete.input"
+      (ionInput)="UpdateSearchResults()"
+      placeholder="Search for a place"
+      (ionClear)="ClearAutocomplete()"
+    ></ion-searchbar>
+  </ion-toolbar>
+  <ion-list class="autocomplete-list" [hidden]="autocompleteItems.length == 0">
+    <ion-item
+      *ngFor="let item of autocompleteItems"
+      tappable
+      (click)="SelectSearchResult(item)"
+    >
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <ion-item lines="none">
+    <ion-button
+      class="current-location-btn"
+      (click)="loadMap()"
+      shape="round"
+      fill="outline"
+    >
+      <ion-icon slot="start" name="locate"></ion-icon>
+      Current Location
+    </ion-button>
+  </ion-item>
+</ion-header>
+<ion-content fullscreen>
+  <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="ShowCords()" ion-fab color="tertiary">
+      <ion-icon name="information-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+  <div class="map-wrapper">
+    <div id="map_center">
+      <div class="pin"></div>
+      <div class="pulse"></div>
+    </div>
+    <div #map id="map" style="height: 100%"></div>
+  </div>
+  <ion-item lines="none" color="light">
+    <div class="address-block">
+      <h6 class="ion-padding">
+        <ion-icon name="location-outline" color="secondary"></ion-icon>
+        <span class="bold">Address :</span><br />
+        {{geoAddress.address}}
+      </h6>
+    </div>
+  </ion-item>
+  <ion-footer class="ion-no-border">
+    <ion-row>
+      <ion-col class="ion-float-left">
+        <ion-button
+          expand="block"
+          shape="round"
+          color="light"
+          type="button"
+          (click)="cancel()"
+          >Cancel</ion-button
+        >
+      </ion-col>
+      <ion-col class="ion-float-right">
+        <ion-button
+          expand="block"
+          color="primary"
+          shape="round"
+          type="button"
+          (click)="closeModal()"
+          >Confirm</ion-button
+        >
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-button
+      expand="full"
+      shape="round"
+      class="continue-btn"
+      color="primary"
+      (click)="closeModal()"
+    >
+      Confirm
+    </ion-button> -->
+  </ion-footer>
+</ion-content>

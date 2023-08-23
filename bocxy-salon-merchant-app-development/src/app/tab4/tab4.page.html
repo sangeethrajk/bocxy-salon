@@ -1,0 +1,103 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Customers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="segment-item">
+      <ion-segment
+        [(ngModel)]="customers"
+        color="secondary"
+        (ionChange)="segmentChanged($event)"
+      >
+        <ion-segment-button value="0">
+          <ion-label>Visited</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+          <ion-label>Regular</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="customers == 0">
+    <ion-list class="customer-list">
+      <ion-item *ngFor="let customer of Visited">
+        <ion-label>
+          <h2>{{customer.firstName}} {{customer.lastName}}</h2>
+          <p>{{customer.mobileNo}}</p>
+        </ion-label>
+        <ion-note slot="end" color="primary">
+          <a href="tel:{{customer.mobileNo}}">
+            <ion-icon name="call-outline"></ion-icon>
+          </a>
+        </ion-note>
+      </ion-item>
+      <!--Show If No Customers-->
+      <div class="no-customers" *ngIf="!Visited || Visited.length === 0">
+        <h5>
+          <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+          Currently no customers to show
+        </h5>
+      </div>
+      <ion-infinite-scroll
+        *ngIf="pageVisited < totalPageVisited"
+        threshold="100px"
+        (ionInfinite)="loadMoreData($event)"
+      >
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </div>
+
+  <div *ngIf="customers == 1">
+    <ion-list class="customer-list">
+      <ion-item *ngFor="let customer of Regular">
+        <ion-label>
+          <h2>{{customer.firstName}} {{customer.lastName}}</h2>
+          <p>{{customer.mobileNo}}</p>
+        </ion-label>
+        <ion-note slot="end" color="primary">
+          <a href="tel:{{customer.mobileNo}}">
+            <ion-icon name="call-outline">
+              <!-- <a href="tel:{{customer.mobileNo}}">
+                          </a> -->
+            </ion-icon></a
+          >
+        </ion-note>
+      </ion-item>
+      <!--Show If No Customers-->
+      <div class="no-customers" *ngIf="!Regular || Regular.length === 0">
+        <h5>
+          <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+          Currently no customers to show
+        </h5>
+      </div>
+      <ion-infinite-scroll
+        *ngIf="pageRegular < totalPageRegular"
+        threshold="100px"
+        (ionInfinite)="loadMoreDataRegular($event)"
+      >
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </div>
+</ion-content>

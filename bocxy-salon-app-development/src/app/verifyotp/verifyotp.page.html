@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-img class="logo" src="./assets/icon/bocxy-logo.svg"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="">
+    <h4 class="ion-text-center bold" *ngIf="reqOTP">Enter Verfication Code</h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <!--OTP Validation Errors-->
+        <div *ngIf="reqOTP" class="validation-error">
+          <ion-label color="danger" *ngIf="otpError || inValidOtpError">
+            Please Enter Valid OTP
+          </ion-label>
+          <ion-label color="danger" *ngIf="accountError">
+            Problem in creating account
+          </ion-label>
+        </div>
+        <form [formGroup]="onOtpForm" (submit)="verifyOtp()" *ngIf="reqOTP">
+          <div class="form animate__animated animate__fadeInDown">
+            <p>
+              We have sent a 4 digit verification code to your registered mobile
+              number
+            </p>
+            <div class="otp-block">
+              <ng-otp-input
+                (onInputChange)="onOtpChange($event)"
+                [config]="config"
+              >
+              </ng-otp-input>
+            </div>
+
+            <p class="ion-text-center otp-time-text" *ngIf="timeLeft">
+              {{dateService.secondsToTimeFormat(timeLeft)}}
+            </p>
+            <div class="ion-text-center" item-center>
+              <a *ngIf="resendOtpEnable" href="javascript:void(0)">
+                <span class="resend-btn" (click)="resend()">Resend</span>
+              </a>
+            </div>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              [disabled]="verifyBtnEnable"
+              class="ion-margin-top"
+              >Verify</ion-button
+            >
+            <ion-button
+              expand="block"
+              shape="round"
+              color="light"
+              type="submit"
+              class="ion-margin-top"
+              (click)="previous()"
+              >Back</ion-button
+            >
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

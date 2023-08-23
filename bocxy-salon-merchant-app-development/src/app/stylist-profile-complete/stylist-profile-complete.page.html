@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" *ngIf="!passwordToggle">
+    <!-- <h4 class="ion-text-center">Register</h4> -->
+    <div class="validation-error">
+      <ion-label color="danger" *ngIf="errCount == 1">
+        {{fieldName}}{{' is '}}{{type}}
+      </ion-label>
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Invalid'">
+        Please Enter Valid Details</ion-label
+      >
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Mandatory'">
+        Please Enter Mandatory Fields</ion-label
+      >
+    </div>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <form
+          *ngIf="registerProfile"
+          [formGroup]="registerProfile"
+          (keyup.enter)="saveProfile()"
+          (submit)="saveProfile()"
+        >
+          <!--Register Block-->
+          <div class="form">
+            <div class="input-block">
+              <ion-label>Full Name</ion-label><sup style="color: red">*</sup>
+              <ion-input
+                inputmode="text"
+                (ionChange)="onChangeFields()"
+                formControlName="firstName"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label>Email</ion-label>
+              <ion-input
+                (ionChange)="onChangeFields()"
+                formControlName="email"
+              ></ion-input>
+            </div>
+
+            <!-- <div class="input-block" (click)="onLocationFocus()">
+                            <ion-label>Shop Location</ion-label>
+                            <ion-input formControlName="firstName"></ion-input>
+                        </div> -->
+            <div class="input-block">
+              <ion-label>Address</ion-label>
+              <ion-textarea
+                (ionChange)="onChangeFields()"
+                formControlName="address"
+              ></ion-textarea>
+            </div>
+            <ion-button
+              expand="full"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+            >
+              Continue
+            </ion-button>
+            <!-- routerLink="/security-question" -->
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+  <div id="container" *ngIf="passwordToggle">
+    <h4 class="ion-text-center">Create Your Password</h4>
+    <div class="validation-error" *ngIf="valueChanged || formSubmitted">
+      <ion-label color="danger" *ngIf="compareConfirmPassword">
+        Passwords Does Not Match
+      </ion-label>
+      <ion-label color="danger" *ngIf="mandatory">
+        Please Enter All Fields
+      </ion-label>
+      <ion-label color="danger" *ngIf="patternPassword">
+        Password should contain numbers and alphabets with atleast 6 characters
+      </ion-label>
+    </div>
+
+    <div class="form-card ion-padding-top">
+      <ion-card class="signup-card">
+        <form
+          [formGroup]="passwordForm"
+          (keyup.enter)="savePassword()"
+          (submit)="savePassword()"
+        >
+          <div class="form">
+            <div class="input-block">
+              <ion-label>Create Password</ion-label>
+              <ion-input
+                formControlName="password"
+                [type]="isTextFieldType ? 'text' : 'password'"
+                (input)="comparePassword()"
+              ></ion-input>
+              <div class="show-password">
+                <ion-icon
+                  [name]="isTextFieldType ? 'eye-off' : 'eye'"
+                  (click)="togglePasswordFieldType()"
+                >
+                </ion-icon>
+              </div>
+            </div>
+            <div class="input-block">
+              <ion-label>Confirm Password</ion-label>
+              <ion-input
+                formControlName="confirmPassword"
+                [type]="isTextFieldType ? 'text' : 'password'"
+                (input)="comparePassword()"
+              ></ion-input>
+            </div>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+              >Submit</ion-button
+            >
+            <!-- routerLink="/login" -->
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="isKeyboardHide"> </ion-footer>

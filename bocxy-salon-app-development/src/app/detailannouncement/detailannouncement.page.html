@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Announcement Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf="annoucement">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle
+        >{{dateFormat(annoucement.createdAt)}}</ion-card-subtitle
+      >
+      <ion-card-title>{{annoucement.title}}!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content> {{annoucement.content}} </ion-card-content>
+    <ion-card-content> {{annoucement._storeName}} </ion-card-content>
+  </ion-card>
+</ion-content>

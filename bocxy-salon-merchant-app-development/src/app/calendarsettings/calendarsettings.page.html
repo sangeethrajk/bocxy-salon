@@ -1,0 +1,124 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Calendar Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="segment-item">
+      <ion-segment
+        [(ngModel)]="bhours"
+        mode="md"
+        color="secondary"
+        value="regular"
+        (ionChange)="segmentChanged($event)"
+      >
+        <ion-segment-button value="regular">
+          <ion-label>Regular</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="special">
+          <ion-label>Special</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #scrollArea scrollEvents="true" fullscreen>
+  <!--Regular Business Hours-->
+  <div *ngIf="bhours ==='regular'">
+    <!-- <ion-card>
+      <ion-item>
+        <ion-label>
+          <div class="time-box">
+            <ion-text>Start Time </ion-text>
+            <ion-badge class="v-center" color="success">08.00 AM</ion-badge>
+          </div>
+          <div class="time-box">
+            <ion-text>End Time </ion-text>
+            <ion-badge class="v-center" color="success">10.00 PM</ion-badge>
+          </div>
+        </ion-label>
+        <ion-button fill="outline" slot="end" routerLink="/createregularbh"
+          ><ion-icon name="create-outline"></ion-icon
+        ></ion-button>
+      </ion-item>
+
+      <ion-card-content> This is your regular slot </ion-card-content>
+    </ion-card> -->
+    <app-permanentslots></app-permanentslots>
+    <ion-fab
+      class="regular-fab"
+      [appHideOnScroll]="scrollArea"
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+      routerLink="/regularbhhistory"
+    >
+      <ion-fab-button color="indigo">
+        <ion-icon name="refresh-circle-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <!--Special Business Hours-->
+  <div *ngIf="bhours ==='special'" class="form">
+    <app-specialslots></app-specialslots>
+    <!-- <ion-card class="special-hours-card">
+      <ion-card-header>
+        <ion-card-title> Diwali Slot </ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-label>
+          <div class="special-time-box">
+            <ion-text>Start Date </ion-text>
+            <ion-badge class="v-center" color="success">08.00 AM</ion-badge>
+          </div>
+          <div class="special-time-box">
+            <ion-text>Start Time</ion-text>
+            <ion-badge class="v-center" color="success">08.00 AM</ion-badge>
+          </div>
+          <div class="special-time-box">
+            <ion-text>End Date </ion-text>
+            <ion-badge class="v-center" color="success">10.00 PM</ion-badge>
+          </div>
+          <div class="special-time-box">
+            <ion-text>End Time</ion-text>
+            <ion-badge class="v-center" color="success">08.00 AM</ion-badge>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-card> -->
+
+    <ion-fab
+      class="regular-fab"
+      slot="fixed"
+      horizontal="end"
+      vertical="bottom"
+      [appHideOnScroll]="scrollArea"
+    >
+      <ion-fab-button color="indigo">
+        <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon
+      ></ion-fab-button>
+      <ion-fab-list side="top">
+        <div class="custom-fab" (click)="navigate('special')">
+          <ion-button>Create Special Slot</ion-button>
+          <ion-fab-button color="secondary" size="small"
+            ><ion-icon name="create-outline"></ion-icon
+          ></ion-fab-button>
+        </div>
+        <!-- <div class="custom-fab">
+          <ion-button routerLink="/specialbhhistory">View History</ion-button>
+          <ion-fab-button color="secondary" size="small"
+            ><ion-icon name="refresh-circle-outline"></ion-icon
+          ></ion-fab-button>
+        </div> -->
+      </ion-fab-list>
+    </ion-fab>
+  </div>
+</ion-content>

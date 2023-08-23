@@ -1,0 +1,74 @@
+:host {
+  .support-call {
+    border: 1px solid #ddd;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .heading {
+    width: 100%;
+    padding: 7px 18px;
+    position: relative;
+    font-size: 16px;
+    color: #444;
+    border-bottom: 1px dashed #444;
+  }
+
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  ion-textarea {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+  }
+
+  .button-row {
+    padding: 0 20px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .banner-card {
+    box-shadow: none;
+  }
+  svg#support-banner {
+    width: 100%;
+    height: fit-content;
+  }
+  /*Error style*/
+  .field-err {
+    color: red;
+    padding: 0 7px;
+    text-align: end;
+    margin-bottom: 0px;
+    margin: 0;
+    font-size: 12px;
+    position: relative;
+  }
+
+  .segment-item {
+    background: #f4f4f4;
+    margin: 0 auto;
+    width: 100%;
+    ion-label {
+      color: inherit;
+      color: #444;
+    }
+  }
+  ion-segment-button {
+    font-size: 3.5vw;
+  }
+  .call-block {
+    padding: 15px 0;
+  }
+}

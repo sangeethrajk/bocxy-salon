@@ -1,0 +1,143 @@
+:host {
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 22px;
+    color: #a9aaac;
+  }
+  .font-m {
+    font-size: 20px;
+  }
+  .color-dark {
+    color: #444;
+  }
+  .star-text {
+    color: #747574;
+    font-size: 11px;
+  }
+  ion-card-title {
+    font-size: 1rem;
+    color: #444;
+    font-weight: bold;
+  }
+  .search-filter-block {
+    padding: 0 4px 0 0;
+    width: 100%;
+  }
+  .filter-btn {
+    border: 1px solid #a09e9e;
+    border-radius: 4px;
+    font-size: 22px;
+    line-height: 5px;
+    color: #a09e9e;
+    padding: 9px;
+  }
+  .category-toolbar {
+    box-shadow: #ddd 1px 1px 3px;
+  }
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top: 5px;
+    .card {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .category-item {
+    overflow-x: auto;
+    --background: none;
+    padding: 4px 0;
+
+    ion-button.category-button {
+      --color: #444;
+      margin-right: 5px;
+      border-radius: 0;
+      height: 30px;
+      --background: #ddd;
+      --box-shadow: none;
+    }
+    ion-item {
+      --backgroud: none;
+    }
+  }
+  .selected-btn {
+    transition: 0.2s ease-in-out;
+    position: relative;
+    z-index: 5;
+    border: none !important;
+    --color: #fff !important;
+    --background: #03a9f4 !important;
+    transform: scale(1.05);
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .service-card {
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .no-service {
+    position: relative;
+    left: 0;
+    top: 20%;
+    text-align: center;
+    right: 0;
+    color: #6a6a6a;
+    vertical-align: middle;
+    bottom: 0;
+    padding: 5px;
+    ion-icon {
+      font-size: 25px;
+    }
+    h5 {
+      font-size: 14px !important;
+    }
+  }
+
+  .allservice-card {
+    box-shadow: none;
+    border-bottom: 1px solid #c3c3c3;
+    border-radius: 0;
+    ion-card-subtitle {
+      text-transform: capitalize;
+      font-weight: normal;
+    }
+    ion-button.book-now {
+      font-size: 12px;
+      margin: 0.4rem auto 0px auto;
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+    }
+    .see-all-service-btn {
+      ion-icon {
+        margin-right: 5px;
+      }
+    }
+    .image-holder {
+      width: 100%;
+      img {
+        width: 100%;
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        border-radius: 10px;
+      }
+    }
+    ion-card-content {
+      background: #f8f8f8;
+    }
+  }
+}

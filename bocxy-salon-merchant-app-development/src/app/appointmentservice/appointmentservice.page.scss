@@ -1,0 +1,24 @@
+:host {
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  ion-button {
+    font-size: 4vw;
+  }
+
+  .errMsg{        
+    font-size: small;  
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right:10px;     
+}
+}

@@ -1,0 +1,139 @@
+:host {
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+  }
+
+  input,
+  ion-select {
+    border-radius: 7px;
+    border-style: solid;
+    border-width: 1px;
+    border: 1px solid #737373;
+    background: #fff;
+    height: 42px;
+    width: 100%;
+  }
+
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .custom-input {
+    padding-left: 10px;
+    margin-top: 5px;
+    text-transform: capitalize;
+  }
+
+  .select-service-msg {
+    text-align: center;
+    font-size: small;
+    color: gray;
+    background: #f8f8f8;
+  }
+
+  .validation-error {
+    font-size: smaller;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top: 5px;
+    .card {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .stylist-item {
+    overflow-x: auto;
+    --background: none;
+    background: #f8f8f8;
+    padding: 1px 0;
+    margin: 0 5px;
+    ion-button {
+      margin: 0 2px;
+      color: #444;
+      --background: none;
+      --box-shadow: none;
+      border: 1px solid #dbdbdb;
+      display: inline-block;
+      ion-icon {
+        margin-right: 2px;
+        font-size: 14px;
+      }
+    }
+    ion-item {
+      --backgroud: none;
+      ion-button {
+        border-radius: 0;
+      }
+    }
+  }
+
+  .selected-stylist {
+    // border: 1px solid #e82264;
+    transition: 0.2s ease-in-out;
+    position: relative;
+    z-index: 5;
+    border-radius: 0;
+    border: none !important;
+    color: #fff !important;
+    --background: #e82264 !important;
+    // transform: scale(1.1);
+  }
+
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+  .sub-heading {
+    width: 100%;
+    padding: 7px 4px;
+    font-size: 14px;
+    color: #444;
+    font-weight: bold;
+  }
+  .booking-block {
+    margin-bottom: 40px;
+    ion-datetime {
+      padding: 0 4px;
+    }
+  }
+}

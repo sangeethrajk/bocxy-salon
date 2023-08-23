@@ -1,0 +1,174 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="">
+    <!-- <h4 class="ion-text-center">Register</h4> -->
+    <div class="validation-error">
+      <ion-label color="danger" *ngIf="errCount == 1"
+        >{{fieldName}}{{' is '}}{{type}}</ion-label
+      >
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Invalid'">
+        Please Enter Valid Details</ion-label
+      >
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Mandatory'">
+        Please Enter Mandatory Fields</ion-label
+      >
+    </div>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <form
+          [formGroup]="registerProfile"
+          (keyup.enter)="saveProfile()"
+          (submit)="saveProfile()"
+        >
+          <!--Register Block-->
+          <div class="form">
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.FULL_NAME' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-input
+                inputmode="text"
+                (ionChange)="onChangeFields()"
+                formControlName="firstName"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.SALON_SPA_NAME' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-input
+                (ionChange)="onChangeFields()"
+                formControlName="storeName"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.STORE_TYPE' | translate}}</ion-label
+              >
+              <sup style="color: red">*</sup>
+              <ion-select
+                interface="action-sheet"
+                cancel-text="close"
+                mode="ios"
+                placeholder="Select Store Type"
+                formControlName="storeTypeId"
+                class="ion-text-wrap"
+              >
+                <ion-select-option
+                  *ngFor="let item of storeTypesList"
+                  [value]="item.storeTypeId"
+                  >{{item.type}}</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.EMAIL' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-input
+                (ionChange)="onChangeFields()"
+                formControlName="email"
+              ></ion-input>
+            </div>
+            <div (click)="openModal()">
+              <ion-button
+                color="success"
+                expand="full"
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+              >
+                <ion-icon name="location" class="font-m"></ion-icon>
+                {{'LOGIN_ITEMS.PICK_SHOP_LOCATION' | translate}}
+              </ion-button>
+            </div>
+            <div class="input-block" [hidden]="true">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.SHOP_LOCATION' | translate}}</ion-label
+              >
+              <ion-input
+                [(ngModel)]="dataReturned.location"
+                formControlName="ShopLocation"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.SHOP_LOCATION' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-textarea
+                rows="3"
+                (ionChange)="onChangeFields()"
+                formControlName="address"
+                [(ngModel)]="dataReturned.address"
+              ></ion-textarea>
+            </div>
+            <ion-item lines="none" class="termsconditions">
+              <ion-checkbox
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="acceptTc"
+                color="secondary"
+                slot="start"
+              ></ion-checkbox>
+              <ion-label
+                >I accept the
+                <a routerLink="/termscondition"
+                  >terms & conditions</a
+                ></ion-label
+              >
+            </ion-item>
+            <ion-button
+              expand="full"
+              shape="round"
+              [disabled]="!acceptTc"
+              color="primary"
+              type="submit"
+              class="ion-margin-top continue-btn"
+              [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+              >{{'COMMON.CONTINUE' | translate}}</ion-button
+            >
+            <!-- routerLink="/security-question" -->
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="isKeyboardHide">
+  <ion-toolbar class="ion-text-center">
+    <p
+      [ngClass]="
+    translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+    >
+      {{'LOGIN_ITEMS.ALREADY_USER' | translate}}
+      <span class="bold text-secondary" routerLink="/login"
+        >{{'LOGIN_ITEMS.SIGN_IN' | translate}}</span
+      >
+    </p>
+  </ion-toolbar>
+</ion-footer>

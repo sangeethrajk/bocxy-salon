@@ -1,0 +1,137 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Walkin Customers ({{totalAppointmentCount}})</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-toolbar>
+    <div class="form">
+      <div class="input-block">
+        <ion-input
+          type="date"
+          (input)="filterChange($event.target.value)"
+          [max]="maxFilterDate"
+          [min]="minFilterDate"
+          [value]="selectedAppointmentDate"
+          [(ngModel)]="dateFilter"
+          [ngClass]="dateFilter ? ' ' : 'placeholder'"
+        ></ion-input>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="totalAppointmentCount > 0">
+    <div class="list-heading">{{appointmentDate}}</div>
+    <div *ngFor="let item of appointments let i=index">
+      <!--List Block-->
+      <div class="appointment-list">
+        <ion-item detail="false" (click)="openDetail(item.appointmentId)">
+          <ion-label>
+            <h2>
+              <div class="wrap-content ion-text-wrap">
+                <ion-text class="ion-text-start customer-name"
+                  >{{item.customerName}}</ion-text
+                >
+              </div>
+              <ion-text class="time-stamp">
+                {{calculateBookingtime(item.createdAt)}}</ion-text
+              >
+            </h2>
+            <h3>
+              <div class="wrap-content ion-text-wrap">
+                {{item.bookedServicesList}}
+              </div>
+            </h3>
+            <h3>
+              <span>
+                Booking Date : {{item.bookingDate | date:'dd/MM/yyyy'}}</span
+              >
+            </h3>
+            <h3>
+              <span> Time Slot : {{getAMPM(item.slotName)}}</span>
+              <div class="price-tag">
+                <ion-badge color="secondary"
+                  >Rs. {{item.totalPriceExpected}}</ion-badge
+                >
+              </div>
+            </h3>
+            <h3 *ngIf="item.stylistName">
+              <span> Styist : {{item.stylistName}}</span>
+            </h3>
+          </ion-label>
+        </ion-item>
+        <ion-row>
+          <ion-col size="6">
+            <span class="check-in">
+              <ion-item lines="none" class="no-background">
+                <ion-checkbox
+                  [(ngModel)]="item.isCheckedIn"
+                  color="primary"
+                  slot="start"
+                  [disabled]="item.isCheckedIn || (this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+                  (click)="presentCheckinAlertConfirm(item,i)"
+                ></ion-checkbox>
+                <ion-label>Check Out</ion-label>
+              </ion-item>
+            </span>
+          </ion-col>
+          <ion-col size="6" class="ion-no-margin">
+            <div class="button-block">
+              <!-- <ion-button *ngIf="!(item.status!='PENDING')"
+              color="primary"
+              class="custom"
+              fill="outline"
+              size="small"
+              [disabled]="item.status!='PENDING'"
+              (click)="presentAcceptAlertConfirm(item,i)"
+              >Accept</ion-button
+            > -->
+              <ion-button
+                *ngIf="!(item.status == 'CHECKIN' || item.status == 'COMPLETED')"
+                class="custom"
+                fill="outline"
+                color="medium"
+                size="small"
+                [disabled]="item.status == 'CHECKIN' || item.status == 'COMPLETED' || (this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+                (click)="presentCancelAlertConfirm(item,i)"
+                >Cancel</ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!--List Block End-->
+    </div>
+    <ion-infinite-scroll
+      *ngIf="page < totalPages"
+      threshold="100px"
+      (ionInfinite)="loadMoreData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <!--Show If No Appointments-->
+  <div class="no-appointments" *ngIf="totalAppointmentCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no appointments to show
+    </h5>
+  </div>
+  <!-- <div *ngIf="totalAppointmentCount == 0" class="noAppointmentsMsgDiv">
+  <ion-col size="12">No Appoinments available</ion-col>
+</div> -->
+</ion-content>

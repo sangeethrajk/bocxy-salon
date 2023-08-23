@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Regular Business Hours History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card
+    class="regular-hours-card"
+    *ngFor="let slotsHistroy of slotsHistroys"
+  >
+    <ion-card-header>
+      <ion-card-title>{{slotsHistroy.name}} </ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-label>
+        <div class="special-time-box">
+          <ion-text>Start Date </ion-text>
+          <ion-badge class="v-center" color="light"
+            >{{slotsHistroy.startDate | date:'dd/MM/yyyy'}}</ion-badge
+          >
+        </div>
+        <div class="special-time-box" *ngIf="slotsHistroy.openingTime">
+          <ion-text>Opening Time</ion-text>
+          <ion-badge class="v-center" color="light"
+            >{{slotsHistroy.openingTime}}</ion-badge
+          >
+        </div>
+        <div class="special-time-box" *ngIf="slotsHistroy.closingTime">
+          <ion-text>Closing Time</ion-text>
+          <ion-badge class="v-center" color="light"
+            >{{slotsHistroy.closingTime}}</ion-badge
+          >
+        </div>
+        <div class="special-time-box">
+          <ion-text>End Date </ion-text>
+          <ion-badge class="v-center" color="light"
+            >{{slotsHistroy.endDate | date:'dd/MM/yyyy'}}</ion-badge
+          >
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-card-content *ngIf="slotsHistroy.weekdayFlag === 'Y'">
+      <ion-grid>
+        <ion-row class="border-b">
+          <ion-col size="6" class="list-heading">Weekdays</ion-col>
+          <ion-col size="3" class="list-heading ion-text-center">Open</ion-col>
+          <ion-col size="3" class="list-heading ion-text-center">Close</ion-col>
+        </ion-row>
+        <div *ngFor="let item of slotsHistroy.weekdays">
+          <ion-row class="weekdays-col">
+            <ion-col size="6" class="days"
+              >{{weekDayMapping[item.day]}}</ion-col
+            >
+            <ion-col size="3" class="ion-text-center">
+              <ion-badge class="v-center" color="light"
+                >{{item.openingTime}}</ion-badge
+              ></ion-col
+            >
+            <ion-col size="3" class="ion-text-center">
+              <ion-badge class="v-center" color="light"
+                >{{item.closingTime}}</ion-badge
+              ></ion-col
+            >
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div class="no-slots" *ngIf="slotsHistroys.length === 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no slots to show
+    </h5>
+  </div>
+</ion-content>

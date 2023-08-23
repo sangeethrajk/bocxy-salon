@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeIn">
+  <div id="container" class="">
+    <h4 class="ion-text-center">Answer your question</h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <div class="validation-error">
+          <ion-label color="danger" *ngIf="incorrectError">
+            Wrong answer
+          </ion-label>
+        </div>
+        <form novalidate>
+          <div *ngIf="questions" class="form">
+            <div class="input-block">
+              <ion-label>
+                <h2>{{questions[index].question}}</h2>
+              </ion-label>
+              <ion-input
+                type="text"
+                name="answer"
+                [(ngModel)]="answer"
+                (input)="changeAnswer($event)"
+              ></ion-input>
+            </div>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="button"
+              class="ion-margin-top"
+              [disabled]="!answer"
+              (click)="validateSecurityQuestion()"
+            >
+              Submit
+            </ion-button>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="light"
+              type="button"
+              (click)="previous()"
+              class="ion-margin-top"
+            >
+              Back
+            </ion-button>
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

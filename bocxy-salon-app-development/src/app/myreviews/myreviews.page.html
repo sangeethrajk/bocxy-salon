@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Reviews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label class="title">Tony & Guy Essensuals</ion-label>
+    </ion-item>
+    <ion-card-header class="list-card-header">
+      <ion-card-subtitle> Gold Facial </ion-card-subtitle>
+      <ion-card-subtitle> 14 October 2020 </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <div class="input-block">
+          <ion-textarea placeholder="Write a review (Optional)"></ion-textarea>
+        </div>
+      </ion-item>
+      <ion-row>
+        <ion-col size="8">
+          <form [formGroup]="form">
+            <div class="star-container">
+              <div class="stars">
+                <ngx-star-rating
+                  formControlName="rating1"
+                  [id]="'rating'"
+                ></ngx-star-rating>
+              </div>
+              <!-- <div>Rating: {{form.value.rat?ing1}}</div> -->
+              <!-- <p>form is valid: {{ form.valid ? 'true' : 'false' }}</p> -->
+            </div>
+          </form>
+        </ion-col>
+        <ion-col size="4" class="ion-text-center">
+          <ion-button
+            class="review-btn"
+            size="small"
+            color="primary"
+            shape="round"
+            >Submit</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="animate__animated animate__fadeIn">
+  <div id="container" class="">
+    <h4 class="ion-text-center">Choose your recovery options</h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <ion-list>
+          <ion-item color="primary" (click)="answerquestion()">
+            <ion-icon
+              name="shield-outline"
+              slot="end"
+              color="secondary"
+            ></ion-icon>
+            <ion-label>Answer your security question?</ion-label>
+          </ion-item>
+          <ion-item color="primary" (click)="recoveryotp()">
+            <ion-icon
+              name="phone-portrait-outline"
+              slot="end"
+              color="secondary"
+            ></ion-icon>
+            <ion-label>Get verification code</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-button
+          expand="block"
+          shape="round"
+          color="light"
+          type="submit"
+          (click)="previous()"
+          class="ion-margin-top"
+          >Back</ion-button
+        >
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

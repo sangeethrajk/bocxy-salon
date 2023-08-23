@@ -1,0 +1,359 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/storeconfig')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Appointment Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list class="ion-no-padding">
+    <div class="heading">
+      <ion-icon
+        name="construct-outline"
+        color="secondary"
+        class="icon-space"
+      ></ion-icon>
+      Configure your stylist and slots
+    </div>
+    <!-- <h6 class="header-h6"> Configure your stylist and slot</h6> -->
+    <form [formGroup]="slotForm">
+      <div class="form">
+        <div class="input-block">
+          <ion-label>Select Slot Type</ion-label>
+          <ion-select
+            mode="ios"
+            placeholder="Select Slot Type"
+            class="ion-text-wrap"
+            interface="action-sheet"
+            (ionChange)="onSlotTypeChange()"
+            formControlName="slotType"
+            name="slotType"
+          >
+            <ion-select-option value="regular">Regular</ion-select-option>
+            <ion-select-option value="special">Special</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div class="input-block">
+          <ion-label>Choose Slot Configuration</ion-label>
+          <ion-select
+            *ngIf="slotForm.get('slotType').value === 'regular'"
+            [interfaceOptions]="customActionSheetOptionsSlot"
+            interface="action-sheet"
+            cancel-text="close"
+            mode="ios"
+            placeholder="Select Slot Configuration"
+            class="ion-text-wrap"
+            formControlName="slot"
+            (ionChange)="changeSlotDropdown($event)"
+          >
+            <ion-select-option
+              *ngFor="let slotList of merchantSlotList"
+              [value]="slotList.merchantSlotId"
+              >{{slotList.name}}</ion-select-option
+            >
+          </ion-select>
+          <ion-select
+            *ngIf="!slotForm.get('slotType').value || slotForm.get('slotType').value === 'special'"
+            [interfaceOptions]="customActionSheetOptionsSlot"
+            interface="action-sheet"
+            cancel-text="close"
+            mode="ios"
+            placeholder="Select Slot Configuration"
+            class="ion-text-wrap"
+            formControlName="slot"
+            (ionChange)="changeSlotDropdown($event)"
+          >
+            <ion-select-option
+              *ngFor="let slotList of merchantSpecialSlotList"
+              [value]="slotList.merchantSpecialSlotId"
+              >{{slotList.name}}</ion-select-option
+            >
+          </ion-select>
+        </div>
+        <div class="input-block">
+          <ion-label>Choose Stylist</ion-label>
+          <ion-select
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            cancel-text="close"
+            mode="ios"
+            placeholder="Select Stylist"
+            class="ion-text-wrap"
+            formControlName="stylist"
+            (ionChange)="changeStylistDropdown()"
+          >
+            <!-- <ion-select-option [value]="stylist.accountId">{{stylist.name}}</ion-select-option> -->
+            <ion-select-option
+              *ngFor="let stylist of professionList"
+              [value]="stylist.accountId"
+              >{{stylist.firstName}}</ion-select-option
+            >
+            <!-- <ion-select-option selected>Anbu</ion-select-option>
+                        <ion-select-option selected>Ramesh</ion-select-option>
+                        <ion-select-option selected>Mahesh</ion-select-option> -->
+          </ion-select>
+        </div>
+        <ion-item
+          lines="none"
+          class="no-background custom-time-input"
+          *ngIf="slotForm.get('slotType').value && slotForm.get('slot').value && slotForm.get('stylist').value && !showDailySlot"
+        >
+          <ion-label>
+            <ion-icon
+              name="time-outline"
+              color="secondary"
+              class="icon-space"
+            ></ion-icon>
+            Stylist Start Time</ion-label
+          >
+          <ion-input
+            placeholder="H:MM"
+            class="ion-no-padding"
+            formControlName="startTime"
+            (click)="showTimepicker(null,'openingTime')"
+            (ionChange)="checkStyleStartTime()"
+            readonly
+          ></ion-input>
+        </ion-item>
+        <ion-item
+          lines="none"
+          class="no-background custom-time-input"
+          *ngIf="slotForm.get('slotType').value && slotForm.get('slot').value && slotForm.get('stylist').value && !showDailySlot"
+        >
+          <ion-label>
+            <ion-icon
+              name="time-outline"
+              color="secondary"
+              class="icon-space"
+            ></ion-icon>
+            Stylist End Time</ion-label
+          >
+          <ion-input
+            placeholder="H:MM"
+            class="ion-no-padding"
+            formControlName="endTime"
+            (click)="showTimepicker(null,'closingTime')"
+            (ionChange)="checkStyleEndTime()"
+            readonly
+          ></ion-input>
+        </ion-item>
+      </div>
+
+      <div>
+        <ng-container
+          *ngIf="slotForm.get('startTime').enabled && checkStartTimeError; else second"
+        >
+          <ion-row>
+            <ion-col class="ion-float-left">
+              <ion-label class="ml-5" style="color: red">
+                Start Time Miss Matching with Slot.
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ng-template #second>
+          <ion-row
+            *ngIf="slotForm.get('endTime').enabled && checkEndTimeError; else third"
+          >
+            <ion-col class="ion-float-left">
+              <ion-label class="ml-5" style="color: red">
+                End Time Miss Matching with Slot.
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+        <ng-template #third>
+          <ion-row
+            *ngIf="slotForm.get('startTime').enabled && slotForm.get('endTime').enabled && checkTimeError; else fourth"
+          >
+            <ion-col class="ion-float-left">
+              <ion-label class="ml-5" style="color: red">
+                Please Select Start & End Time.
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+
+        <ng-template #fourth>
+          <ion-row *ngIf="showDailySlot && isWeekDayError === true">
+            <ion-col class="ion-float-left">
+              <ion-label color="danger"> {{errorDay}} </ion-label>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </div>
+      <!--
+          <ion-col class="ion-float-right" *ngIf="slots.length>0">
+            <div class="ion-float-right">
+              <div class="checkbox-container" *ngIf="!slotCheckAll">
+                <ion-checkbox
+                  class="checkbox"
+                  slot="start"
+                  color="secondary"
+                  [checked]="slotCheckAll"
+                  (ionChange)="onSlotCheckAllChange()"
+                ></ion-checkbox>
+                <ion-label class="slot-label">Check All</ion-label>
+              </div>
+              <div class="checkbox-container" *ngIf="slotCheckAll">
+                <ion-checkbox
+                  class="checkbox"
+                  slot="start"
+                  color="secondary"
+                  [checked]="slotCheckAll"
+                  (ionChange)="onSlotUnCheckAllChange()"
+                ></ion-checkbox>
+                <ion-label class="slot-label">Check All</ion-label>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div> -->
+      <!-- <ion-grid fixed class="ion-text-center slot-grid">
+        <ion-row *ngIf="slots">
+          <ion-col size="3" *ngFor="let slot of slots; let i = index">
+            <div class="checkbox-container">
+              <ion-checkbox
+                class="checkbox"
+                [value]="slot.slotId"
+                slot="start"
+                color="secondary"
+                [checked]="slot.checked"
+                (ionChange)="onSlotCheckboxChange($event, i)"
+              ></ion-checkbox>
+              <ion-label class="slot-label">{{slot.slotName}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </form>
+  </ion-list>
+  <!--New Weekdays UI-->
+  <ion-grid
+    class="weekdays-grid animate__animated animate__fadeIn"
+    *ngIf="slotForm.valid && showDailySlot"
+  >
+    <ion-row class="border-b">
+      <ion-col size="2" class="list-heading">Days</ion-col>
+      <ion-col size="3" class="list-heading ion-text-center">Open</ion-col>
+      <ion-col size="3" class="list-heading ion-text-center">Close</ion-col>
+      <!-- <ion-col size="1"></ion-col> -->
+      <ion-col size="4" class="list-heading ion-text-center v-center">
+        <div class="v-center">Weekly Off</div>
+      </ion-col>
+    </ion-row>
+    <div *ngFor="let item of timing">
+      <ion-row class="weekdays-col">
+        <ion-col size="2" class="days">
+          <div>{{weekDayMapping[item.day]}}</div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="custome-datetime">
+            <ion-input
+              class="ion-no-padding"
+              placeholder="HH:MM"
+              (click)="showTimepicker(item,'openingTime')"
+              [disabled]="item.isLeave"
+              [value]="item.openingTime"
+              readonly
+            ></ion-input>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <div class="custome-datetime">
+            <ion-input
+              class="ion-no-padding"
+              placeholder="HH:MM"
+              (click)="showTimepicker(item,'closingTime')"
+              [disabled]="item.isLeave"
+              [value]="item.closingTime"
+              readonly
+            ></ion-input>
+          </div>
+        </ion-col>
+        <ion-col size="2" class="v-center ion-no-padding">
+          <div
+            [ngClass]="item.isLeave === true ? 'app-all-btn-disabled' : 'app-all-btn'"
+            (click)="applyToAllWeekDays(item)"
+          >
+            Apply all
+          </div>
+        </ion-col>
+        <ion-col size="2" class="v-center">
+          <div class="v-center">
+            <ion-checkbox
+              color="secondary"
+              [checked]="item.isLeave"
+              (ionChange)="markAsLeave(item,$event.detail.checked)"
+            ></ion-checkbox>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+  <!--///New Weekdays UI-->
+  <!-- <ion-grid
+    *ngIf="slotForm.valid && showDailySlot"
+    class="weekdays-grid animate__animated animate__fadeIn"
+  >
+    <ion-row class="border-b">
+      <ion-col size="6" class="list-heading">Weekdays</ion-col>
+      <ion-col size="3" class="list-heading ion-text-center">Start</ion-col>
+      <ion-col size="3" class="list-heading ion-text-center">End</ion-col>
+    </ion-row>
+    <div *ngFor="let item of timing">
+      <ion-row class="weekdays-col">
+        <ion-col size="6" class="days">{{weekDayMapping[item.day]}}</ion-col>
+        <ion-col size="3">
+          <ion-datetime
+            placeholder="H:MM"
+            mode="ios"
+            displayFormat="h:mm A"
+            [value]="item.openingTime"
+            (ionChange)="weekDaysTimeChange(item,'openingTime', $event.target.value)"
+          ></ion-datetime>
+        </ion-col>
+        <ion-col size="3">
+          <ion-datetime
+            placeholder="H:MM"
+            mode="ios"
+            displayFormat="h:mm A"
+            [value]="item.closingTime"
+            (ionChange)="weekDaysTimeChange(item,'closingTime', $event.target.value)"
+          ></ion-datetime>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid> -->
+
+  <ion-row class="ion-text-center button-row">
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="light"
+        type="button"
+        (click)="goBack('/home/tabs/storeconfig')"
+      >
+        Cancel</ion-button
+      >
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="primary"
+        type="button"
+        (click)="saveSlots()"
+        [disabled]="saveDisable"
+        >Save
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

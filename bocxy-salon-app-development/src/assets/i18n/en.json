@@ -1,0 +1,208 @@
+{
+    "COMMON": {
+        "SUBMIT": "Submit",
+        "OK": "Ok",
+        "CANCEL": "Cancel",
+        "BACK": "Back",
+        "RESET": "Reset",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "REMOVE": "Remove",
+        "ADD": "Add",
+        "CONTINUE": "Continue",
+        "VIEW_DETAILS": "View Details",
+        "VIEW": "View",
+        "SELECT_DATE": "Select date",
+        "PLEASE_WAIT": "Please wait",
+        "LANGUAGES": "Languages",
+        "SELECT_LANGUAGE": "Choose Language",
+        "IN_SECONDS": "Seconds Left",
+        "ENGLISH": "English",
+        "SAVE":"Save",
+        "RESEND":"Resend",
+        "VERIFY_SUBMIT":"Verify & Submit"
+    },
+    "PLACEHOLDER_MSG": {
+        "MOBILE_NUMBER": "Enter Mobile Number",
+        "PASSWORD": "Password"
+    },
+    "LOGIN_ITEMS": {
+        "WELCOME_TITLE": "Welcome",
+        "WELCOME_SUB_MESSAGE": "Thank you for choosing us!",
+        "OTP_BUTTON_TEXT": "Get OTP",
+        "ALREADY_USER": "Already User?",
+        "SIGN_IN": "Sign in",
+        "SIGN_UP": "Sign up",
+        "REGISTER": "Register",
+        "FORGOT_PASSWORD": "Forgot password?",
+        "PASSWORD_RECOVERY": "Password Recovery",
+        "ENTER_VERIFICATION_CODE": "Enter Verfication Code",
+        "OTP_INSTRUCTION_MSG": "OTP has been sent to your registered mobile number please enter the OTP",
+        "OTP_VERIFY_BUTTON_TEXT": "Verify",
+        "OTP_RESEND_MSG": "If you didn't receive OTP",
+        "OTP_RESEND_BUTTON_TEXT": "Resend",
+        "AGENCY_REGISTER_TITLE": "Agency Registration",
+        "TERMS_AND_CONDITION_TEXT": "I agree the terms and conditions",
+
+        "CREATE_PASSWORD_TITLE": "Create Your Password",
+        "CREATE_PASSWORD_SUBTITLE": "Your password has to be at least 6 characters long, one upper case and one digit!",
+        "CREATE_PASSWORD_BOTTOM_INFO": "This password can be used for future login!",
+        "CREATE_PASSWORD_LABEL": "Create Password",
+        "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+
+        "HOME_WELCOME_MESSAGE": "Thank You!!! <br> We are super excited to have you on board!",
+        "AGENCY_REG_TITLE": "Agency Registration",
+        "AGENCY_NAME": "Agency Name",
+        "AGENCY_REG_NUM": "Agency Registration Number",
+        "CONTACT_NAME": "Contact Name",
+        "EMAIL": "E-Mail",
+        "REGION": "Region",
+        "TERMS_AND_CONDITIONS": "I accept Terms and Conditions",
+        "NEW_USER": "Dont have an account",
+
+        "FULL_NAME": "Full Name",
+        "SALON_SPA_NAME": "Salon/SPA Name",
+        "STORE_TYPE": "Store Type",
+        "EMAIL": "Email",
+        "SHOP_LOCATION": "Shop Location",
+        "PICK_SHOP_LOCATION": "Pick Shop Location",
+
+        "SECURITY_CENTER": "Security Center",
+        "SELECT_QUESTION": "Select your security question",
+        "YOUR_ANSWER": "Your answer",
+        "SKIP_LOGIN":"Skip Login"
+    },
+    "SIDE_MENU_ITEMS": {
+        "HOME": "Home",
+        "MY_BOOKINGS": "My Bookings",
+        "MY_NOTIFICATION":"My Notifications",
+        "PROFILE":"Profile",
+        "EXPLORE":"Explore",
+        "APPOINTMENT_HISTORY": "Appointment History",
+        "ANNOUNCEMENT": "Announcement",
+        "HELP_SUPPORT": "Help & Support",
+        "SIGN_OUT": "Sign Out",
+        "SIGN_IN": "Sign in"
+    },
+
+    "TAB_MENU_ITEMS": {
+        "HOME": "Home",
+        "EXPLORE":"Explore",
+        "BOOKINGS": "Bookings",
+        "PROFILE":"Profile"
+    },
+
+    "HOME_ITEMS": {
+        "SPECIAL_OFFER": "Special Offers",
+        "SEE_MORE": "See More",
+        "SERVICES":"Services"
+    },
+    "EXPLORE_ITEMS": {
+        "SEARCH_SERVICES": "Search Services",
+        "CLOSE": "Close",
+        "BY_STORE":"By Store",
+        "BY_LOCATION":"By Location",
+        "CURRENT_LOCATION":"Current Location",
+        "SELECT_LOCATION_MSG":" Please go back and choose any location to search "
+    },
+    "MY_BOOKINGS_ITEMS": {
+        "MY_BOOKINGS_TITLE": "My Bookings",
+        "BOOKING_POLICY_TEXT":"Booking Policy",
+        "DETAILS":"Details"
+    },
+    "PROFILE_ITEMS":{
+        "PROFILE_TITLE":"Profile",
+        "ACCOUNT_SETTINGS":"Account Settings",
+        "CHANGE_PASSWORD":"Change Password",
+        "MY_NOTIFICATION":"My Notifications",
+        "SIGN_OUT":"Sign out"
+    },
+    "SERVICES_ITEMS":{
+        "SERVICES_TITLE":"Services"
+    },
+    "ALL_SERVICES_ITEMS":{
+        "ALL_SERVICES_TITLE":"Services",
+        "SELECT_LOCATION_MSG":" Please go back and choose any location/service to search "
+    },
+    "NOTIFICATION_ITEMS":{
+        "NOTIFICATION_TITLE":"Notifications",
+        "NO_NOTIFICATION_MSG":"Currently no notifications to show "
+    },
+    "HELP_SUPPORT_ITEMS":{
+        "HELP_TITLE":"Help & Support",
+        "MORE_DETAILS":"For more details"
+    },
+    "ACCOUNT_SETTINGS_ITEMS":{
+        "ACCOUNT_SETTINGS_TITLE":"Profile Settings",
+        "PICK_ADDRESS":"Pick Address",
+        "FIRST_NAME":"First Name",
+        "LAST_NAME":"Last Name",
+        "EMAIL":"Email",
+        "ADDRESS":"Address"
+    },
+    "CHANGE_PASSWORD_ITEMS":{
+        "CHANGE_PASSWORD_TITLE":"Change Password",
+        "EMAIL":"Email",
+        "MOBILE_NUMBER":"Mobile Number",
+        "NEW_PASSWORD":"New Password",
+        "RETYPE_PASSWORD":"Re-type Password",
+        "ONE_TIME_PASSWORD":"One time password",
+        "OTP_SENT_TO":"Enter OTP sent to"
+    },
+    "GLOBAL_SEARCH_ITEMS": {
+        "SEARCH_SERVICES": "Search Services",
+        "CLOSE": "Close",
+        "BY_STORE":"By Store",
+        "BY_LOCATION":"By Location",
+        "CURRENT_LOCATION":"Current Location",
+        "SELECT_LOCATION_MSG":" Please go back and choose any location to search "
+    },
+    "APPOINTMENT_DETAIL_ITEMS":{
+        "APPOINTMENT_DETAIL_TITLE":"Appointment Details",
+        "BOOKING_ID":"Booking ID",
+        "CUSTOMER_NAME":"Customer name",
+        "MOBILE_NUMBER":"Mobile number",
+        "BOOKING_TYPE":"Booking type",
+        "SERVICE_NAME":"Service",
+        "SLOT_TIME":"Slot",
+        "PRICE":"Price",
+        "CREATED_ON":"Created on"
+    },
+    "PASSWORD_RECOVERY_ITEMS":{
+        "PASSWORD_RECOVERY_TITLE":"Password Recovery",
+        "MOBILE_NUMBER":"Mobile number"
+    },
+    "CUSTOMER_INFO_ITEMS":{
+        "CUSTOMER_INFO_TITLE":"Customer Information",
+        "FIRST_NAME":"First Name",
+        "LAST_NAME":"Last Name",
+        "EMAIL":"Email",
+        "ADDRESS":"Address",
+        "I_ACCEPT_THE":"I accept the",
+        "TERMS_CONDITIONS":"terms & Conditions"
+    },
+    "ERROR_MSG": {
+        "VALID_MOBILE_NUMBER": "Enter valid mobile number",
+        "ENTER_MOBILE_NUMBER": "Please enter mobile number",
+        "INVALID_MOBILE_NUMBER": "Invalid mobile number",
+        "INVALID_PASSWORD": "Invalid passsword",
+        "MOBILE_NUMBER_EXIST": "Mobile number already exit",
+        "VALID_OTP": "Please Enter valid OTP",
+        "OTP_SENT": "OTP has been sent",
+        "INVALID_OTP": "Incorrect OTP",
+        "PASSWORD_REQUIRED": "Password required",
+        "ACCOUNT_NOT_EXIST": "Account doesn't exist",
+        "CREATE_PASSWORD_WARN_MSG": "Password has to be at least 6 characters with numeric!",
+        "CONFIRM_PASSWORD_WARN_MSG": "Confirm Password required",
+        "CONFIRM_PASSWORD_MIS_MATCH": "Password mismatch ",
+        "VALID_PASSWORD": "Password is valid",
+        "AGENCY_NAME_REQ": "Agency name required",
+        "CHECK_AGENCY_NAME": "Please check agency name",
+        "AGENCY_REG_NUM_REQ": "Registration number required",
+        "CONTACT_NAME_REQ": "Contact name required",
+        "EMAIL_REQ": "Email required",
+        "EMAIL_INCORRECT": "Email is incorrect",
+        "REGION_REQ": "Region required"
+
+    }
+}

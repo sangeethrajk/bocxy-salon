@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/storeconfig')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Services</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none" class="default-duration-item">
+      <ion-label
+        >Default Duraion
+        <p>(Applicable for all services)</p>
+      </ion-label>
+
+      <ion-badge [color]="enableDefault ? 'secondary' : 'medium'"
+        >{{defaultMin}}</ion-badge
+      >
+      <ion-button
+        class="setting-btn"
+        fill="clear"
+        slot="end"
+        (click)="openDefaultDuration(defaultServiceData)"
+      >
+        <ion-icon color="medium" name="settings"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="categories && categories.length > 0">
+  <ion-toolbar class="category-toolbar">
+    <div class="scrolling-wrapper">
+      <div class="card">
+        <ion-item class="category-item" lines="none">
+          <ion-button
+            *ngFor="let item of categories; let i = index"
+            (click)="changeState(i)"
+            [ngClass]="selectedIndex === i  ? 'selected-btn' : ''"
+            expand="full"
+            size="small"
+            [color]="selectedIndex === i ? 'primary':'medium'"
+            [fill]="selectedIndex === i ? 'solid':' '"
+            class="category-button"
+          >
+            <span>{{item.serviceGroupName}}</span>
+          </ion-button>
+        </ion-item>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-input
+        placeholder="Search for services"
+        (ionInput)="filterservice($event)"
+      >
+        <ion-icon
+          class="search-icon"
+          name="search-outline"
+          slot="end"
+        ></ion-icon>
+      </ion-input>
+    </ion-item>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content has-bouncing="true" #scrollArea scrollEvents="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!--If No Services Show this-->
+  <div class="vertical-center" *ngIf="categories && categories.length === 0">
+    <div class="text-gray">
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon> No services
+      added!
+    </div>
+    <p class="start-service-text" (click)="gotoUrl('/addservices')">
+      <ion-icon name="add-circle-outline"></ion-icon> <br />Start to add a
+      Service
+    </p>
+  </div>
+
+  <ion-list *ngIf="serviceData && serviceData.length > 0">
+    <div *ngFor="let service of serviceData; let i = index">
+      <ion-item padding (click)="toggleDetails(service)">
+        <ion-icon
+          color="medium"
+          slot="end"
+          [name]="service.showDetails ? 'remove-circle-outline' : 'add-circle-outline'"
+        ></ion-icon>
+        <!-- <ion-thumbnail slot="start">
+          <img
+            [src]="service.serviceIconLocal ? sanitizer.bypassSecurityTrustResourceUrl(service.serviceIconLocal) : 'https://bocxy-merchant-new.s3.ap-south-1.amazonaws.com/'+service.serviceIcon"
+          />
+        </ion-thumbnail> -->
+        <ion-label class="service-item">{{service.service}}</ion-label>
+      </ion-item>
+      <ion-card
+        class="service-detail ion-no-margin"
+        *ngIf="service.showDetails"
+      >
+        <ion-item
+          *ngFor="let cat of service.categories; let j = index"
+          lines="none"
+        >
+          <ion-thumbnail slot="start">
+            <ion-icon
+              color="medium"
+              name="return-down-forward-outline"
+            ></ion-icon>
+          </ion-thumbnail>
+          <ion-label> {{cat.serviceCategoryName}}</ion-label>
+          <ion-badge
+            class="disable-badge"
+            color="medium"
+            *ngIf="cat.active == 'N'"
+            >Disabled</ion-badge
+          >
+          <span
+            slot="end"
+            (click)="gotoUrl('/addservices/'+cat.merchantStoreServiceId)"
+          >
+            <ion-icon name="options-outline" class="action-icon"></ion-icon>
+          </span>
+          <span slot="end" (click)="presentAlertConfirm(i, j)">
+            <ion-icon name="trash-outline" class="action-icon"></ion-icon>
+          </span>
+        </ion-item>
+      </ion-card>
+    </div>
+  </ion-list>
+
+  <ion-fab
+    slot="fixed"
+    horizontal="end"
+    vertical="bottom"
+    [appHideOnScroll]="scrollArea"
+  >
+    <ion-fab-button color="indigo">
+      <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon
+    ></ion-fab-button>
+    <ion-fab-list side="top">
+      <div class="custom-fab">
+        <ion-button>Request Service</ion-button>
+        <ion-fab-button color="secondary" size="small"
+          ><ion-icon name="create-outline"></ion-icon
+        ></ion-fab-button>
+      </div>
+      <div class="custom-fab" (click)="gotoUrl('/addservices')">
+        <ion-button>Add Service</ion-button>
+        <ion-fab-button color="secondary" size="small"
+          ><ion-icon name="add-circle-outline"></ion-icon
+        ></ion-fab-button>
+      </div>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

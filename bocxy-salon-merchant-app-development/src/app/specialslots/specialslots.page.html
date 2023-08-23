@@ -1,0 +1,24 @@
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+<ion-list>
+  <ion-item *ngFor="let slot of storeConfigList let i=index">
+    <ion-label>{{slot.name}}</ion-label>
+    <div class="grade-item-btn">
+      <!-- <ion-icon name="pencil-outline" routerLink="/creategrade/{{grade.name}}"></ion-icon> -->
+      <ion-icon name="pencil-outline" (click)="navigate(slot)"></ion-icon>
+    </div>
+    <div class="grade-item-btn">
+      <ion-icon
+        name="trash-outline"
+        (click)="presentDeleteAlertConfirm(slot, i)"
+      ></ion-icon>
+    </div>
+  </ion-item>
+</ion-list>
+<div class="no-slots" *ngIf="storeConfigList.length === 0">
+  <h5>
+    <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+    Currently no slots to show
+  </h5>
+</div>

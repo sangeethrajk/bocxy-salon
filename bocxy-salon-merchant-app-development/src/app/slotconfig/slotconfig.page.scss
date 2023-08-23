@@ -1,0 +1,145 @@
+:host {
+  .center-button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    ion-button {
+      width: 100%;
+    }
+  }
+  .center-item {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #222469;
+    border-radius: 5px;
+    img {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+  .header-h6 {
+    margin-top: 5px;
+    margin-bottom: 0;
+    margin-left: 15px;
+    color: #444;
+  }
+  .heading {
+    width: 100%;
+    padding: 7px 16px;
+    // background: #faeef2;
+    font-size: 16px;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    input.ng2-tel-input {
+      width: 100% !important;
+      border-radius: 5px;
+      height: 42px;
+      border: 1px solid #a8a6a6;
+      padding: 8px 8px 8px 80px;
+    }
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+  }
+  .slot-heading {
+    ion-label {
+      background: #efeff0;
+      padding: 5px 16px;
+    }
+    ion-icon {
+      margin: -3px 0;
+    }
+  }
+  .slot-grid {
+    padding: 14px 14px;
+  }
+  .slot-label {
+    margin: 0 5px;
+    font-size: 16px;
+  }
+  .checkbox-container {
+    text-align: left;
+  }
+  ion-checkbox {
+    --border-color: #e82264;
+  }
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .regular-bh {
+    box-shadow: none;
+  }
+  .list-heading {
+    color: #444;
+    font-weight: bold;
+  }
+  .weekdays-col {
+    ion-badge {
+      border-radius: 0;
+      min-width: 65px;
+    }
+    ion-datetime {
+      padding: 0;
+      text-align: center;
+      border: 1px solid #9e9e9e;
+    }
+  }
+  .time-box {
+    padding: 0 10px;
+    border: 1px solid #ddd;
+  }
+  .toggle-item {
+    padding: 0;
+    margin: 10px 0;
+  }
+  .weekdays-grid {
+    padding: 10px;
+  }
+  .app-all-btn-disabled {
+    font-size: 10px;
+    background: lightgray;
+    color: #fff;
+    padding: 2px 5px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .item-interactive.ion-invalid {
+    --highlight-background: var(
+      --ion-color-step-150,
+      rgba(156, 154, 154, 0.13)
+    );
+  }
+
+  .item-interactive.ion-valid {
+    --highlight-background: var(
+      --ion-color-step-150,
+      rgba(156, 154, 154, 0.13)
+    );
+  }
+}

@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon class="back-btn-size" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create Stylist Grade</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-col size="12" class="validation-error error-msg">
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && gradeForm.get('name').value && existGrade && (existGrade.toLowerCase() === gradeForm.get('name').value.toLowerCase())"
+    >
+      {{gradeForm.get('name').value}} grade already exist
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && !gradeForm.get('name').value"
+    >
+      *Please enter grade name
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && gradeForm.get('name').value && !gradeForm.get('name').valid"
+    >
+      Name should not contain special characters, extra spaces and numbers
+    </ion-label>
+  </ion-col>
+  <div class="form">
+    <form
+      *ngIf="gradeForm"
+      [formGroup]="gradeForm"
+      (keyup.enter)="gradeSubmit()"
+      (submit)="gradeSubmit()"
+    >
+      <div class="input-block">
+        <ion-label>Grade Title</ion-label>
+        <ion-input
+          formControlName="name"
+          name="name"
+          placeholder="e.g.Senior Stylist"
+          type="text"
+        ></ion-input>
+      </div>
+      <div class="input-block">
+        <ion-item lines="none">
+          <ion-label>Disable this grade</ion-label>
+          <ion-toggle
+            [(ngModel)]="showDisable"
+            (ionChange)="disableToggle()"
+            color="secondary"
+            formControlName="disable"
+          ></ion-toggle>
+        </ion-item>
+      </div>
+      <div class="btn-block">
+        <ion-button
+          type="submit"
+          shape="round"
+          expand="block"
+          *ngIf="!editData"
+          [disabled]="disableCreateButton"
+          >Create</ion-button
+        >
+        <ion-button
+          type="submit"
+          shape="round"
+          expand="block"
+          *ngIf="editData"
+          [disabled]="disableCreateButton"
+          >Update</ion-button
+        >
+      </div>
+      <div class="grade-error">
+        <p *ngIf="showDisable">
+          Please note, if you disable this grade,you may no longer use this
+          grade.
+        </p>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,62 @@
+:host {
+  .list-icons {
+    font-size: 8vw;
+    margin: 5px 0;
+    color: #797878;
+  }
+
+  .inactiveslot {
+    color: #ff9800;
+  }
+  .activeslot {
+    color: #0fc52e;
+  }
+
+  .time-box {
+    display: block;
+    min-height: 30px;
+    align-items: center;
+    ion-badge {
+      float: right;
+      border-radius: 0;
+      min-width: 65px;
+    }
+    ion-text {
+      font-size: 1em;
+      color: #444;
+    }
+  }
+
+  .list-heading {
+    font-weight: bold;
+  }
+  .weekdays-col {
+    ion-badge {
+      border-radius: 0;
+      min-width: 65px;
+      border: 1px solid #ddd;
+      color: #444;
+    }
+  }
+  .ml-10 {
+    margin-left: 10px;
+  }
+  .calendar-detail {
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+  }
+  ion-refresher.refresher-native {
+    display: block;
+    z-index: 3 !important;
+  }
+  .footer-content {
+    ion-col {
+      display: flex;
+      align-items: center;
+      ion-button {
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+<!-- <ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
+<ion-split-pane contentId="menu-content" when="xs" [disabled]="true">
+  <ion-menu
+    contentId="menu-content"
+    menuId="menu-content"
+    side="start"
+    type="overlay"
+    auto-hide="true"
+  >
+    <ion-header class="ion-no-border">
+      <ion-menu-toggle>
+        <ion-toolbar routerLink="/home/tabs/tab4">
+          <ion-avatar
+            slot="start"
+            *ngIf="userData && userData.pictureType == 'AVATAR'"
+          >
+            <!-- <img src="./assets/icon/male_icon.svg" /> -->
+            <img [src]="selectedIcon" />
+          </ion-avatar>
+          <ion-avatar
+            slot="start"
+            *ngIf="userData && userData.pictureType == null"
+          >
+            <!-- <img src="./assets/icon/male_icon.svg" /> -->
+            <img [src]="selectedIcon" />
+          </ion-avatar>
+
+          <div class="user-profile-header">
+            <div class="title">
+              <h4>{{ userData?.firstName }}</h4>
+            </div>
+            <ion-text class="mob-num">
+              {{ userData?.mobileNoDialCode }}&nbsp;{{ userData?.mobileNo }}
+            </ion-text>
+          </div>
+          <!-- <ion-title>Bocxy</ion-title>
+                <span class="mob-num">+91 9988665745</span> -->
+        </ion-toolbar>
+      </ion-menu-toggle>
+    </ion-header>
+    <ion-content>
+      <ion-list class="menu-list">
+        <!-- <ion-list-header>
+                    <ion-label>Forms</ion-label>
+                </ion-list-header> -->
+        <div *ngFor="let page of pages; let i = index">
+          <ion-menu-toggle class="side-menu" autoHide="false" *ngIf="page.url">
+            <div *ngIf="page.url != '/login'">
+              <ion-item
+                [routerLink]="page.url"
+                [disabled]="page.hide"
+                detail="true"
+                lines="none"
+              >
+                <ion-icon slot="start" name="{{ page.icon }}"></ion-icon>
+                <ion-label
+                  [ngClass]="
+                    translate.currentLang ? 'font-' + translate.currentLang : ''
+                  "
+                >
+                  {{ page.title | translate }}
+                </ion-label>
+              </ion-item>
+            </div>
+            <div *ngIf="page.url === '/login'">
+              <ion-item
+                (click)="logout()"
+                [disabled]="page.hide"
+                detail="true"
+                lines="none"
+              >
+                <ion-icon slot="start" name="{{ page.icon }}"></ion-icon>
+                <ion-label
+                  [ngClass]="
+                    translate.currentLang ? 'font-' + translate.currentLang : ''
+                  "
+                >
+                  {{ page.title | translate }}
+                </ion-label>
+              </ion-item>
+            </div>
+          </ion-menu-toggle>
+
+          <ion-item
+            *ngIf="page.children?.length > 0"
+            (click)="page.open = !page.open; scrollToBottom()"
+            [class.active-parent]="page.open"
+            detail="false"
+            class="lang-bg"
+            lines="none"
+            [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+          >
+            <ion-icon
+              slot="end"
+              class="lang-toggle-icon"
+              name="chevron-forward"
+              *ngIf="!page.open"
+            ></ion-icon>
+            <ion-icon
+              slot="end"
+              class="lang-toggle-icon"
+              name="chevron-down-outline"
+              *ngIf="page.open"
+            ></ion-icon>
+            <ion-icon slot="start" name="{{ page.icon }}"></ion-icon>
+            <ion-label class="language-heading">
+              {{ page.title | translate }}</ion-label
+            >
+          </ion-item>
+
+          <ion-list *ngIf="page.open">
+            <ion-radio-group
+              value="en"
+              [(ngModel)]="lang"
+              (ionChange)="switchLanguage()"
+            >
+              <ion-item lines="none" *ngFor="let sub of page.children">
+                <ion-label>{{ sub.title }}</ion-label>
+                <ion-radio
+                  color="secondary"
+                  slot="start"
+                  [value]="sub.value"
+                ></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-split-pane>

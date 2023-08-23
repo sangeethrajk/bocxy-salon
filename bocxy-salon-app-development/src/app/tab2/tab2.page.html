@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Offers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card
+    [ngStyle]="{'background':item.color}"
+    *ngFor="let item of offersItems"
+  >
+    <img [src]="item.img" />
+    <ion-card-header color="light">
+      <ion-card-title [ngStyle]="{'color':item.color}"
+        >{{item.offer}}</ion-card-title
+      >
+      <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center offer-valid-label">
+      <ion-item lines="none">
+        <ion-label> {{item.description}}</ion-label>
+        <ion-button color="light" shape="round"> Get now </ion-button></ion-item
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,42 @@
+:host {
+  .customer-list {
+    width: 100%;
+    h2 {
+      color: #565656;
+    }
+    ion-icon {
+      font-size: 22px;
+      color: #757575;
+    }
+  }
+  .segment-item {
+    background: #f4f4f4;
+    margin: 0 auto;
+    width: 100%;
+    ion-label {
+      color: inherit;
+    }
+    ion-label.ios {
+      font-size: 16px;
+    }
+  }
+  ion-segment-button {
+    font-size: 3.5vw;
+  }
+  .no-customers {
+    position: relative;
+    left: 0;
+    top: 20%;
+    text-align: center;
+    right: 0;
+    color: #6a6a6a;
+    vertical-align: middle;
+    bottom: 0;
+    ion-icon {
+      font-size: 25px;
+    }
+    h5 {
+      font-size: 16px !important;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/storeconfig')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Staff Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <div class="heading">
+      Admin can create and manage staffs, change roles, grant permissions
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="ion-no-padding" #slidingList>
+    <ion-item-sliding
+      *ngFor="let stylist of stylistData; let i = index"
+      (ionDrag)="slideOpened($event, stylist)"
+      (click)="clickSlides($event)"
+      (drag)="clickSlides($event)"
+    >
+      <ion-item>
+        <ion-label>
+          <ion-icon name="person-outline"></ion-icon> {{stylist.firstName}}
+        </ion-label>
+        <ion-badge
+          class="disable-badge"
+          color="medium"
+          *ngIf="stylist.active == 'N'"
+          >Disabled</ion-badge
+        >
+        <span class="text-gray italic animate__infinite">
+          <ion-icon [name]="'chevron-back-outline'"></ion-icon>
+          <span class="swipe-text">Swipe</span>
+        </span>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option
+          (click)="getPermissionAccess(stylist.accountId)"
+          color="secondary"
+        >
+          <ion-icon slot="end" name="lock-closed-outline"></ion-icon>
+          Access
+        </ion-item-option>
+        <ion-item-option
+          (click)="gotoUrl('/addstylist/'+stylist.accountId)"
+          color="medium"
+        >
+          <ion-icon slot="end" name="settings-outline"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option (click)="presentAlertConfirm(i)" color="light">
+          <ion-icon slot="end" name="trash-outline"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="gotToAddStylist()"
+  >
+    <ion-fab-button color="indigo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

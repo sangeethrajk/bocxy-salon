@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "83450790234",
+    "firebase_url": "https://bocxy-app.firebaseio.com",
+    "project_id": "bocxy-app",
+    "storage_bucket": "bocxy-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83450790234:android:48e4ceba7d974491573363",
+        "android_client_info": {
+          "package_name": "com.mazelon.bocxy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83450790234-qj3amj8s19tirrj7ti93booadvutoatc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz_lByr0t-wCgznIp08B_AVSYHw9_caJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83450790234-qj3amj8s19tirrj7ti93booadvutoatc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

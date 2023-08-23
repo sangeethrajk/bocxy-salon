@@ -1,0 +1,17 @@
+:host {
+    .heading {
+        width: 100%;
+        padding: 7px 14px;
+        font-size: 16px;
+        color: #444;
+        border-bottom: 1px dashed #444;
+    }
+    .report-list {
+        img {
+            width: 3.4vw;
+        }
+        ion-icon {
+            font-size: 6vw;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Bocxy-Beauty App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,151 @@
+{
+    "COMMON": {
+        "SUBMIT": "சமர்ப்பி",
+        "OK": "சரி",
+        "CANCEL": "ரத்துசெய்",
+        "BACK": "பின் செல்",
+        "RESET": "மீட்டமை",
+        "EDIT": "தொகு",
+        "DELETE": "அழி",
+        "REMOVE": "அகற்று",
+        "ADD": "சேர்",
+        "CONTINUE": "தொடர்ந்து செல்",
+        "VIEW_DETAILS": "விவரம் காண்க",
+        "VIEW": "காண்க",
+        "SELECT_DATE": "தேதியை தேர்ந்தெடு",
+        "PLEASE_WAIT": "காத்திருக்கவும்",
+        "LANGUAGES": "மொழிகள்",
+        "SELECT_LANGUAGE": "மொழியை தேர்ந்தெடுக்கவும்",
+        "IN_SECONDS": "நொடிகளில்",
+        "ENGLISH": "ஆங்கிலம்"
+    },
+
+    "PLACEHOLDER_MSG": {
+        "MOBILE_NUMBER": "மொபைல் எண்ணை பதிவிடவும்",
+        "PASSWORD": "பாஸ்வேர்டு"
+    },
+    "LOGIN_ITEMS": {
+        "WELCOME_TITLE": "வரவேற்கிறோம்!",
+        "WELCOME_SUB_MESSAGE": "எங்களை தேர்ந்தெடுத்தமைக்கு நன்றி!",
+        "OTP_BUTTON_TEXT": "OTP பெறு",
+        "ALREADY_USER": "பழைய வாடிக்கையாளர்?",
+        "SIGN_IN": "உள் நுழைக",
+        "SIGN_UP": "பதிவு செய்க",
+        "REGISTER": "பதிவு செய்க",
+        "FORGOT_PASSWORD": "பாஸ்வேர்டை மறந்துவிட்டீர்களா?",
+        "PASSWORD_RECOVERY": "பாஸ்வேர்டு மீட்பு",
+        "ENTER_VERIFICATION_CODE": "வெரிபிகேஷன் எண்ணை தரவும்",
+        "OTP_INSTRUCTION_MSG": "உங்கள் மொபைல் எண்ணுக்கு OTP அனுப்பப்பட்டுள்ளது, தயவுசெய்து OTP ஐ உள்ளிடவும்!",
+        "OTP_VERIFY_BUTTON_TEXT": "சரிபார்ப்பு",
+        "OTP_RESEND_MSG": "நீங்கள் OTP ஐப் பெறவில்லை என்றால்",
+        "OTP_RESEND_BUTTON_TEXT": "மீண்டும் அனுப்பு",
+        "AGENCY_REGISTER_TITLE": "ஏஜென்சி பதிவு",
+        "TERMS_AND_CONDITION_TEXT": "விதிமுறைகளையும் நிபந்தனைகளையும் நான் ஒப்புக்கொள்கிறேன்",
+
+        "CREATE_PASSWORD_TITLE": "உங்கள் பாஸ்வேர்டை உருவாக்கவும்",
+        "CREATE_PASSWORD_SUBTITLE": "உங்கள் பாஸ்வேர்டு குறைந்தது 6 எழுத்துகள் நீளமாக இருக்க வேண்டும், ஒரு இலக்கமாக இருக்க வேண்டும்!",
+        "CREATE_PASSWORD_BOTTOM_INFO": "இந்த பாஸ்வேர்டு எதிர்கால உள்நுழைவுக்கு பயன்படுத்தப்படலாம்!",
+        "CREATE_PASSWORD_LABEL": "பாஸ்வேர்டை டைப் செய்யவும்",
+        "CONFIRM_PASSWORD_LABEL": "பாஸ்வேர்டை உறுதிசெய்க",
+
+        "HOME_WELCOME_MESSAGE": "நன்றி!!! <br> எங்கள் வாடிக்கையாளராக இணைந்ததில் மிகவும் மகிழ்ச்சியடைகிறோம்!",
+        "AGENCY_REG_TITLE": "ஏஜென்சி பதிவு செய்க",
+        "AGENCY_NAME": "ஏஜென்சி பெயர்",
+        "AGENCY_REG_NUM": "ஏஜென்சி பதிவு எண்",
+        "CONTACT_NAME": "நபரின் பெயர்",
+        "EMAIL": "மின்னஞ்சல்",
+        "REGION": "பகுதி",
+        "TERMS_AND_CONDITIONS": "நிபந்தனை மற்றும் விதிமுறைகளை ஏற்றுக்கொள்கிறேன்.",
+        "NEW_USER": "புதிய வாடிக்கையாளர்?",
+
+        "FULL_NAME": "முழு பெயர்",
+        "SALON_SPA_NAME": "சலூன்/ஸ்பா பெயர்",
+        "STORE_TYPE": "கடையின் வகை",
+        "EMAIL": "இமெயில்",
+        "SHOP_LOCATION": "கடை முகவரி",
+        "PICK_SHOP_LOCATION": "கடை முகவரி பெற",
+
+        "SECURITY_CENTER": "செக்யூரிட்டி சென்டர்",
+        "SELECT_QUESTION": "செக்யூரிட்டி கேள்வியை தேர்ந்தெடு",
+        "YOUR_ANSWER": "உங்கள் பதில்"
+    },
+
+    "SIDE_MENU_ITEMS": {
+        "HOME": "முகப்பு",
+        "MY_STORE": "எனது கடை",
+        "CUSTOMERS": "வாடிக்கையாளர்கள்",
+        "APPOINTMENT_HISTORY": "அபாய்ன்ட்மென்ட் ஹிஸ்டரி",
+        "ANNOUNCEMENT": "அறிவிக்கை",
+        "MY_ACCOUNT": "எனது கணக்கு",
+        "HELP_SUPPORT": "உதவி மையம்",
+        "SIGN_OUT": "வெளியேறு"
+    },
+
+    "TAB_MENU_ITEMS": {
+        "HOME": "முகப்பு",
+        "MY_STORE": "எனது கடை",
+        "APPOINTMENT": "வாகனம் கொடுக்க",
+        "CUSTOMERS": "வாடிக்கையாளர்கள்"
+    },
+
+    "HOME_ITEMS": {
+        "HOME": "முகப்பு",
+        "APPOINTMENT_STATUS": "Appointment Status",
+        "UPCOMING": "Upcoming",
+        "NEW_APPOINTMENTS": "New Appointments",
+        "UPCOMING_APPOINTMENTS": "Upcoming",
+        "WALKIN_CUSTOMERS": "Walk-in Customers",
+        "CANCELLED": "Cancelled",
+        "ONGOING": "Ongoing",
+        "TOTAL": "Total"
+
+    },
+    "MYSTORE_ITEMS": {
+        "MYSTORE_SETTING_TITLE": "முகப்பு",
+        "CALENDAR_SETTINGS": "முகப்பு",
+        "STYLE_GRADE_MGMT": "முகப்பு",
+        "STAFF_MGMT": "முகப்பு",
+        "APPOINTMENT_SETTINGS": "முகப்பு",
+        "MY_SERVICES": "முகப்பு",
+        "OFFERS_MGMT": "முகப்பு",
+        "HOLIDAY_MGMT": "முகப்பு"
+    },
+    "APPOINTMENT_ITEMS": {
+        "APPOINTMENTS_TITLE": "முகப்பு",
+        "CUSTOMER_DETAILS": "முகப்பு",
+        "FULL_NAME": "முகப்பு",
+        "CONTACT_NUMBER": "முகப்பு",
+        "SERVICES": "முகப்பு",
+        "PICK_DATE": "முகப்பு",
+        "PICK_STYLIST": "முகப்பு",
+        "PICK_TIME": "முகப்பு"
+    },
+    "CUSTOMERS_ITEMS": {
+        "CUSTOMERS_TITLE": "முகப்பு",
+        "VISITED": "முகப்பு",
+        "REGULAR": "முகப்பு"
+    },
+    "ERROR_MSG": {
+        "VALID_MOBILE_NUMBER": "சரியான மொபைல் எண்ணை தரவும்",
+        "ENTER_MOBILE_NUMBER": "மொபைல் எண்ணை பதிவிடவும்",
+        "INVALID_MOBILE_NUMBER": "தவறான மொபைல் எண்",
+        "INVALID_PASSWORD": "தவறான பாஸ்வேர்டு",
+        "MOBILE_NUMBER_EXIST": "மொபைல் எண் ஏற்கனவே பதிவுசெய்யப்பட்டது ",
+        "VALID_OTP": "சரியான OTP எண்ணை தரவும்",
+        "OTP_SENT": "OTP அனுப்பப்பட்டுள்ளது",
+        "INVALID_OTP": "OTP தவறானது",
+        "PASSWORD_REQUIRED": "பாஸ்வேர்டை பதிவிடவும்",
+        "ACCOUNT_NOT_EXIST": "கணக்கு துவங்கப்படவில்லை",
+        "CREATE_PASSWORD_WARN_MSG": "பாஸ்வேர்டு எண்கள் கலந்து குறைந்த பட்சம் 6 இலக்கங்களாக இருக்கவேண்டும்!",
+        "CONFIRM_PASSWORD_WARN_MSG": "பாஸ்வேர்டை உறுதி செய்க",
+        "CONFIRM_PASSWORD_MIS_MATCH": "பாஸ்வேர்டு பொருந்தவில்லை",
+        "VALID_PASSWORD": "சரியான பாஸ்வேர்டு",
+        "AGENCY_NAME_REQ": "ஏஜென்சி பெயர் உள்ளிடவும்",
+        "CHECK_AGENCY_NAME": "ஏஜென்சி பெயரை சரி பார்க்கவும்",
+        "AGENCY_REG_NUM_REQ": "ஏஜென்சி பதிவு எண் உள்ளிடவும்",
+        "CONTACT_NAME_REQ": "தொடர்பு நபர் பெயரை உள்ளிடவும்",
+        "EMAIL_REQ": "இமெயில் முகவரி உள்ளிடவும்",
+        "EMAIL_INCORRECT": "தவறான இமெயில் முகவரி",
+        "REGION_REQ": "பகுதியை உள்ளிடவும்"
+    }
+}

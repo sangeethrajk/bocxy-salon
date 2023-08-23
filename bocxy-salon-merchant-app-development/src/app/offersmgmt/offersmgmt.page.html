@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Offers Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-item lines="none" class="title-item">
+    <p class="sub-text" slot="start">Select offers image / banner</p>
+    <ion-button
+      color="medium"
+      fill="clear"
+      size="small"
+      slot="end"
+      (click)="pickImage()"
+      ><ion-icon name="camera"></ion-icon
+    ></ion-button>
+  </ion-item>
+  <!-- <h5 *ngIf="croppedImagepath.length">Cropped Image</h5> -->
+  <ion-card class="offers-card">
+    <p *ngIf="isLoading">Loading ...</p>
+    <img [src]="croppedImagepath" (click)="pickImage()" />
+    <ion-card-content>
+      <div class="input-block">
+        <ion-label>Service name</ion-label>
+        <ion-input></ion-input>
+      </div>
+      <div class="input-block">
+        <ion-label>Shop name</ion-label>
+        <ion-input></ion-input>
+      </div>
+      <div class="input-block">
+        <ion-label>Offer end date</ion-label>
+        <ion-input type="date"></ion-input>
+      </div>
+      <div class="heading ion-margin-top ion-margin-bottom">
+        <span class="offer-switch">
+          <ion-toggle
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="showSchedule"
+            color="secondary"
+          ></ion-toggle>
+        </span>
+        <span slot="start">
+          <ion-icon name="calendar-outline" color="secondary"></ion-icon>
+          Publish Later</span
+        >
+        <p class="caption-text">
+          *Offers will be published on specified date and time
+        </p>
+      </div>
+      <div class="form ion-margin-bottom" *ngIf="showSchedule">
+        <ion-row>
+          <ion-col>
+            <div class="input-block">
+              <ion-label>Date</ion-label>
+              <ion-input type="date"></ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="input-block">
+              <ion-label>Time</ion-label>
+              <ion-input type="tme"></ion-input>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <ion-item lines="none">
+        <ion-label>Notify customers</ion-label>
+        <ion-checkbox
+          color="secondary"
+          slot="start"
+          checked="true"
+        ></ion-checkbox>
+      </ion-item>
+      <div class="ion-text-center publish-btn">
+        <ion-button color="primary" shape="round"> Publish </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

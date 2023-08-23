@@ -1,0 +1,77 @@
+:host {
+  .heading {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 6px;
+    font-size: 3.5vw;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+  .slot-name-input {
+    border-radius: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #b8b7b7;
+  }
+  .icon-left {
+    float: left;
+    width: 10vw;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 22px;
+    margin: 4px 1px;
+  }
+  ion-datetime.datetime-text {
+    color: #e82264;
+  }
+  .button-row {
+    padding: 0 10px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .slot-banner-card {
+    ion-card-title {
+      font-size: 1em;
+      color: #444 !important;
+      font-weight: initial;
+    }
+  }
+  .picker-toolbar.sc-ion-picker-md {
+    width: 100%;
+    background: #444;
+    contain: strict;
+    z-index: 1;
+  }
+
+  .errMsg {
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs),
+  .item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
+    opacity: 1;
+  }
+
+  .store-datetime-disabled {
+    opacity: 1 !important;
+  }
+
+  .store-select-disabled {
+    opacity: 1;
+  }
+
+  .selectRemoveIcon::part(icon) {
+    display: none !important;
+  }
+
+  .slotName {
+    padding: 10px;
+  }
+}

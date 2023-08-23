@@ -1,0 +1,438 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/tab2')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!title">Add Service</ion-title>
+    <ion-title *ngIf="title">Edit Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animate__animated animate__fadeIn">
+  <form
+    *ngIf="merchantServiceForm"
+    [formGroup]="merchantServiceForm"
+    (keyup.enter)="formSubmit()"
+    (submit)="formSubmit()"
+  >
+    <ion-list class="ion-no-padding">
+      <div class="heading">
+        <ion-icon
+          name="briefcase-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        Service details
+      </div>
+      <ion-item lines="none" class="title-item">
+        <ion-label
+          class="ion-no-margin upload-btn"
+          slot="end"
+          (click)="selectImage()"
+        >
+          <img src="./assets/img/add-photo.svg" />
+        </ion-label>
+
+        <p class="sub-text" slot="start">Select service image / banner</p>
+      </ion-item>
+      <p
+        ion-text
+        class="banner-err error-fix"
+        *ngIf="(formSubmitted && !this.editData && isBannerChanged===false)"
+      >
+        *Select a banner
+      </p>
+      <ion-card class="banner-card">
+        <img [src]="croppedImagepath" (click)="selectImage()" />
+      </ion-card>
+
+      <div class="form">
+        <div class="input-block">
+          <ion-label>Choose Service Group</ion-label>
+          <ion-select
+            interface="action-sheet"
+            mode="ios"
+            formControlName="serviceGroupId"
+            (ionChange)="changeServiceGroupListDropdown($event)"
+            placeholder="Select Service Group"
+            class="ion-text-wrap"
+          >
+            <ion-select-option
+              *ngFor="let service of servicesGroupList"
+              [value]="service.serviceGroupId"
+            >
+              {{service.name}}
+            </ion-select-option>
+          </ion-select>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || merchantServiceForm.get('serviceGroupId').touched) &&  merchantServiceForm.get('serviceGroupId').hasError('required')"
+          >
+            *Service Group is required
+          </p>
+        </div>
+        <div class="input-block">
+          <ion-label>Choose Service</ion-label>
+          <ion-select
+            interface="action-sheet"
+            mode="ios"
+            formControlName="serviceId"
+            (ionChange)="changeServiceDropdown($event)"
+            placeholder="Select Service"
+            class="ion-text-wrap"
+          >
+            <ion-select-option
+              *ngFor="let service of services"
+              [value]="service.serviceId"
+            >
+              {{service.name}}
+            </ion-select-option>
+          </ion-select>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || merchantServiceForm.get('serviceId').touched) &&  merchantServiceForm.get('serviceId').hasError('required')"
+          >
+            *Service is required
+          </p>
+        </div>
+
+        <div class="input-block">
+          <ion-label>Category</ion-label>
+          <ng-autocomplete
+            [data]="serviceType"
+            [searchKeyword]="keyword"
+            placeHolder="Enter service type"
+            (selected)="selectEvent($event)"
+            (inputChanged)="onChangeSearch($event)"
+            (inputFocused)="onFocused($event)"
+            historyIdentifier="countries"
+            [itemTemplate]="itemTemplate"
+            formControlName="category"
+          >
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound></ng-template>
+
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || categoryTouched) &&  merchantServiceForm.get('category').hasError('required')"
+          >
+            *Service type is required
+          </p>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || categoryTouched) && !merchantServiceForm.get('category').hasError('required') && merchantServiceForm.get('category').hasError('validCategory')"
+          >
+            *Only alphabets allowed
+          </p>
+        </div>
+
+        <div class="input-block">
+          <ion-label>Service Original Price - Excl.Tax</ion-label>
+          <ion-input formControlName="price" type="tel"></ion-input>
+
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || merchantServiceForm.get('price').touched) &&  merchantServiceForm.get('price').hasError('required')"
+          >
+            *Service price is required
+          </p>
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || merchantServiceForm.get('price').touched) &&  merchantServiceForm.get('price').hasError('pattern')"
+          >
+            *Please enter valid price
+          </p>
+        </div>
+
+        <div class="duration-block">
+          <ion-item class="ion-no-padding">
+            <ion-label>Service Duration</ion-label>
+            <ion-select
+              mode="ios"
+              class="d-select"
+              placeholder="Hrs"
+              formControlName="durationHours"
+              (ionChange)="durationHours()"
+              interface="popover"
+            >
+              <ion-select-option *ngFor="let hr of Hours" value="{{hr.value}}"
+                >{{hr.name}}</ion-select-option
+              >
+            </ion-select>
+            <ion-select
+              mode="ios"
+              class="d-select"
+              placeholder="Mins"
+              formControlName="durationmin"
+              (ionChange)="durationmin()"
+              interface="popover"
+            >
+              <ion-select-option
+                *ngFor="let min of minutes"
+                value="{{min.value}}"
+                >{{min.name}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
+          <p ion-text class="field-err error-fix" *ngIf="durationErr">
+            *Duration is required
+          </p>
+        </div>
+      </div>
+      <div class="heading">
+        <ion-icon
+          name="male-female-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        Gender Type
+      </div>
+      <ion-list class="ion-no-padding">
+        <p
+          ion-text
+          class="field-err"
+          style="padding-right: 12px"
+          *ngIf="(formSubmitted && (!selectedServiceGenderCategory || selectedServiceGenderCategory.length == 0))"
+        >
+          *Select atleast one gender category
+        </p>
+
+        <ion-row class="category-items">
+          <ion-col size="4" *ngFor="let category of serviceGenderCategoryList">
+            <div class="checkbox-container">
+              <ion-checkbox
+                class="checkbox"
+                slot="start"
+                color="primary"
+                [(ngModel)]="category.isSelected"
+                [ngModelOptions]="{standalone: true}"
+              ></ion-checkbox>
+              <ion-label class="grade-label">{{category.name}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+      <ion-list class="grade-list">
+        <p
+          ion-text
+          class="field-err"
+          *ngIf="(formSubmitted && selectedStylistGrades &&  selectedStylistGrades.length == 0)"
+        >
+          *Please select atleast one grade
+        </p>
+        <div *ngFor="let grade of grades">
+          <div class="heading" (click)="toggleDetails(grade)">
+            <ion-icon
+              name="medal-outline"
+              color="secondary"
+              class="icon-space"
+            ></ion-icon>
+            {{grade.title}}
+            <ion-icon
+              class="text-gray float-r"
+              slot="end"
+              [name]="grade.icon"
+            ></ion-icon>
+          </div>
+
+          <ion-card
+            class="service-detail ion-no-margin animate__animated animate__fadeIn"
+            *ngIf="!grade.showDetails"
+          >
+            <ion-grid fixed class="ion-text-center grade-grid">
+              <ion-row>
+                <ion-col size="6" *ngFor="let grade of stylistGrade">
+                  <div class="checkbox-container">
+                    <ion-checkbox
+                      class="checkbox"
+                      slot="start"
+                      color="primary"
+                      [(ngModel)]="grade.isChecked"
+                      [ngModelOptions]="{standalone: true}"
+                    ></ion-checkbox>
+                    <ion-label class="grade-label">{{grade.name}}</ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </div>
+      </ion-list>
+
+      <div class="heading ion-margin-top ion-margin-bottom">
+        <span class="offer-switch">
+          <ion-toggle
+            [(ngModel)]="showOffer"
+            (ionChange)="offerToggle()"
+            color="secondary"
+            formControlName="offer"
+          ></ion-toggle>
+        </span>
+        <span slot="start">
+          <ion-icon name="gift-outline" color="secondary"></ion-icon>
+          Offers</span
+        >
+      </div>
+      <div
+        class="form ion-margin-bottom animate__animated animate__fadeIn"
+        *ngIf="showOffer"
+      >
+        <div class="input-block">
+          <ion-label>Offer Price</ion-label>
+          <ion-input formControlName="offerPrice" type="tel"></ion-input>
+
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || merchantServiceForm.get('offerPrice').dirty) &&  merchantServiceForm.get('offerPrice').hasError('required')"
+          >
+            *Offer price is required
+          </p>
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || merchantServiceForm.get('offerPrice').dirty) &&  merchantServiceForm.get('offerPrice').hasError('pattern')"
+          >
+            *Please enter valid price
+          </p>
+        </div>
+
+        <ion-row>
+          <ion-col size="6" class="ion-no-padding">
+            <div class="input-block">
+              <ion-label>Offer Start Date</ion-label>
+              <ion-input
+                formControlName="offerStartDate"
+                type="date"
+                (input)="checkOfferValidity()"
+              ></ion-input>
+
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || merchantServiceForm.get('offerStartDate').dirty) &&  merchantServiceForm.get('offerStartDate').hasError('required')"
+              >
+                *Date required
+              </p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding">
+            <div class="input-block">
+              <ion-label>Offer Start Time</ion-label>
+              <ion-input
+                formControlName="offerStartTime"
+                type="time"
+                (input)="checkOfferValidity()"
+              ></ion-input>
+
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || merchantServiceForm.get('offerStartTime').dirty) &&  merchantServiceForm.get('offerStartTime').hasError('required')"
+              >
+                *Time required
+              </p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="ion-no-padding">
+            <div class="input-block">
+              <ion-label>Offer End Date</ion-label>
+              <ion-input
+                formControlName="offerEndDate"
+                type="date"
+                (input)="checkOfferValidity()"
+              ></ion-input>
+
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || merchantServiceForm.get('offerEndDate').dirty) &&  merchantServiceForm.get('offerEndDate').hasError('required')"
+              >
+                *Date required
+              </p>
+              <p ion-text class="field-err" *ngIf="endDateErr">
+                Should be >= start date
+              </p>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="ion-no-padding">
+            <div class="input-block">
+              <ion-label>Offer End Time</ion-label>
+              <ion-input
+                formControlName="offerEndTime"
+                type="time"
+                (input)="checkOfferValidity()"
+              ></ion-input>
+
+              <p
+                ion-text
+                class="field-err"
+                *ngIf="(formSubmitted || merchantServiceForm.get('offerEndTime').dirty) &&  merchantServiceForm.get('offerEndTime').hasError('required')"
+              >
+                *Time required
+              </p>
+              <p ion-text class="field-err" *ngIf="endTimeErr">
+                *Should be > start time
+              </p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-list>
+
+    <div class="input-block disable-switch">
+      <ion-item lines="none">
+        <ion-label>Disable this service</ion-label>
+        <ion-toggle
+          [(ngModel)]="showDisable"
+          (ionChange)="disableToggle()"
+          color="secondary"
+          formControlName="disable"
+        ></ion-toggle>
+      </ion-item>
+      <div class="service-diable-error">
+        <p *ngIf="showDisable">
+          Please note, if you disable this service,you may no longer use this
+          service.
+        </p>
+      </div>
+    </div>
+
+    <ion-footer class="ion-padding-top" *ngIf="isKeyboardHide">
+      <ion-row class="ion-text-center button-row">
+        <ion-col size="6">
+          <ion-button
+            expand="block"
+            color="light"
+            shape="round"
+            type="button"
+            (click)="goBack('/tab2')"
+          >
+            Cancel
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" shape="round" type="submit"
+            >Save</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </form>
+</ion-content>

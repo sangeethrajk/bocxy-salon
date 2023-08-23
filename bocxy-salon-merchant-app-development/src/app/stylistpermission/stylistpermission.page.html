@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Stylist Permission</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="heading">
+    <ion-icon
+      name="calendar-outline"
+      class="icon-space"
+      color="secondary"
+    ></ion-icon>
+    Permission
+  </div>
+  <ion-list>
+    <ion-item lines="none" *ngFor="let list of permissionList; let i=index">
+      <ion-label>{{list.name}}</ion-label>
+      <ion-toggle
+        color="secondary"
+        [checked]="list.checked"
+        (ionChange)="toggleChange($event,i)"
+        [(ngModel)]="list.id"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer class="ion-no-border ion-padding">
+  <div>
+    <ion-button shape="round" expand="block" (click)="updatePermissions()"
+      >Save</ion-button
+    >
+  </div>
+</ion-footer>

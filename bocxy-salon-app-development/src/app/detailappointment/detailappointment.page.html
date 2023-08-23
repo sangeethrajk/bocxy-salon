@@ -1,0 +1,104 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title
+      >{{'APPOINTMENT_DETAIL_ITEMS.APPOINTMENT_DETAIL_TITLE' |
+      translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf="appointment">
+  <div class="mb-60">
+    <ion-card>
+      <ion-item>
+        <ion-label
+          ><span class="bold">Booking ID -</span>
+          {{appointment.bookingId}}</ion-label
+        >
+      </ion-item>
+
+      <ion-card-content>
+        <div class="list-item">
+          <ion-label>Service</ion-label>
+          <h3 class="bold">{{appointment.serviceName}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Location</ion-label>
+          <h3 class="bold">
+            {{appointment.location ? appointment.location : 'NA'}},
+            {{appointment.storeName}}
+          </h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Stylist Name</ion-label>
+          <h3 class="bold">{{appointment.stylistName}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Status</ion-label>
+          <h3 class="bold">{{appointment.status}}</h3>
+        </div>
+        <div *ngIf="appointment.cancelReason" class="list-item">
+          <ion-label>Cancel Reason</ion-label>
+          <h3 class="bold">{{appointment.cancelReason}}</h3>
+        </div>
+        <div class="divider"></div>
+        <ion-row>
+          <ion-col size="7">
+            <div>
+              <ion-label>Slot</ion-label>
+              <h3 class="bold">
+                {{appointment.bookingDate | date:'MMM d y'}}
+                {{dateService.timeConvert(appointment.slotName)}}
+              </h3>
+            </div>
+          </ion-col>
+          <ion-col size="5">
+            <div>
+              <ion-label
+                >{{'APPOINTMENT_DETAIL_ITEMS.PRICE' | translate}}</ion-label
+              >
+              <div *ngIf="appointment.totalAmount">
+                <h3 class="bold">
+                  <span>Rs.</span>{{appointment.totalAmount}}
+                  <span>+ GST</span>
+                </h3>
+              </div>
+              <!--If no price-->
+              <div *ngIf="!appointment.totalAmount">
+                <ion-badge class="no-price ion-text-wrap" color="secondary"
+                  >Price depends after consulting</ion-badge
+                >
+              </div>
+              <!--//If no price-->
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+            <div>
+              <ion-label>Created At</ion-label>
+              <h3 class="bold">
+                {{appointment.createdAt | date:'MMM d EEEE y'}}
+              </h3>
+            </div>
+          </ion-col>
+          <!-- <ion-col class="v-center" size="5">
+            <ion-button class="detail-btn" color="light" (click)="cancelAlert()"
+              >{{'COMMON.CANCEL' | translate}}</ion-button
+            >
+          </ion-col> -->
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

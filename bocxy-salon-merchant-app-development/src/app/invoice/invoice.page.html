@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card mode="ios">
+    <ion-card-header color="medium">
+      <ion-row>
+        <ion-col>
+          <ion-card-title>Surendar</ion-card-title>
+          <ion-card-subtitle>09887754235</ion-card-subtitle>
+          <ion-card-subtitle>Facial</ion-card-subtitle>
+          <ion-card-subtitle>Oct 2 2020, 11.00am</ion-card-subtitle>
+        </ion-col>
+        <ion-col class="ion-text-end">
+          <ion-card-subtitle>Modern Beauty Center</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <div class="divider"></div>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="6" class="center">
+          <ion-label>Service Price </ion-label></ion-col
+        >
+        <ion-col
+          ><ion-badge color="light" class="price-badge">
+            <span class="icon-rupee font-s"></span> 999</ion-badge
+          ></ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" class="center">
+          <ion-label>Discount (Rs)</ion-label></ion-col
+        >
+        <ion-col class="ion-text-center"><ion-input></ion-input></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" class="center">
+          <ion-label>Total Price </ion-label></ion-col
+        >
+        <ion-col
+          ><ion-badge color="light" class="price-badge">
+            <span class="icon-rupee font-s"></span> 999</ion-badge
+          ></ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button shape="round" fill="outline" color="medium"
+            >Cancel</ion-button
+          >
+        </ion-col>
+        <ion-col>
+          <ion-button shape="round" color="secondary">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

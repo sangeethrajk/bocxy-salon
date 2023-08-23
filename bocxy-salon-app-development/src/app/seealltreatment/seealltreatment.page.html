@@ -1,0 +1,125 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="allservice-header" [appScrollVanish]="scrollArea">
+    <div class="store-banner">
+      <ion-card class="ion-no-margin">
+        <ion-button fill="clear" (click)="previous()" class="banner-back">
+          <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+        </ion-button>
+        <img src="./assets/img/store-img.jpg" />
+        <ion-card-header *ngIf="merchantStore">
+          <ion-card-title>{{merchantStore.name}}</ion-card-title>
+          <ion-card-subtitle>{{merchantStore.address}}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-searchbar
+        placeholder="Search for services"
+        [(ngModel)]="searchString"
+        (ionChange)="getServiceOrStore()"
+        debounce="500"
+      ></ion-searchbar>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen #scrollArea scrollEvents="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="totalCount > 0">
+    <ion-list>
+      <ion-item
+        lines="none"
+        *ngFor="let service of serviceList"
+        class="allservice-items"
+      >
+        <ion-label>
+          <ion-row>
+            <ion-col size="8" class="ion-text-wrap"
+              ><h2 class="service-name">{{service.serviceName}}</h2>
+              <ion-row>
+                <ion-col class="ion-text-wrap">
+                  <h3>
+                    {{service.storeName}}
+
+                    <!-- <span *ngIf="!service.location">{{service.storeName}}</span> -->
+                  </h3>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-text-wrap v-center">
+                  <h3 class="">
+                    {{service.location}}
+                    <span *ngIf="!service.location">Not available</span>
+                  </h3>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <div class="price-box">
+                <h1 *ngIf="service.price" class="ion-no-margin price">
+                  <span class="icon-rupee font-s"></span> {{service.price}}
+                </h1>
+                <!--If no price-->
+                <div *ngIf="!service.price">
+                  <ion-badge class="no-price ion-text-wrap" color="secondary"
+                    >Price depends after consulting</ion-badge
+                  >
+                </div>
+
+                <!--//If no price-->
+                <div>
+                  <span class="gst-text">*GST applicable</span>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="8" class="align-center ion-text-wrap">
+              <div class="star-text">
+                <ion-icon name="star-outline"></ion-icon>
+                {{service.stars}}
+                <span *ngIf="!service.stars">No ratings</span>
+              </div>
+            </ion-col>
+            <ion-col size="4" class="ion-text-end">
+              <ion-button
+                (click)="bookNow(service.merchantStoreServiceId)"
+                color="primary"
+                expand="block"
+                shape="round"
+                size="small"
+                class="book-btn ion-text-end"
+              >
+                Book
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+      *ngIf="page < totalPages"
+      threshold="100px"
+      (ionInfinite)="loadMoreData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div class="no-service" *ngIf="totalCount == 0">
+    <h5>
+      <div class="nothing-to-show"></div>
+      <br />
+      Currently no services to show
+    </h5>
+  </div>
+</ion-content>

@@ -1,0 +1,154 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack(data.merchantStoreServiceId)">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Payment Mode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="animate__animated animate__fadeIn">
+  <ion-list class="payment-list">
+    <ion-radio-group [(ngModel)]="payments">
+      <ion-list-header>
+        <ion-label>Choose your payment options</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Pay later</ion-label>
+        <ion-radio checked="false" slot="start" value="paylater"></ion-radio>
+        <div class="text-mute font-small">
+          <p>(Pay at the time of service)</p>
+        </div></ion-item
+      >
+      <!-- <ion-item>
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/visa.png"
+          width="35"
+        />
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/mastercard.png"
+          width="35"
+        />
+        <ion-label>Card Payment</ion-label>
+        <ion-radio checked="false" slot="start" value="cardpay"></ion-radio>
+      </ion-item>
+
+      <ion-row
+        *ngIf="payments=='cardpay'"
+        class="card-payment-row animate__animated animate__fadeIn"
+      >
+        <ion-col size="12">
+          <ion-label>Card number</ion-label>
+          <ion-input
+            placeholder="Card number"
+            type="tel"
+            maxlength="16"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="6"
+          ><ion-label>Expiry Month</ion-label>
+          <ion-select
+            mode="ios"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            placeholder="Expiry Month"
+          >
+            <ion-select-option>Jan (01)</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="6"
+          ><ion-label>Expiry Year</ion-label>
+          <ion-select
+            mode="ios"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            placeholder="Expiry Year"
+          >
+            <ion-select-option>2022</ion-select-option>
+          </ion-select></ion-col
+        >
+        <ion-col size="4">
+          <ion-label>CVV</ion-label>
+          <ion-input type="tel" maxlength="3"></ion-input>
+        </ion-col>
+        <ion-col size="8" class="cvv-col">
+          <p>
+            <img class="ion-no-margin" src="./assets/img/cvv.png" />
+            Last 3 digits printed on the back of the card
+          </p>
+        </ion-col>
+        <ion-item lines="none">
+          <ion-label>Save this card as my default card</ion-label>
+          <ion-checkbox color="secondary" slot="start" checked></ion-checkbox>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label>UPI Payment</ion-label>
+        <ion-radio checked="false" slot="start" value="upi"></ion-radio>
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/upi.png"
+          width="35"
+        />
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/gpay.png"
+          width="25"
+        />
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/phonepe.png"
+          width="25"
+        />
+        <img
+          class="ion-no-margin"
+          slot="end"
+          src="./assets/img/paytm.png"
+          width="35"
+        />
+      </ion-item> -->
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-text-center button-row ion-margin-bottom">
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        type="submit"
+        color="light"
+        (click)="goBack(data.merchantStoreServiceId)"
+        >Cancel</ion-button
+      >
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="primary"
+        type="submit"
+        (click)="onContinue()"
+        >Continue</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>
+<!-- <ion-footer class="ion-text-center ion-no-border ion-padding">
+  <ion-button color="medium" shape="round" fill="outline">Cancel</ion-button>
+  <ion-button color="primary" shape="round" (click)="onContinue()"
+    >Continue</ion-button
+  >
+</ion-footer> -->

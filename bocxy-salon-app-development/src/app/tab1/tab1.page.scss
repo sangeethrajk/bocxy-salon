@@ -1,0 +1,224 @@
+:host {
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 22px;
+    color: #a9aaac;
+  }
+  ion-slides {
+    --bullet-background: #e82264;
+    --bullet-background-active: rebeccapurple;
+  }
+
+  .location-title {
+    font-size: 1em;
+    background: #fff;
+    font-weight: bold;
+    padding: 5px;
+    line-height: 2;
+    .caret {
+      vertical-align: middle;
+    }
+    ion-icon {
+      color: #e82264;
+    }
+  }
+  .notification-btn {
+    position: relative;
+    margin-right: 5px;
+    ion-button {
+      width: 50px;
+    }
+    ion-icon {
+      font-size: 1.5rem;
+      color: #444;
+    }
+    .notify-badge {
+      position: absolute;
+      left: 16px;
+      width: 20px;
+      height: 20px;
+      padding: 4px;
+      top: 0px;
+      font-size: 12px;
+      border-radius: 50%;
+    }
+  }
+
+  .heading {
+    width: 100%;
+    padding: 5px 4px;
+    position: relative;
+    font-size: 14px;
+    color: #797979;
+    font-weight: bold;
+  }
+
+  .card-background-page {
+    .service-buttons {
+      display: grid;
+      padding: 0 15px;
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      height: calc(100vh - 10%);
+      span {
+        width: 100%;
+        margin: 6px 0;
+        outline: none;
+      }
+      img {
+        width: 100%;
+      }
+      ion-card {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        background-color: transparent;
+        margin: 3px;
+        box-shadow: none;
+        // border-radius: 0;
+        // border: 1px solid #0e1a61;
+        // border-top-right-radius: 25px;
+        .card-title {
+          font-size: 14px;
+          width: 100%;
+          color: rgb(219, 219, 219);
+          font-family: auto;
+        }
+      }
+    }
+  }
+
+  .scroll-content {
+    overflow-y: hidden;
+  }
+  .brand-slides {
+    ion-slide {
+      padding: 15px;
+    }
+  }
+  .location-block {
+    max-width: 65vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    align-items: center;
+    vertical-align: middle;
+    color: #797979;
+  }
+  .see-more-btn {
+    margin: 0;
+    text-align: end;
+    font-size: 14px;
+    padding: 0 6px;
+    font-weight: bold;
+    color: #797979;
+    outline: none;
+    ion-label {
+      display: flex;
+      align-items: center;
+      ion-icon {
+        font-size: 14px;
+        margin-left: 2px;
+        color: #e82264;
+      }
+    }
+  }
+  .offer-slide {
+    ion-slide {
+      width: 90% !important;
+    }
+  }
+  .special-offers {
+    .swiper-slide img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+    }
+    ion-card.offer-card {
+      min-height: 22vh;
+      width: 100%;
+      margin: 0 8px 8px 0;
+      text-align: start !important;
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid #ddd;
+      ion-card-header {
+        width: 100%;
+        padding: 0 2px;
+        ion-card-title {
+          color: #797979;
+          font-size: 0.8rem;
+          font-weight: bold;
+        }
+        ion-card-subtitle {
+          font-size: 0.6rem;
+          color: #959595;
+        }
+      }
+      ion-card-content {
+        color: #787878;
+        width: 100%;
+        font-size: 0.7rem;
+        padding: 6px 2px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    .card {
+      display: inline-block;
+      margin: 0 0 0px 5px;
+      width: 85%;
+      max-width: fit-content;
+    }
+  }
+  .scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    .card {
+      flex: 0 0 auto;
+    }
+  }
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+    --offset-bottom: auto !important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .container-s {
+    position: relative;
+    text-align: center;
+    color: white;
+    height: 19vh;
+  }
+  .title-s {
+    position: absolute;
+    background: #080633d4;
+    font-weight: bold;
+    color: #d6d2d3;
+    padding: 5px;
+    font-size: 0.8rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

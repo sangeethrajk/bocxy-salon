@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="previous()">
+                <ion-icon class="back-btn-size" name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Location Search</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar type="text" debounce="500" (ionChange)="getPlaces($event)"></ion-searchbar>
+    <ion-list *ngIf="isPlaceAvailable">
+        <ion-item *ngFor="let place of places">
+            <ion-icon name="location-outline" color="secondary" class="location-icon"></ion-icon> {{ place }}
+        </ion-item>
+    </ion-list>
+</ion-content>

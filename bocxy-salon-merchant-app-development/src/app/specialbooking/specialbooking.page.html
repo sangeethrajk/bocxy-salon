@@ -1,0 +1,189 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/tab3')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Special Booking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <div class="validation-error">
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && !appointmentForm.get('userName').value"
+    >
+      Please Enter Full Name
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="(formSubmitted) && appointmentForm.get('userName').value && !appointmentForm.get('contactNumber').value"
+    >
+      Please Enter Contact Number
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && appointmentForm.get('userName').value && (appointmentForm.get('contactNumber').touched || appointmentForm.get('contactNumber').dirty) && appointmentForm.get('contactNumber').value && appointmentForm.get('contactNumber').hasError('invalid_cell_phone')"
+    >
+      Please Enter Valid Contact Number
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && !appointmentForm.get('contactNumber').hasError('invalid_cell_phone') && !appointmentForm.get('service').value"
+    >
+      Please Select Service
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && isPickDateError"
+    >
+      Please Select Date
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && !isPickDateError && isStylistError"
+    >
+      Please Select Stylist
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && !isPickDateError && !isStylistError && isSlotSelectionError"
+    >
+      Please Select Time Slot
+    </ion-label>
+  </div>
+  <form
+    [formGroup]="appointmentForm"
+    (keyup.enter)="showBookingConfirmation()"
+    (submit)="showBookingConfirmation()"
+  >
+    <div class="input-block">
+      <ion-label>Full name</ion-label>
+      <input
+        class="custom-input"
+        formControlName="userName"
+        name="userName"
+        placeholder="Full Name"
+        mode="ios"
+        type="text"
+        maxlength="50"
+        (keypress)="userNameValidate($event)"
+      />
+    </div>
+    <div class="input-block">
+      <ion-label>Contact number</ion-label>
+      <input
+        appBlockCopyPaste
+        class="ng2-tel-input"
+        type="tel"
+        ng2TelInput
+        [ng2TelInputOptions]="telInputOptions"
+        (hasError)="hasError($event)"
+        (ng2TelOutput)="getNumber($event)"
+        (intlTelInputObject)="telInputObject($event)"
+        (countryChange)="onCountryChange($event)"
+        formControlName="contactNumber"
+        name="contactNumber"
+        (input)="changePhone()"
+        (keypress)="numberValidate($event)"
+        #ngTelInput
+      />
+    </div>
+    <div class="input-block sign-input" (click)="showMerchantServiceModal()">
+      <ion-label>Services</ion-label>
+      <input
+        class="custom-input"
+        type="text"
+        mode="ios"
+        placeholder="Select Service"
+        formControlName="service"
+        name="service"
+      />
+    </div>
+    <div class="booking-block">
+      <ion-item class="ion-no-padding" lines="none">
+        <div class="input-block">
+          <ion-label class="sub-heading"> Date</ion-label>
+          <div
+            class="select-service-msg"
+            *ngIf="!appointmentBooking.merchantStoreServiceId"
+          >
+            <ion-label> Please select a service </ion-label>
+          </div>
+          <ion-datetime
+            *ngIf="appointmentBooking.merchantStoreServiceId"
+            mode="ios"
+            placeholder="Select Date"
+            display-timezone="utc"
+            [min]="minFilterDate"
+            [max]="maxFilterDate"
+            (ionChange)="OnDateSelect($event.target.value)"
+          ></ion-datetime>
+        </div>
+      </ion-item>
+      <div class="input-block sign-input">
+        <ion-label class="sub-heading">Stylists</ion-label>
+      </div>
+      <div class="scrolling-wrapper">
+        <div class="select-service-msg" *ngIf="!appointmentBooking.bookingDate">
+          <ion-label> Please select a date </ion-label>
+        </div>
+        <div
+          class="select-service-msg"
+          *ngIf="appointmentBooking.bookingDate && emptyStylist"
+        >
+          <ion-label> No Stylist assigned for this service or date </ion-label>
+        </div>
+        <div class="card">
+          <div class="stylist-item">
+            <!-- [disabled]="!this.appointmentBooking.bookingDate" -->
+            <ion-button
+              *ngFor="let stylist of stylists; let i = index"
+              (click)="OnStylistSelect(stylist.professionistAccountId,i)"
+              [ngClass]="selectedStylistIndex === i  ? 'selected-stylist' : ''"
+              [color]="stylistButtonColor"
+              size="small"
+              expand="full"
+              [disabled]="!appointmentBooking.bookingDate"
+              ><ion-icon name="checkmark-circle-outline"></ion-icon>
+              {{stylist.firstName}}</ion-button
+            >
+          </div>
+        </div>
+      </div>
+      <ion-item class="ion-no-padding" lines="none">
+        <div class="input-block">
+          <ion-label class="sub-heading"> Time</ion-label>
+          <ion-datetime
+            placeholder="H:MM"
+            mode="ios"
+            displayFormat="h:mm A"
+            (ionChange)="OnTimeSlotSelect($event.target.value)"
+          ></ion-datetime>
+        </div>
+      </ion-item>
+    </div>
+
+    <ion-footer class="ion-no-border">
+      <ion-row class="ion-text-center button-row">
+        <ion-col size="6">
+          <ion-button
+            expand="block"
+            color="light"
+            shape="round"
+            (click)="goBack('/home/tabs/tab3')"
+            >Cancel</ion-button
+          >
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button expand="block" shape="round" color="primary" type="submit"
+            >Save</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </form>
+</ion-content>

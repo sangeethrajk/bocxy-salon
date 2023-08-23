@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <div id="container" class="">
+    <h4 class="ion-text-center">
+      {{'PASSWORD_RECOVERY_ITEMS.PASSWORD_RECOVERY_TITLE' | translate}}
+    </h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <div *ngIf="!reqOTP" class="validation-error">
+          <ion-label
+            color="danger"
+            *ngIf="exist === 1 && !forgotForm.get('mobileNumber').hasError('required') && !forgotForm.get('mobileNumber').hasError('invalid_cell_phone')"
+          >
+            Mobile Number not registered!
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted || forgotForm.get('mobileNumber').touched) && forgotForm.get('mobileNumber').hasError('invalid_cell_phone')"
+          >
+            Please Enter Valid Mobile Number
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted ||forgotForm.get('mobileNumber').touched)&& forgotForm.get('mobileNumber').hasError('required')"
+          >
+            Please Enter Mobile Number
+          </ion-label>
+        </div>
+        <form [formGroup]="forgotForm" (submit)="goToNext()">
+          <!--Register Block-->
+          <div class="form animate__animated animate__fadeIn" *ngIf="!reqOTP">
+            <div class="input-block">
+              <ion-label
+                >{{'PASSWORD_RECOVERY_ITEMS.MOBILE_NUMBER' |
+                translate}}</ion-label
+              >
+              <input
+                appBlockCopyPaste
+                class="ng2-tel-input"
+                type="tel"
+                ng2TelInput
+                [ng2TelInputOptions]="telInputOptions"
+                (hasError)="hasError($event)"
+                (ng2TelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+                formControlName="mobileNumber"
+                name="mobileNumber"
+                (input)="changePhone()"
+                (keypress)="numberValidate($event)"
+                #ngTelInput
+              />
+              <!-- [separateDialCode]="separateDialCode" -->
+            </div>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="secondary"
+              type="submit"
+              class="ion-margin-top"
+              >{{'COMMON.SUBMIT' | translate}}</ion-button
+            >
+            <ion-button
+              expand="block"
+              shape="round"
+              type="button"
+              color="medium"
+              (click)="previous()"
+              class="ion-margin-top"
+              >{{'COMMON.CANCEL' | translate}}</ion-button
+            >
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

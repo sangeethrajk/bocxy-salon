@@ -1,0 +1,196 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('home/tabs/tab1')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{'NOTIFICATION_ITEMS.NOTIFICATION_TITLE' | translate}}
+      ({{totalNotficationsCount}})</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animate__animated animate__fadeIn">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="[notficationList].length > 0">
+    <div *ngFor="let req of notficationList">
+      <div
+        *ngIf="req.typeData == 'COMPLETED' && req.type =='APPOINTMENT'"
+        style="width: 100%"
+      >
+        <ion-card
+          (click)="gotToAppointment(req.notificationId,req.read,req.appointmentId)"
+        >
+          <ion-item lines="none">
+            <ion-button fill="clear" class="notify-button">
+              <ion-icon
+                name="notifications-outline"
+                color="primary"
+                slot="start"
+              ></ion-icon>
+              <ion-badge
+                color="danger"
+                class="notify-badge ion-text-center"
+                slot="end"
+                *ngIf="req.read == 'N'"
+              >
+                New
+              </ion-badge>
+            </ion-button>
+            <ion-label>Appointment Completed!</ion-label>
+            <span slot="end" class="time-stamp"
+              >{{dateFormat(req.appointmentCreatedTime)}}</span
+            >
+          </ion-item>
+
+          <ion-card-content>
+            Thank you for choosing our service, please feel free to rate us.
+            -{{req.StoreName}}, {{req.locality}}
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div
+        *ngIf="req.typeData == 'CONFIRMED'&& req.type =='APPOINTMENT'"
+        style="width: 100%"
+      >
+        <ion-card
+          (click)="gotToAppointment(req.notificationId,req.read,req.appointmentId)"
+        >
+          <ion-item lines="none">
+            <ion-button fill="clear" class="notify-button">
+              <ion-icon
+                name="notifications-outline"
+                color="primary"
+                slot="start"
+              ></ion-icon>
+              <ion-badge
+                color="danger"
+                class="notify-badge ion-text-center"
+                slot="end"
+                *ngIf="req.read == 'N'"
+              >
+                New
+              </ion-badge>
+            </ion-button>
+            <ion-label>Appointment Confirmed!</ion-label>
+            <!-- <span slot="end" class="time-stamp"
+              >{{dateFormat(req.appointmentCreatedTime)}}</span
+            > -->
+          </ion-item>
+
+          <ion-card-content>
+            Hello! Your appointment has been confirmed by {{req.StoreName ?
+            req.StoreName : req.StoreNameCanceled}}
+            <!-- {{req.StoreName}},
+            {{req.locality}} -->
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div
+        *ngIf="req.typeData == 'CANCELED'&& req.type =='APPOINTMENT'"
+        style="width: 100%"
+      >
+        <ion-card
+          (click)="gotToAppointment(req.notificationId,req.read,req.appointmentId)"
+        >
+          <ion-item lines="none">
+            <ion-button fill="clear" class="notify-button">
+              <ion-icon
+                name="notifications-outline"
+                color="primary"
+                slot="start"
+              ></ion-icon>
+              <ion-badge
+                color="danger"
+                class="notify-badge ion-text-center"
+                slot="end"
+                *ngIf="req.read == 'N'"
+              >
+                New
+              </ion-badge>
+            </ion-button>
+            <ion-label>Appointment Canceled!</ion-label>
+            <!-- <span slot="end" class="time-stamp"
+              >{{dateFormat(req.appointmentCreatedTime)}}</span
+            > -->
+          </ion-item>
+
+          <ion-card-content>
+            Oops! {{req.StoreNameCanceled}} apologies for this cancellation.
+            {{req.cancelReason ? req.cancelReason: ""}}
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngIf="req.type == 'ANNOUNCEMENT'" style="width: 100%">
+        <ion-card
+          (click)="goToAnnoucement(req.notificationId,req.read,req.announcementId)"
+        >
+          <ion-item lines="none">
+            <ion-button fill="clear" class="notify-button">
+              <ion-icon
+                name="notifications-outline"
+                color="primary"
+                slot="start"
+              ></ion-icon>
+              <ion-badge
+                color="danger"
+                class="notify-badge ion-text-center"
+                slot="end"
+                *ngIf="req.read == 'N'"
+              >
+                New
+              </ion-badge>
+            </ion-button>
+            <ion-label> {{req.title}}</ion-label>
+            <span slot="end" class="time-stamp"
+              >{{dateFormat(req.annoucementCreatedTime)}}</span
+            >
+          </ion-item>
+
+          <ion-card-content> {{req.content}} </ion-card-content>
+        </ion-card>
+      </div>
+      <!-- <ion-infinite-scroll
+        *ngIf="page < totalPages"
+        threshold="100px"
+        (ionInfinite)="loadMoreData($event)"
+      >
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
+    </div>
+  </div>
+  <div
+    class="no-service"
+    *ngIf="[notficationList].length === 0"
+    [ngClass]="
+  translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+  >
+    <h5>
+      <div class="nothing-to-show"></div>
+      <br />
+      {{'NOTIFICATION_ITEMS.NO_NOTIFICATION_MSG' | translate}}
+    </h5>
+  </div>
+
+  <!-- <div class="no-grade" *ngIf="totalGradeCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no Notifications to show
+    </h5>
+  </div> -->
+</ion-content>

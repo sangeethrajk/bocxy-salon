@@ -1,0 +1,133 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <div id="container" class="">
+    <h4 class="ion-text-center bold">{{'LOGIN_ITEMS.SIGN_IN' | translate}}</h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <!--Login Errors-->
+        <div class="validation-error">
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted || loginForm.get('mobileNumber').touched || loginForm.get('password').dirty) && loginForm.get('mobileNumber').hasError('invalid_cell_phone')"
+          >
+            Please Enter Valid Mobile Number
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted || loginForm.get('mobileNumber').touched || loginForm.get('password').dirty) && loginForm.get('mobileNumber').hasError('required')"
+          >
+            Please Enter Mobile Number
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted || loginForm.get('mobileNumber').touched || loginForm.get('password').dirty) && !mobileNumErr && !activeErr && !loginForm.get('mobileNumber').hasError('required') && !loginForm.get('mobileNumber').hasError('invalid_cell_phone') && loginForm.get('password').hasError('required')"
+          >
+            Please Enter Password
+          </ion-label>
+          <ion-label color="danger" *ngIf="(formSubmitted) && mobileNumErr">
+            Account doesn't exist
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted) && passwordErr && !loginForm.get('password').hasError('required')"
+          >
+            Incorrect passsword
+          </ion-label>
+          <ion-label color="danger" *ngIf="(formSubmitted) && activeErr">
+            Account Disabled
+          </ion-label>
+        </div>
+        <form
+          [formGroup]="loginForm"
+          (keyup.enter)="login()"
+          (submit)="login()"
+        >
+          <div class="form">
+            <div class="input-block sign-input">
+              <ion-label
+                >{{'PLACEHOLDER_MSG.MOBILE_NUMBER' | translate}}</ion-label
+              >
+              <input
+                class="ng2-tel-input"
+                type="tel"
+                ng2TelInput
+                [ng2TelInputOptions]="telInputOptions"
+                (hasError)="hasError($event)"
+                (ng2TelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+                formControlName="mobileNumber"
+                name="mobileNumber"
+                (input)="changePhone()"
+                (keypress)="numberValidate($event)"
+                #ngTelInput
+              />
+              <!-- [separateDialCode]="separateDialCode" -->
+            </div>
+            <div class="input-block">
+              <ion-label>{{'PLACEHOLDER_MSG.PASSWORD' | translate}}</ion-label>
+              <ion-input
+                type="password"
+                formControlName="password"
+                name="password"
+                (input)="typeChange('password')"
+              ></ion-input>
+            </div>
+            <div class="ion-text-end">
+              <p routerLink="/forgotpw">
+                {{'LOGIN_ITEMS.FORGOT_PASSWORD' | translate}}
+              </p>
+            </div>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="secondary"
+              type="submit"
+              class="ion-margin-top"
+            >
+              {{'LOGIN_ITEMS.SIGN_IN' | translate}}
+            </ion-button>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="medium"
+              type="button"
+              class="ion-margin-top"
+              (click)="skipLogin()"
+            >
+              {{'LOGIN_ITEMS.SKIP_LOGIN' | translate}}
+            </ion-button>
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer
+  class="ion-no-border"
+  *ngIf="isKeyboardHide"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar class="ion-text-center">
+    <p>
+      {{'LOGIN_ITEMS.NEW_USER' | translate}}
+      <span class="bold text-secondary" routerLink="/signup"
+        >{{'LOGIN_ITEMS.SIGN_UP' | translate}}</span
+      >
+    </p>
+  </ion-toolbar>
+</ion-footer>

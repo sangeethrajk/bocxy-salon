@@ -1,0 +1,53 @@
+:host {
+  .avatar {
+    margin-right: 0;
+    width: 40px;
+    height: 40px;
+    ion-icon {
+      font-size: 22px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 10px 5px;
+      color: #737373;
+    }
+    ion-label {
+      font-size: 16px;
+    }
+  }
+  .helpsupport-list {
+    ion-label {
+      img {
+        float: left;
+        margin-right: 5px;
+        border: 2px solid #2196f3;
+      }
+      h3 {
+        font-size: 12px;
+      }
+    }
+
+    .help-title {
+      width: 100%;
+      position: relative;
+      display: block;
+      background: #ececec;
+      padding: 10px;
+      span {
+        font-size: 14px;
+        font-weight: bold;
+        color: #444;
+        margin: 0 10px;
+      }
+    }
+    .sub-image {
+      width: 35vw !important;
+      margin: 0 auto;
+      display: inline-block;
+      float: none !important;
+    }
+  }
+  .top-title {
+    padding: 5px 18px 5px;
+    color: #444;
+  }
+}

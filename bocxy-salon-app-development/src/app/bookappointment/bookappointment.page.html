@@ -1,0 +1,234 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/formen')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Book Appointment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-card color="secondary">
+    <ion-card-header>
+      <ion-card-title
+        >{{merchantStoreService.storeName}}
+        {{merchantStoreService.location}}</ion-card-title
+      >
+      <ion-card-subtitle
+        >{{merchantStoreService.serviceName}}</ion-card-subtitle
+      >
+      <ion-card-subtitle class="ion-no-margin pt-4">
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col></ion-col>
+          <ion-col size="4" class="ion-text-end ion-no-padding price-font">
+            <span class="icon-rupee"></span>
+            {{merchantStoreService.price}}
+          </ion-col>
+        </ion-row>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card> -->
+  <div class="validation-error">
+    <ion-label color="danger" *ngIf="isSubmitted && isDateError">
+      Please Select a date
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="isSubmitted && !isDateError && isStylistError"
+    >
+      Please Select a stylist
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="isSubmitted && !isDateError && !isStylistError && isTimeSlotError"
+    >
+      Please Select a slot
+    </ion-label>
+  </div>
+  <div class="heading">Pick Date</div>
+
+  <!-- <h6 class="header-h6">
+      </h6> -->
+  <div class="scrolling-wrapper">
+    <div class="card">
+      <ion-item class="date-item" lines="none">
+        <ion-button
+          *ngFor="let date of datebuttons; let i = index"
+          (click)="OnAppointmentDateSelect(date, i)"
+          [ngClass]="selectedIndex === i  ? 'selected-btn' : ''"
+          expand="full"
+          size="small"
+          class="date-button"
+          >{{date.name}}</ion-button
+        >
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="heading">Stylists</div>
+  <!-- <h6 class="header-h6">
+     </h6> -->
+  <div class="scrolling-wrapper">
+    <div class="card">
+      <div class="msg" *ngIf="!emptyStylist && stylists.length === 0">
+        <ion-label> No stylist to show </ion-label>
+      </div>
+      <div class="msg" *ngIf="emptyStylist">
+        <ion-label> No stylist available </ion-label>
+      </div>
+      <ion-item lines="none" class="stylist-item">
+        <ion-button
+          *ngFor="let stylist of stylists; let i = index"
+          (click)="changeStylist(stylist, i)"
+          size="small"
+          class="stylist-btn"
+          [ngClass]="selectedStylistIndex === i  ? 'selected-stylist' : ''"
+          [disabled]="!appointment.bookingDate"
+        >
+          <ion-avatar>
+            <img src="./assets/img/user.svg" />
+          </ion-avatar>
+          <!-- <ion-icon name="checkmark-circle-outline"></ion-icon> -->
+          {{stylist.firstName}}
+        </ion-button>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="heading">Timing</div>
+
+  <ion-item lines="none" class="time-item">
+    <div class="msg" *ngIf="this.selectedIndex === null">
+      <ion-label> Select a date </ion-label>
+    </div>
+    <div class="msg" *ngIf="this.emptyDaySlots">
+      <ion-label>No slots available for selected date</ion-label>
+    </div>
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-text-center">
+        <ion-col size="2" *ngFor="let time of timeslot; let i = index">
+          <ion-button
+            expand="full"
+            size="small"
+            (click)="changeTimeSlot(time, i)"
+            [ngClass]="selectedTimeIndex === i  ? 'selected-timeslot' : ''"
+            [disabled]="time.isDisabled == null || time.isDisabled"
+            >{{time.slotName}}</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <ion-card class="service-select-card">
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-row class="ion-no-padding ion-no-margin">
+          <ion-col
+            size="8"
+            class="ion-no-padding v-center font-12 pt-1 ion-text-wrap"
+          >
+            <ion-card-title
+              >{{merchantStoreService.serviceName}}</ion-card-title
+            >
+            {{merchantStoreService.storeName}}
+            {{merchantStoreService.location}}</ion-col
+          >
+          <ion-col
+            size="4"
+            class="ion-text-end ion-no-padding price-font ion-text-wrap"
+          >
+            <!--If no price-->
+            <div>
+              <ion-badge
+                *ngIf="!merchantStoreService.price"
+                class="no-price ion-text-wrap"
+                color="secondary"
+                >Price depends after consulting</ion-badge
+              >
+              <!--//If no price-->
+              <ng-container *ngIf="merchantStoreService.price">
+                <span class="icon-rupee font-14"></span
+                >{{merchantStoreService.price}}
+              </ng-container>
+            </div>
+
+            <div>
+              <span class="gst-text">*GST applicable</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-subtitle>
+      <!---->
+      <ion-card-subtitle class="ion-no-margin pt-4">
+        <ion-row class="ion-no-padding ion-no-margin" *ngIf="selectedStylist">
+          <ion-col size="8" class="ion-no-padding">
+            <fa-icon
+              *ngIf="selectedStylist.firstName"
+              [icon]="['fas', 'user']"
+            ></fa-icon>
+            <ion-chip *ngIf="selectedStylist.firstName" class="stylist-chip">
+              <ion-label>{{selectedStylist.firstName}}</ion-label>
+              <!-- <ion-icon name="close-circle"></ion-icon> -->
+            </ion-chip>
+          </ion-col>
+          <ion-col
+            size="4"
+            class="ion-text-end ion-no-padding font-12 v-center ion-text-wrap"
+          >
+            <span> {{selectedDate}} </span><br />
+            <span> {{selectedSlotDuration}} </span>
+          </ion-col>
+        </ion-row>
+      </ion-card-subtitle>
+      <!---->
+    </ion-card-header>
+  </ion-card>
+
+  <!--Total-->
+  <!-- <ion-card class="total-cost">
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="8" class="total-label">Total</ion-col>
+        <ion-col size="4" class="total-rs">899</ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card> -->
+  <!--//Total-->
+
+  <!--Add another service-->
+  <!-- <div class="ion-text-center">
+    <ion-button color="primary" fill="clear">
+      <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon> Add another service
+    </ion-button>
+  </div> -->
+  <!--//Add another service-->
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-text-center button-row ion-margin-bottom">
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        type="submit"
+        color="light"
+        (click)="goBack('/formen')"
+        >Cancel</ion-button
+      >
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="primary"
+        type="submit"
+        (click)="onBooking()"
+        [disabled]="disableBookButton"
+        >Book</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon class="back-btn-size" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select service</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="light" class="brand-search">
+    <ion-searchbar
+      placeholder="Filter Service"
+      (ionInput)="filterservice($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list *ngIf="services">
+      <ion-item
+        *ngFor="let ser of services"
+        (click)="serviceSelected(ser)">
+        {{ser.name}}
+      </ion-item>
+    </ion-list>
+  </div> 
+</ion-content>

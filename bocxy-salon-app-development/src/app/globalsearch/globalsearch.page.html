@@ -1,0 +1,93 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-title>
+      {{'GLOBAL_SEARCH_ITEMS.SEARCH_SERVICES' | translate}}</ion-title
+    >
+    <ion-buttons
+      slot="end"
+      id="notify-btn"
+      class="notification-btn"
+      (click)="dismiss()"
+    >
+      <ion-button size="small" fill="clear" color="primary"
+        >{{'GLOBAL_SEARCH_ITEMS.CLOSE' | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!--Search by Services-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-input
+        placeholder="i.e. Facial"
+        [(ngModel)]="searchString"
+        (ionInput)="getServiceOrStore()"
+      ></ion-input>
+      <!-- debounce="500" -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-list class="search-items" *ngIf="searchList.length > 0">
+    <ion-item *ngFor="let result of searchList" (click)="storeSelected(result)">
+      <ng-container *ngIf="result.type ==='STORE';else serviceBlock">
+        {{result.merchantStoreName}}, {{result.merchantStoreLocation}}
+      </ng-container>
+      <ng-template #serviceBlock>
+        <ng-container *ngIf="result.type ==='SERVICE'">
+          {{result.merchantStoreServiceName}} {{result.serviceCategoryName}}
+          {{result.serviceGenderCategoryName}}, {{result.merchantStoreName}},
+          {{result.merchantStoreLocation}}
+        </ng-container>
+      </ng-template>
+    </ion-item>
+  </ion-list>
+  <div
+    class="no-service"
+    *ngIf="selectLocation && searchList.length === 0 && searchString"
+  >
+    <h5>
+      <div class="nothing-to-show"></div>
+      <br />
+      No services available
+    </h5>
+  </div>
+  <div class="no-service" *ngIf="!selectLocation">
+    <h5>
+      <div class="nothing-to-show"></div>
+      <br />
+      {{'GLOBAL_SEARCH_ITEMS.SELECT_LOCATION_MSG' | translate}}
+    </h5>
+  </div>
+</ion-content>
+<ion-footer
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-row class="ion-text-center button-row ion-margin-bottom">
+    <ion-col size="12">
+      <ion-button
+        expand="block"
+        shape="round"
+        type="submit"
+        color="light"
+        (click)="dismiss()"
+      >
+        {{'COMMON.CANCEL' | translate}}</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

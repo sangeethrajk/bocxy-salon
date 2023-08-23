@@ -1,0 +1,72 @@
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <div>
+    <ion-slides
+      pager="true"
+      #introSlider
+      [options]="slideOpts"
+      (ionSlideDidChange)="slidesChanged(slides)"
+      (ionSlidesDidLoad)="slidesChanged(slides)"
+    >
+      <ion-slide>
+        <div class="slide">
+          <img src="./assets/img/slide-1.jpg" />
+          <h2 class="text-secondary">Welcome</h2>
+          <p>
+            The <b>Bocxy app</b> Lorem Ipsum is simply dummy text of the
+            printing and typesetting industry.
+          </p>
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/img/slide-2.jpg" />
+        <h2 class="text-secondary">What is Bocxy?</h2>
+        <p>
+          <b>Bocxy App</b> is an open source SDK that enables developers to
+          build high quality mobile apps with web technologies like HTML, CSS,
+          and JavaScript.
+        </p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/img/slide-1.jpg" />
+        <h2 class="text-secondary">What is Bocxy Appflow?</h2>
+        <p>
+          <b>Bocxy Appflow</b> is a powerful set of services and features built
+          on top of Ionic Framework that brings a totally new level of app
+          development agility to mobile dev teams
+        </p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/img/slide-2.jpg" />
+        <h2 class="text-secondary">Ready to be styled?</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry.
+        </p>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <ion-footer>
+    <ion-button
+      *ngIf="intro<3"
+      (click)="swipeNext()"
+      color="secondary"
+      expand="block"
+      shape="round"
+    >
+      Next
+    </ion-button>
+
+    <ion-button
+      *ngIf="intro == 3"
+      color="secondary"
+      expand="block"
+      shape="round"
+      (click)="goToHome()"
+    >
+      Continue
+    </ion-button>
+  </ion-footer>
+</ion-content>

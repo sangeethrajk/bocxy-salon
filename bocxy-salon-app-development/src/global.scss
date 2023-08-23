@@ -1,0 +1,467 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@font-face {
+  font-family: "airbnb";
+  src: url("./assets/fonts/airbnb/AirbnbCerealBook.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "airbnb-medium";
+  src: url("./assets/fonts/airbnb/AirbnbCerealMedium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "airbnb-bold";
+  src: url("./assets/fonts/airbnb/AirbnbCerealBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "airbnb" !important;
+  text-transform: none;
+}
+
+ion-button {
+  outline: none;
+}
+
+ion-input {
+  border: 1px solid #a8a6a6;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding-left: 5px !important;
+  margin-top: 5px;
+  input {
+    padding-left: 10px !important;
+  }
+}
+
+ion-select {
+  border: 1px solid #a8a6a6;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding-left: 10px !important;
+  margin-top: 5px;
+}
+
+.bold {
+  font-weight: bold !important;
+  color: #737373;
+}
+
+.text-secondary {
+  color: #e82264;
+}
+
+.iti--allow-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100% !important;
+}
+.iti__selected-flag {
+  outline: none;
+}
+.iti-mobile .iti--container {
+  top: 0;
+  bottom: 30px;
+  display: none;
+  left: 30px;
+  right: 30px;
+  position: fixed;
+  transform: translateY(39%);
+}
+
+.font-m {
+  font-size: 1.2rem;
+}
+.font-s {
+  font-size: 0.9rem;
+}
+.font-10 {
+  font-size: 10px !important;
+}
+.font-12 {
+  font-size: 12px !important;
+}
+.font-14 {
+  font-size: 14px !important;
+}
+.font-16 {
+  font-size: 16px !important;
+}
+.pl-0 input {
+  padding-left: 0 !important;
+}
+.custom-btn-gray {
+  border: 1px solid #a8a7a7;
+  background: #efefef;
+  color: #444;
+}
+.v-center {
+  height: 100%;
+  display: block;
+}
+.scroll-content {
+  padding-bottom: 0 !important;
+}
+.space-around {
+  padding: 2px;
+}
+
+.icon-space {
+  position: relative;
+  top: 2px !important;
+}
+.pt-2 {
+  padding-top: 2px;
+}
+.pt-3 {
+  padding-top: 3px;
+}
+.pt-4 {
+  padding-top: 4px;
+}
+.pt-5 {
+  padding-top: 5px;
+}
+.font-small {
+  font-size: 12px;
+}
+.text-mute {
+  color: gray;
+  font-style: italic;
+}
+.btn-small {
+  height: 30px;
+  max-width: 100px;
+  font-size: 14px;
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+}
+.card-padding {
+  padding: 5px 10px;
+}
+
+.otp-input {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  padding-left: 28px !important;
+  padding-right: 26px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  flex: 1;
+  color: var(--ion-color-step-850, #444444);
+  font-size: 14px;
+  // text-overflow: ellipsis;
+  white-space: pre-wrap;
+}
+
+.alert-radio-icon.sc-ion-alert-md {
+  left: 18px;
+  top: 0;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  border-style: solid;
+}
+.action-sheet-selected.sc-ion-action-sheet-md {
+  color: #e82264;
+  background: #f1f1f1;
+}
+.action-sheet-selected.sc-ion-action-sheet-ios {
+  color: #e82264;
+  background: #f1f1f1;
+}
+button.action-sheet-cancel {
+  color: #888 !important;
+}
+.select-action-sheet {
+  --height: 400px;
+}
+
+.sign-input {
+  .iti--allow-dropdown {
+    position: relative;
+    margin: 4px 0 !important;
+    border: 0;
+  }
+}
+
+.no-background {
+  --background: none;
+}
+
+.font-ta {
+  ion-label {
+    font-size: 0.8rem !important;
+  }
+  p {
+    font-size: 0.8rem !important;
+    span {
+      font-size: 0.9rem !important;
+    }
+  }
+  span {
+    font-size: 0.8rem !important;
+  }
+  ion-button {
+    font-size: 0.8rem !important;
+  }
+  h4 {
+    font-size: 1.2rem !important;
+  }
+  .language-title {
+    font-size: 0.8rem !important;
+  }
+  .heading {
+    font-size: 0.8rem !important;
+  }
+  .language-heading {
+    font-size: 1rem !important;
+  }
+  ion-title {
+    font-size: 1rem !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "MuktaMalar-Regular" !important;
+  }
+  p {
+    font-family: "MuktaMalar-Regular" !important;
+  }
+  ion-label {
+    font-family: "MuktaMalar-Regular" !important;
+  }
+  .my-booking-card {
+    ion-label {
+      font-size: 1rem !important;
+    }
+  }
+}
+ion-tabs.font-ta {
+  ion-label {
+    font-size: 0.7rem !important;
+  }
+}
+.font-ta {
+  font-family: "MuktaMalar-Regular" !important;
+}
+ion-label.font-ta {
+  font-size: 0.8rem !important;
+}
+p.font-ta {
+  font-size: 0.8rem !important;
+}
+ion-button.font-ta {
+  font-size: 0.8rem !important;
+}
+h4.font-ta {
+  font-size: 1.2rem !important;
+}
+.side-menu {
+  ion-label.font-ta {
+    font-size: 1rem !important;
+  }
+}
+.cpw-title {
+  margin: 0 12px;
+}
+ion-row.ios {
+  padding: 0;
+}
+ion-row.md {
+  padding: 0;
+}
+
+ion-checkbox {
+  --size: 15px;
+}
+.border {
+  border: 1px solid #ddd;
+}
+.border-l {
+  border-left: 1px solid #ddd;
+}
+.border-r {
+  border-right: 1px solid #ddd;
+}
+.p-10 {
+  padding: 10px;
+}
+.float-r {
+  float: right !important;
+}
+.float-l {
+  float: left !important;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+ngx-star-rating label.star:hover {
+  -webkit-transform: rotate(0) scale(1) !important;
+  transform: rotate(0) scale(1) !important;
+}
+input.star-5:checked ~ label.star:before {
+  color: #f7e14a !important;
+  text-shadow: 0 0 1px #952 !important;
+}
+label.star {
+  padding: 6px !important;
+  font-size: 7vw !important;
+  color: #ada6a6 !important;
+  transition: 0.2s;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.filter-actionsheet {
+  --background: #fff;
+  .action-sheet-button:active {
+    background: #e82264;
+    color: #fff;
+    ion-icon {
+      --color: #fff;
+    }
+  }
+  ion-icon {
+    --color: #e82264;
+  }
+}
+.item-height {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+.align-center {
+  display: flex;
+  align-items: center;
+}
+.no-service {
+  position: relative;
+  left: 0;
+  top: 20%;
+  text-align: center;
+  right: 0;
+  color: #6a6a6a;
+  vertical-align: middle;
+  bottom: 0;
+  ion-icon {
+    font-size: 25px;
+  }
+  h5 {
+    font-size: 1rem !important;
+  }
+}
+.nothing-to-show {
+  background-image: url("./assets/img/no-offer.svg"); /* The image used */
+  width: 100px;
+  height: 106px;
+  margin: 0 auto;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+.segment-item {
+  ion-label {
+    font-size: 16px;
+  }
+}
+.exitToast {
+  margin-bottom: 50px;
+  --width: 200px;
+  --height: 20px;
+  font-size: 10px;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  --box-shadow: none;
+}
+.toast-container {
+  --background-color: #e82264;
+  text-align: center;
+}
+
+.booking-policy-alert {
+  .alert-button {
+    background: #efefef;
+  }
+  .alert-message {
+    line-height: 1.5;
+  }
+}
+.appointment-cancel-alert {
+  .alert-button {
+    font-weight: bold;
+  }
+  .alert-message {
+    line-height: 1.5;
+  }
+  .alert-button-group {
+    border-top: 1px solid #ddd;
+  }
+  .ok-btn {
+    color: #e91e63;
+  }
+  .cancel-btn {
+    color: #444;
+  }
+}
+ion-badge.no-price {
+  border-radius: 0;
+  font-size: 8px;
+  background: none;
+  color: #e91e63;
+  border: 1px solid #e91e63;
+  text-align: center;
+}
+.gst-text {
+  font-size: 10px;
+  color: #6a6a6a !important;
+}

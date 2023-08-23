@@ -1,0 +1,79 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <!-- <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title> {{'PROFILE_ITEMS.PROFILE_TITLE' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="account-banner">
+    <!-- <ion-button fill="clear" slot="end" class="edit-btn">
+            <ion-icon name="pencil" color="light"></ion-icon>
+        </ion-button> -->
+
+    <ion-avatar
+      class="account-avatar"
+      *ngIf="userData && userData.pictureType==='AVATAR'"
+    >
+      <img [src]="selectedIcon" />
+      <!-- <img src="./assets/icon/male_icon.svg" /> -->
+    </ion-avatar>
+    <ion-avatar
+      class="account-avatar"
+      *ngIf="userData && userData.pictureType=== null"
+    >
+      <img [src]="selectedIcon" />
+    </ion-avatar>
+
+    <div class="account-heading">
+      <h4 class="ion-no-margin">{{userData?.firstName}}</h4>
+      <p class="ion-no-margin">
+        {{userData?.mobileNoDialCode}}&nbsp;{{userData?.mobileNo}}
+      </p>
+      <p class="ion-no-margin">{{userData?.email}}</p>
+      <p
+        class="ion-no-margin"
+        *ngIf="userData && userData.roleCodes && (userData.roleCodes.includes('MR'))"
+      >
+        {{userData?.storeEmail}}
+      </p>
+    </div>
+  </div>
+
+  <ion-list
+    class="account-list"
+    [ngClass]="
+  translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+  >
+    <ion-item detail="true" (click)="gotoUrl('/accountsettings')">
+      <ion-icon name="person-outline" color="secondary"></ion-icon>
+      {{'PROFILE_ITEMS.PROFILE_TITLE' | translate}}</ion-item
+    >
+    <ion-item detail="true" (click)="gotoUrl('/changepassword')">
+      <ion-icon name="lock-closed-outline" color="secondary"></ion-icon>
+      {{'PROFILE_ITEMS.CHANGE_PASSWORD' | translate}}</ion-item
+    >
+    <ion-item detail="true" (click)="gotoUrl('/notifications')">
+      <ion-icon name="notifications-outline" color="secondary"></ion-icon>
+      {{'PROFILE_ITEMS.MY_NOTIFICATION' | translate}}</ion-item
+    >
+    <!-- <ion-item detail="true" (click)="goToLocation('home')">
+      <ion-icon name="trophy-outline" color="secondary"></ion-icon> Refer to
+      your friend</ion-item
+    > -->
+    <ion-item detail="true" (click)="gotoUrl('/login')">
+      <ion-icon name="log-out-outline" color="secondary"></ion-icon>
+      {{'PROFILE_ITEMS.SIGN_OUT' | translate}}</ion-item
+    >
+  </ion-list>
+</ion-content>

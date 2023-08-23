@@ -1,0 +1,88 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/storeconfig')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Stylist Grade Mgmt</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- <ion-toolbar>
+  <ion-row>
+    <ion-col>
+      <div class="add-grade-btn">
+        <ion-item class="grades" lines="none" (click)="presentModal(null)">
+          <ion-thumbnail slot="start">
+            <img src="./assets/img/add-grade.svg" />
+          </ion-thumbnail>
+          <ion-label> Add new grade</ion-label>
+        </ion-item>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-toolbar> -->
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="totalGradeCount > 0">
+    <ion-list class="grade-list">
+      <ion-item *ngFor="let grade of gradeList let i = index">
+        <ion-avatar class="avatar" slot="start">
+          <ion-icon name="medal-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{grade.name}}</h2>
+        </ion-label>
+        <ion-badge
+          class="disable-badge"
+          color="medium"
+          *ngIf="grade.active == 'N'"
+          >Disabled</ion-badge
+        >
+        <div class="grade-item-btn">
+          <!-- <ion-icon name="pencil-outline" routerLink="/creategrade/{{grade.name}}"></ion-icon> -->
+          <ion-icon
+            name="pencil-outline"
+            (click)="presentModal(grade)"
+          ></ion-icon>
+        </div>
+        <div class="grade-item-btn">
+          <ion-icon
+            name="trash-outline"
+            (click)="presentDeleteAlertConfirm(grade, i)"
+          ></ion-icon>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll
+      *ngIf="page < totalPages"
+      threshold="100px"
+      (ionInfinite)="loadMoreData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div class="no-grade" *ngIf="totalGradeCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no grades to show
+    </h5>
+  </div>
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="presentModal(null)"
+  >
+    <ion-fab-button color="indigo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,101 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create Special Business Hours</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="form">
+    <div class="input-block">
+      <ion-label>Slot Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </div>
+
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>
+        <ion-icon
+          name="calendar-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        Start Date</ion-label
+      >
+      <ion-datetime
+        mode="ios"
+        value="2019-10-01T15:43:40.394Z"
+        display-timezone="utc"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>
+        <ion-icon
+          name="time-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        Start Time</ion-label
+      >
+      <ion-datetime
+        placeholder="H:MM"
+        mode="ios"
+        displayFormat="h:mm A"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>
+        <ion-icon
+          name="calendar-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        End Date</ion-label
+      >
+      <ion-datetime
+        mode="ios"
+        value="2019-10-01T15:43:40.394Z"
+        display-timezone="utc"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>
+        <ion-icon
+          name="time-outline"
+          color="secondary"
+          class="icon-space"
+        ></ion-icon>
+        End Time</ion-label
+      >
+      <ion-datetime
+        placeholder="H:MM"
+        mode="ios"
+        displayFormat="h:mm A"
+      ></ion-datetime>
+    </ion-item>
+  </div>
+
+  <ion-footer class="ion-no-border">
+    <ion-row class="ion-text-center button-row">
+      <ion-col size="6">
+        <ion-button
+          expand="block"
+          color="light"
+          shape="round"
+          type="submit"
+          (click)="previous()"
+          >Cancel</ion-button
+        >
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button expand="block" shape="round" color="primary" type="submit"
+          >Save</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+</ion-content>

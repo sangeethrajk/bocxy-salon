@@ -1,0 +1,42 @@
+:host {
+  .float-r {
+    float: right;
+  }
+  .title-icon {
+    padding-right: 10px;
+    color: #e82264;
+    font-weight: bold;
+  }
+  .title {
+    font-size: 20px;
+    color: #444;
+  }
+  .star-container {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+  }
+  .star-value {
+    position: relative;
+    line-height: 2;
+  }
+  .input-block {
+    text-align: start;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .review-btn {
+    text-align: center;
+    height: 4.5vh;
+    font-size: 13px;
+    margin: 10px 0;
+    outline: none;
+  }
+  ion-textarea {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    padding-left: 15px;
+  }
+}

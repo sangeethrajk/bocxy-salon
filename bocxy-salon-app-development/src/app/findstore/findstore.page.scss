@@ -1,0 +1,27 @@
+:host {
+  .store-location-radio {
+    ion-radio {
+      margin: 0 10px;
+      // opacity: 0;
+      // position: fixed;
+      // width: 0;
+      // padding: 3vh 16vw;
+    }
+  }
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .border {
+    border: 1px solid #ddd;
+  }
+  .current-location-btn {
+    font-size: 0.9em;
+    width: 50%;
+    margin: 0 auto;
+    height: 30px;
+  }
+}

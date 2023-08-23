@@ -1,0 +1,85 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Service</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="validation-error">
+    <ion-label
+      color="danger"
+      *ngIf="formSubmitted && !serviceForm.get('service').value"
+    >
+      Please select a service
+    </ion-label>
+  </div>
+  <div class="form-card">
+    <ion-card class="signup-card">
+      <form
+        [formGroup]="serviceForm"
+        (keyup.enter)="addService()"
+        (submit)="addService()"
+      >
+        <div class="form" style="height: 500px">
+          <div class="input-block" (click)="showMerchantServiceModal()">
+            <ion-label>Services</ion-label>
+            <input
+              class="ion-text-wrap"
+              type="text"
+              mode="ios"
+              placeholder="Select Service"
+              formControlName="service"
+              name="service"
+            />
+          </div>
+          <div class="input-block">
+            <ion-label>Stylist</ion-label>
+            <ion-select
+              mode="ios"
+              placeholder="Select Stylist"
+              interface="action-sheet"
+              class="ion-text-wrap"
+              formControlName="stylist"
+              name="stylist"
+            >
+              <ion-select-option
+                *ngFor="let stylist of stylistList"
+                [value]="stylist.accountId"
+                >{{stylist.firstName}}</ion-select-option
+              >
+            </ion-select>
+          </div>
+        </div>
+        <ion-footer class="ion-no-border">
+          <ion-row class="ion-text-center button-row">
+            <ion-col size="6">
+              <ion-button
+                expand="block"
+                shape="round"
+                color="light"
+                (click)="previous()"
+                >Cancel</ion-button
+              >
+            </ion-col>
+
+            <ion-col size="6">
+              <ion-button
+                expand="block"
+                color="primary"
+                shape="round"
+                type="submit"
+                [disabled]="disableSaveBtn"
+                >Save</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </ion-footer>
+      </form>
+    </ion-card>
+  </div>
+</ion-content>

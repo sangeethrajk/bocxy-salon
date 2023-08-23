@@ -1,0 +1,170 @@
+:host {
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top: 5px;
+    .card {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+  .date-item {
+    overflow-x: auto;
+    --background: none;
+    background: #f5f5f6;
+    padding: 4px 0;
+    ion-button.date-button {
+      color: #444;
+      margin-right: 5px;
+    }
+    ion-item {
+      --backgroud: none;
+    }
+  }
+  .stylist-item {
+    overflow-x: auto;
+    --background: none;
+    background: #f5f5f6;
+    padding: 4px 0;
+    ion-button {
+      margin: 0 2px;
+      min-width: 100px;
+    }
+    ion-item {
+      --backgroud: none;
+    }
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .form-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .header-h6 {
+    padding: 5px 19px;
+    background: #faeef2;
+    color: #737373;
+  }
+  .heading {
+    width: 100%;
+    padding: 7px 24px;
+    font-size: 16px;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+  }
+
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .filter-btn {
+    border: 1px solid #a09e9e;
+    border-radius: 4px;
+    font-size: 22px;
+    line-height: 5px;
+    color: #a09e9e;
+    padding: 9px;
+  }
+  .category-toolbar {
+    box-shadow: #ddd 1px 1px 3px;
+  }
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top: 5px;
+    .card {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
+  .category-item {
+    overflow-x: auto;
+    --background: none;
+    padding: 4px 0;
+
+    ion-button.category-button {
+      --color: #444;
+      margin-right: 5px;
+      border-radius: 0;
+      height: 30px;
+      --background: #ddd;
+      --box-shadow: none;
+      display: inline-block;
+    }
+    ion-item {
+      --backgroud: none;
+    }
+  }
+  ion-textarea {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+  }
+  .holiday-type {
+    position: relative;
+    ion-label {
+      margin-left: 5px;
+    }
+  }
+  .date-select-custom {
+    ion-select {
+      border: none;
+    }
+  }
+  .item-border {
+    border: 1px solid #dedddd;
+  }
+  .field-err {
+    color: red;
+    text-align: end;
+    ion-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: none;
+    }
+    .button-row {
+      padding: 0 15px;
+      ion-button {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}

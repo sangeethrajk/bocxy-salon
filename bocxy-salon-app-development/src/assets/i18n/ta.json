@@ -1,0 +1,208 @@
+{
+    "COMMON": {
+        "SUBMIT": "சமர்ப்பி",
+        "OK": "சரி",
+        "CANCEL": "ரத்துசெய்",
+        "BACK": "பின் செல்",
+        "RESET": "மீட்டமை",
+        "EDIT": "தொகு",
+        "DELETE": "அழி",
+        "REMOVE": "அகற்று",
+        "ADD": "சேர்",
+        "CONTINUE": "தொடர்ந்து செல்",
+        "VIEW_DETAILS": "விவரம் காண்க",
+        "VIEW": "காண்க",
+        "SELECT_DATE": "தேதியை தேர்ந்தெடு",
+        "PLEASE_WAIT": "காத்திருக்கவும்",
+        "LANGUAGES": "மொழிகள்",
+        "SELECT_LANGUAGE": "மொழியை தேர்ந்தெடுக்கவும்",
+        "IN_SECONDS": "நொடிகளில்",
+        "ENGLISH": "ஆங்கிலம்",
+        "SAVE":"சேமி",
+        "RESEND":"மீண்டும் பெறு",
+        "VERIFY_SUBMIT":"சரிபார்த்து சமர்ப்பி"
+    },
+
+    "PLACEHOLDER_MSG": {
+        "MOBILE_NUMBER": "மொபைல் எண்ணை பதிவிடவும்",
+        "PASSWORD": "பாஸ்வேர்டு"
+    },
+    "LOGIN_ITEMS": {
+        "WELCOME_TITLE": "வரவேற்கிறோம்!",
+        "WELCOME_SUB_MESSAGE": "எங்களை தேர்ந்தெடுத்தமைக்கு நன்றி!",
+        "OTP_BUTTON_TEXT": "OTP பெறு",
+        "ALREADY_USER": "பழைய வாடிக்கையாளர்?",
+        "SIGN_IN": "உள் நுழைக",
+        "SIGN_UP": "பதிவு செய்க",
+        "REGISTER": "பதிவு செய்க",
+        "FORGOT_PASSWORD": "பாஸ்வேர்டை மறந்துவிட்டீர்களா?",
+        "PASSWORD_RECOVERY": "பாஸ்வேர்டு மீட்பு",
+        "ENTER_VERIFICATION_CODE": "வெரிபிகேஷன் எண்ணை தரவும்",
+        "OTP_INSTRUCTION_MSG": "உங்கள் மொபைல் எண்ணுக்கு OTP அனுப்பப்பட்டுள்ளது, தயவுசெய்து OTP ஐ உள்ளிடவும்!",
+        "OTP_VERIFY_BUTTON_TEXT": "சரிபார்ப்பு",
+        "OTP_RESEND_MSG": "நீங்கள் OTP ஐப் பெறவில்லை என்றால்",
+        "OTP_RESEND_BUTTON_TEXT": "மீண்டும் அனுப்பு",
+        "AGENCY_REGISTER_TITLE": "ஏஜென்சி பதிவு",
+        "TERMS_AND_CONDITION_TEXT": "விதிமுறைகளையும் நிபந்தனைகளையும் நான் ஒப்புக்கொள்கிறேன்",
+
+        "CREATE_PASSWORD_TITLE": "உங்கள் பாஸ்வேர்டை உருவாக்கவும்",
+        "CREATE_PASSWORD_SUBTITLE": "உங்கள் பாஸ்வேர்டு குறைந்தது 6 எழுத்துகள் நீளமாக இருக்க வேண்டும், ஒரு இலக்கமாக இருக்க வேண்டும்!",
+        "CREATE_PASSWORD_BOTTOM_INFO": "இந்த பாஸ்வேர்டு எதிர்கால உள்நுழைவுக்கு பயன்படுத்தப்படலாம்!",
+        "CREATE_PASSWORD_LABEL": "பாஸ்வேர்டை டைப் செய்யவும்",
+        "CONFIRM_PASSWORD_LABEL": "பாஸ்வேர்டை உறுதிசெய்க",
+
+        "HOME_WELCOME_MESSAGE": "நன்றி!!! <br> எங்கள் வாடிக்கையாளராக இணைந்ததில் மிகவும் மகிழ்ச்சியடைகிறோம்!",
+        "AGENCY_REG_TITLE": "ஏஜென்சி பதிவு செய்க",
+        "AGENCY_NAME": "ஏஜென்சி பெயர்",
+        "AGENCY_REG_NUM": "ஏஜென்சி பதிவு எண்",
+        "CONTACT_NAME": "நபரின் பெயர்",
+        "EMAIL": "மின்னஞ்சல்",
+        "REGION": "பகுதி",
+        "TERMS_AND_CONDITIONS": "நிபந்தனை மற்றும் விதிமுறைகளை ஏற்றுக்கொள்கிறேன்.",
+        "NEW_USER": "புதிய வாடிக்கையாளர்?",
+
+        "FULL_NAME": "முழு பெயர்",
+        "SALON_SPA_NAME": "சலூன்/ஸ்பா பெயர்",
+        "STORE_TYPE": "கடையின் வகை",
+        "EMAIL": "இமெயில்",
+        "SHOP_LOCATION": "கடை முகவரி",
+        "PICK_SHOP_LOCATION": "கடை முகவரி பெற",
+
+        "SECURITY_CENTER": "செக்யூரிட்டி சென்டர்",
+        "SELECT_QUESTION": "செக்யூரிட்டி கேள்வியை தேர்ந்தெடு",
+        "YOUR_ANSWER": "உங்கள் பதில்",
+        "SKIP_LOGIN":"உள்நுழைவைத் தவிர்"
+    },
+
+    "SIDE_MENU_ITEMS": {
+        "HOME": "முகப்பு",
+        "MY_BOOKINGS": "எனது புக்கிங்ஸ்",
+        "MY_NOTIFICATION":"எனது நோட்டிபிகேஷன்ஸ்",
+        "PROFILE":"சுயவிவரம்",
+        "APPOINTMENT_HISTORY": "அபாய்ன்ட்மென்ட் ஹிஸ்டரி",
+        "ANNOUNCEMENT": "அறிவிக்கை",
+        "HELP_SUPPORT": "உதவி மையம்",
+        "SIGN_OUT": "வெளியேறு",
+        "SIGN_IN": "உள் நுழைக"
+    },
+
+    "TAB_MENU_ITEMS": {
+        "HOME": "முகப்பு",
+        "EXPLORE":"தேடல்",
+        "BOOKINGS": "புக்கிங்ஸ்",
+        "PROFILE":"சுயவிவரம்"
+    },
+
+    "HOME_ITEMS": {
+        "SPECIAL_OFFER": "ஸ்பெஷல் ஆஃபர்ஸ்",
+        "SEE_MORE": "மேலும் பார்க்க",
+        "SERVICES":"சேவைகள்"
+    },
+    "EXPLORE_ITEMS": {
+        "SEARCH_SERVICES": "சேவை தேடல்",
+        "CLOSE": "மூடு",
+        "BY_STORE":"கடை",
+        "BY_LOCATION":"இடம்",
+        "CURRENT_LOCATION":"தற்போதைய இடம்",
+        "SELECT_LOCATION_MSG":" தயவுசெய்து தேடலுக்கான இடம்/கடையை தேர்வு செய்யவும் "
+    },
+    "MY_BOOKINGS_ITEMS": {
+        "MY_BOOKINGS_TITLE": "எனது புக்கிங்ஸ்",
+        "BOOKING_POLICY_TEXT":"புக்கிங் பாலிசி",
+        "DETAILS":"விவரம்"
+    },
+    "PROFILE_ITEMS":{
+        "PROFILE_TITLE":"சுயவிவரம்",
+        "ACCOUNT_SETTINGS":"அமைப்புகள்",
+        "CHANGE_PASSWORD":"பாஸ்வேர்டு மாற்றியமை",
+        "MY_NOTIFICATION":"எனது அறிவிப்புகள்",
+        "SIGN_OUT":"வெளியேறு"
+    },
+    "SERVICES_ITEMS":{
+        "SERVICES_TITLE":"சேவைகள்"
+    },
+    "ALL_SERVICES_ITEMS":{
+        "ALL_SERVICES_TITLE":"சேவைகள்",
+        "SELECT_LOCATION_MSG":" தயவுசெய்து தேடலுக்கான இடம்/சேவையை தேர்வு செய்யவும் "
+    },
+    "NOTIFICATION_ITEMS":{
+        "NOTIFICATION_TITLE":"அறிவிப்புகள்",
+        "NO_NOTIFICATION_MSG":"தற்சமயம் காண்பிக்க எந்த அறிவிப்பும் இல்லை"
+    },
+    "HELP_SUPPORT_ITEMS":{
+        "HELP_TITLE":"உதவி மையம்",
+        "MORE_DETAILS":"மேலும் விவரங்களுக்கு"
+    },
+    "ACCOUNT_SETTINGS_ITEMS":{
+        "ACCOUNT_SETTINGS_TITLE":"சுயவிவர அமைப்புகள்",
+        "PICK_ADDRESS":"விலாசம் எடுக்க",
+        "FIRST_NAME":"முதல் பெயர்",
+        "LAST_NAME":"கடைசிப் பெயர்",
+        "EMAIL":"இமெயில்",
+        "ADDRESS":"விலாசம்"
+    },
+    "CHANGE_PASSWORD_ITEMS":{
+        "CHANGE_PASSWORD_TITLE":"பாஸ்வேர்டு மாற்றியமை",
+        "EMAIL":"இமெயில்",
+        "MOBILE_NUMBER":"மொபைல் எண்",
+        "NEW_PASSWORD":"புதிய பாஸ்வேர்டு",
+        "RETYPE_PASSWORD":"பாஸ்வேர்டு மீண்டும் உள்ளிடு",
+        "ONE_TIME_PASSWORD":"ஒரு முறை கடவுச்சொல்",
+        "OTP_SENT_TO":"OTP அனுப்பிய மொபைல் எண்"
+    },
+    "GLOBAL_SEARCH_ITEMS": {
+        "SEARCH_SERVICES": "சேவை தேடல்",
+        "CLOSE": "மூடு",
+        "BY_STORE":"கடை",
+        "BY_LOCATION":"இடம்",
+        "CURRENT_LOCATION":"தற்போதைய இடம்",
+        "SELECT_LOCATION_MSG":" தயவுசெய்து தேடலுக்கான இடம்/கடையை தேர்வு செய்யவும் "
+    },
+    "APPOINTMENT_DETAIL_ITEMS":{
+        "APPOINTMENT_DETAIL_TITLE":"அப்பாய்ன்மெண்ட் விவரங்கள்",
+        "BOOKING_ID":"புக்கிங் ID",
+        "CUSTOMER_NAME":"வாடிக்கையாளர் பெயர்",
+        "MOBILE_NUMBER":"மொபைல் எண்",
+        "BOOKING_TYPE":"புக்கிங் டைப்",
+        "SERVICE_NAME":"சேவை",
+        "SLOT_TIME":"ஸ்லாட்",
+        "PRICE":"விலை",
+        "CREATED_ON":"உருவாக்கப்பட்டது"
+    },
+    "PASSWORD_RECOVERY_ITEMS":{
+        "PASSWORD_RECOVERY_TITLE":"பாஸ்வேர்டு மீட்பு",
+        "MOBILE_NUMBER":"மொபைல் எண்"
+    },
+    "CUSTOMER_INFO_ITEMS":{
+        "CUSTOMER_INFO_TITLE":"வாடிக்கையாளர் விவரங்கள்",
+        "FIRST_NAME":"முதல் பெயர்",
+        "LAST_NAME":"கடைசிப் பெயர்",
+        "EMAIL":"இமெயில்",
+        "ADDRESS":"விலாசம்",
+        "I_ACCEPT_THE":"ஏற்றுக்கொள்கிறேன்",
+        "TERMS_CONDITIONS":"விதிமுறைகள் மற்றும் நிபந்தனைகள்"
+    },
+    "ERROR_MSG": {
+        "VALID_MOBILE_NUMBER": "சரியான மொபைல் எண்ணை தரவும்",
+        "ENTER_MOBILE_NUMBER": "மொபைல் எண்ணை பதிவிடவும்",
+        "INVALID_MOBILE_NUMBER": "தவறான மொபைல் எண்",
+        "INVALID_PASSWORD": "தவறான பாஸ்வேர்டு",
+        "MOBILE_NUMBER_EXIST": "மொபைல் எண் ஏற்கனவே பதிவுசெய்யப்பட்டது ",
+        "VALID_OTP": "சரியான OTP எண்ணை தரவும்",
+        "OTP_SENT": "OTP அனுப்பப்பட்டுள்ளது",
+        "INVALID_OTP": "OTP தவறானது",
+        "PASSWORD_REQUIRED": "பாஸ்வேர்டை பதிவிடவும்",
+        "ACCOUNT_NOT_EXIST": "கணக்கு துவங்கப்படவில்லை",
+        "CREATE_PASSWORD_WARN_MSG": "பாஸ்வேர்டு எண்கள் கலந்து குறைந்த பட்சம் 6 இலக்கங்களாக இருக்கவேண்டும்!",
+        "CONFIRM_PASSWORD_WARN_MSG": "பாஸ்வேர்டை உறுதி செய்க",
+        "CONFIRM_PASSWORD_MIS_MATCH": "பாஸ்வேர்டு பொருந்தவில்லை",
+        "VALID_PASSWORD": "சரியான பாஸ்வேர்டு",
+        "AGENCY_NAME_REQ": "ஏஜென்சி பெயர் உள்ளிடவும்",
+        "CHECK_AGENCY_NAME": "ஏஜென்சி பெயரை சரி பார்க்கவும்",
+        "AGENCY_REG_NUM_REQ": "ஏஜென்சி பதிவு எண் உள்ளிடவும்",
+        "CONTACT_NAME_REQ": "தொடர்பு நபர் பெயரை உள்ளிடவும்",
+        "EMAIL_REQ": "இமெயில் முகவரி உள்ளிடவும்",
+        "EMAIL_INCORRECT": "தவறான இமெயில் முகவரி",
+        "REGION_REQ": "பகுதியை உள்ளிடவும்"
+    }
+}

@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/tab1')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="account-banner">
+    <!-- <ion-button fill="clear" slot="end" class="edit-btn">
+            <ion-icon name="pencil" color="light"></ion-icon>
+        </ion-button> -->
+
+    <ion-avatar
+      class="account-avatar"
+      *ngIf="userData && userData.pictureType==='AVATAR'"
+    >
+      <img [src]="selectedIcon" />
+      <!-- <img src="./assets/icon/male_icon.svg" /> -->
+    </ion-avatar>
+    <ion-avatar
+      class="account-avatar"
+      *ngIf="userData && userData.pictureType=== null"
+    >
+      <img [src]="selectedIcon" />
+      <!-- <img src="./assets/icon/male_icon.svg" /> -->
+    </ion-avatar>
+    <div class="account-heading">
+      <h4 class="ion-no-margin">{{userData?.firstName}}</h4>
+      <p class="ion-no-margin">
+        {{userData?.mobileNoDialCode}}&nbsp;{{userData?.mobileNo}}
+      </p>
+      <p
+        class="ion-no-margin"
+        *ngIf="userData && userData.roleCodes && (userData.roleCodes.includes('MG') || userData.roleCodes.includes('ST'))"
+      >
+        {{userData?.email}}
+      </p>
+      <p
+        class="ion-no-margin"
+        *ngIf="userData && userData.roleCodes && (userData.roleCodes.includes('MR'))"
+      >
+        {{userData?.storeEmail}}
+      </p>
+    </div>
+  </div>
+
+  <ion-list class="account-list">
+    <ion-item detail="true" routerLink="/accountsettings">
+      <ion-icon name="person-outline" color="secondary"></ion-icon> Account
+      Settings</ion-item
+    >
+    <ion-item detail="true" (click)="gotoChangePw()">
+      <ion-icon name="lock-closed-outline" color="secondary"></ion-icon> Change
+      Password</ion-item
+    >
+    <ion-item detail="true" routerLink="/notifications">
+      <ion-icon name="notifications-outline" color="secondary"></ion-icon> My
+      Notification</ion-item
+    >
+    <!-- <ion-item detail="true" routerLink="/home">
+      <ion-icon name="trophy-outline" color="secondary"></ion-icon> Refer and
+      Earn</ion-item
+    > -->
+    <ion-item detail="true" routerLink="/login">
+      <ion-icon name="log-out-outline" color="secondary"></ion-icon> Sign
+      out</ion-item
+    >
+  </ion-list>
+</ion-content>
+<ion-footer class="ion-text-center ion-no-border text-gray">
+  <p>Version.0.0.1</p>
+</ion-footer>

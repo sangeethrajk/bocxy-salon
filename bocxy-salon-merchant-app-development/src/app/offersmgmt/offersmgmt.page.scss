@@ -1,0 +1,49 @@
+:host {
+  .heading {
+    width: 100%;
+    padding: 7px 14px;
+    font-size: 16px;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+  .sub-text {
+    margin: 0 5px;
+    font-size: 18px;
+    color: #737373;
+  }
+  .title-item {
+    ion-button {
+      font-size: 24px;
+    }
+  }
+
+  .input-block {
+    text-align: start;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .offer-switch {
+    position: relative;
+    float: right;
+    bottom: 11px;
+  }
+  .caption-text {
+    font-size: 10px !important;
+    color: #727272;
+  }
+  .publish-btn {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    ion-button {
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+  .offers-card {
+    box-shadow: none;
+  }
+}

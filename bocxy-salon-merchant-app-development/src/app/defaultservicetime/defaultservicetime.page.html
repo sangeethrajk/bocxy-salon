@@ -1,0 +1,74 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon class="back-btn-size" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Default Service Duration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form
+    *ngIf="defaultServiceForm"
+    [formGroup]="defaultServiceForm"
+    (keyup.enter)="formSubmit()"
+    (submit)="formSubmit()"
+  >
+    <div class="form">
+      <div class="input-block">
+        <ion-item class="ion-no-padding">
+          <ion-label>Service Duration</ion-label>
+          <ion-select
+            mode="ios"
+            class="d-select"
+            placeholder="Hrs"
+            formControlName="durationHours"
+            (ionChange)="durationHours()"
+            interface="popover"
+          >
+            <ion-select-option *ngFor="let hr of Hours" value="{{hr.value}}"
+              >{{hr.name}}</ion-select-option
+            >
+          </ion-select>
+          <ion-select
+            mode="ios"
+            class="d-select"
+            placeholder="Mins"
+            formControlName="durationmin"
+            (ionChange)="durationmin()"
+            interface="popover"
+          >
+            <ion-select-option *ngFor="let min of minutes" value="{{min.value}}"
+              >{{min.name}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="input-block">
+        <ion-item lines="none">
+          <ion-label>Enable this Druation</ion-label>
+          <ion-toggle
+            [(ngModel)]="enableDefault"
+            color="secondary"
+            formControlName="defaultSlot"
+          ></ion-toggle>
+        </ion-item>
+      </div>
+
+      <div>
+        <ion-button expand="block" shape="round" expand="block" type="submit"
+          >Submit</ion-button
+        >
+      </div>
+    </div>
+  </form>
+  <p ion-text class="field-err" *ngIf="durationErr">*Duration is required</p>
+
+  <ion-item lines="none">
+    <div class="bottom-info">
+      <p>* This will be applied for all the services as default duration.</p>
+    </div>
+  </ion-item>
+</ion-content>

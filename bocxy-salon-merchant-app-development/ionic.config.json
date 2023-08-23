@@ -1,0 +1,7 @@
+{
+    "name": "bocxy-merchant",
+    "integrations": {
+        "cordova": {}
+    },
+    "type": "angular"
+}

@@ -1,0 +1,34 @@
+:host {
+  .payment-list {
+    ion-item {
+      img {
+        margin: 5px;
+      }
+    }
+  }
+  .card-payment-row {
+    padding: 0 20px;
+    ion-label {
+      font-size: 14px;
+    }
+  }
+  .cvv-col {
+    padding-top: 16px;
+    img {
+      float: left;
+      width: 50px;
+    }
+    p {
+      font-size: 12px;
+      text-align: right;
+    }
+  }
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      max-width: 200px;
+      padding: 0;
+      margin: 0 auto;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "collections": [
+        {
+            "name": "sampleName",
+            "fields": [
+                "field1",
+                "field2"
+            ]
+        }
+    ]
+}

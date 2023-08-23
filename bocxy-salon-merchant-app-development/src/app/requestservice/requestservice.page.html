@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-button (click)="previous()">
+                <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Request for new service</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+    <div class="heading animate__animated animate__fadeIn">
+        <ion-icon name="paper-plane-outline" color="secondary" class="icon-space"></ion-icon> Request for non-listed services
+    </div>
+</ion-toolbar>
+<ion-content fullscreen>
+    <form>
+        <ion-list class="ion-no-padding">
+            <div class="form">
+                <div class="input-block">
+                    <ion-label>Service Name</ion-label>
+                    <ion-input type="text"></ion-input>
+                </div>
+                <div class="input-block mt-10">
+                    <ion-label>Service Type</ion-label>
+                    <ion-select placeholder="Select Type" class="ion-text-wrap">
+                        <ion-select-option selected>Massage</ion-select-option>
+                        <ion-select-option selected>Facial</ion-select-option>
+                    </ion-select>
+                </div>
+                <div class="input-block mt-10">
+                    <ion-label>Description</ion-label>
+                    <ion-textarea type="text"></ion-textarea>
+                </div>
+            </div>
+        </ion-list>
+        <ion-row class="ion-text-center button-row">
+            <ion-col size="6">
+                <ion-button expand="block" fill="outline" color="medium" shape="round" type="submit" (click)="previous()">Cancel</ion-button>
+            </ion-col>
+
+            <ion-col size="6">
+                <ion-button expand="block" shape="round" color="primary" type="submit">Request</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

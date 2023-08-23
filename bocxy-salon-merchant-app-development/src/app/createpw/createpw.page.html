@@ -1,0 +1,111 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="">
+    <h4
+      class="ion-text-center cpw-title"
+      [ngClass]="
+    translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+    >
+      {{'LOGIN_ITEMS.CREATE_PASSWORD_TITLE' | translate}}
+    </h4>
+    <div class="validation-error" *ngIf="valueChanged || formSubmitted">
+      <ion-label color="danger" *ngIf="compareConfirmPassword">
+        Passwords Does Not Match
+      </ion-label>
+      <ion-label color="danger" *ngIf="mandatory">
+        Please Enter All Fields
+      </ion-label>
+      <ion-label color="danger" *ngIf="patternPassword">
+        Password should contain numbers and alphabets with atleast 6 characters
+      </ion-label>
+    </div>
+
+    <div class="form-card ion-padding-top">
+      <ion-card class="signup-card">
+        <form
+          [formGroup]="passwordForm"
+          (keyup.enter)="savePassword()"
+          (submit)="savePassword()"
+        >
+          <div class="form">
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.CREATE_PASSWORD_LABEL' | translate}}</ion-label
+              >
+              <ion-input
+                formControlName="password"
+                [type]="isTextFieldType ? 'text' : 'password'"
+                (input)="comparePassword()"
+              ></ion-input>
+              <div class="show-password">
+                <ion-icon
+                  [name]="isTextFieldType ? 'eye-off' : 'eye'"
+                  (click)="togglePasswordFieldType()"
+                >
+                </ion-icon>
+              </div>
+            </div>
+            <div class="input-block">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'LOGIN_ITEMS.CONFIRM_PASSWORD_LABEL' | translate}}</ion-label
+              >
+              <ion-input
+                formControlName="confirmPassword"
+                [type]="isTextFieldType ? 'text' : 'password'"
+                (input)="comparePassword()"
+              ></ion-input>
+            </div>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+              [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+              >{{'COMMON.SUBMIT' | translate}}</ion-button
+            >
+            <!-- routerLink="/login" -->
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" *ngIf="isKeyboardHide">
+  <ion-toolbar class="ion-text-center">
+    <p
+      [ngClass]="
+    translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+    >
+      {{'LOGIN_ITEMS.ALREADY_USER' | translate}}
+      <span class="bold text-secondary" routerLink="/login"
+        >{{'LOGIN_ITEMS.SIGN_IN' | translate}}</span
+      >
+    </p>
+    <!-- <div class="divider"></div>
+    <ion-item lines="none" class="ion-text-center lang-btn">
+        <ion-button (click)="onClick()" color="secondary" size="small" expand="block" fill="clear" shape="round">
+            English
+        </ion-button> |
+        <ion-button (click)="onClick()" size="small" expand="block" fill="clear" shape="round">
+            Tamil
+        </ion-button>
+    </ion-item> -->
+  </ion-toolbar>
+</ion-footer>

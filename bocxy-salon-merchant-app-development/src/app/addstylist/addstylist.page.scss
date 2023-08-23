@@ -1,0 +1,88 @@
+:host {
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    input.ng2-tel-input {
+      width: 100% !important;
+      border-radius: 5px;
+      height: 42px;
+      background: #fff !important;
+      border-color: transparent;
+      border: 1px solid #a8a6a6;
+    }
+  }
+  .sub-text {
+    margin: 0 5px;
+    color: #737373;
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+    height: 40px;
+  }
+  ion-textarea {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+  }
+  .heading {
+    width: 100%;
+    padding: 7px 14px;
+    font-size: 16px;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+  .button-row {
+    padding: 0 10px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .error-fix {
+    margin-top: 6px !important;
+  }
+
+  /*Error style*/
+  .field-err {
+    color: red;
+    padding: 0 7px;
+    text-align: end;
+    margin-bottom: 0px;
+    margin: 0;
+    font-size: 12px;
+    position: relative;
+  }
+
+  .service-diable-error {
+    p {
+      padding: 10px;
+      color: #637177;
+      background: #f8f8f8;
+      margin: 0;
+    }
+  }
+  .disable-switch {
+    margin-bottom: 75px;
+    ion-toggle {
+      padding: 7px 5px;
+    }
+  }
+
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: #fff;
+    border: none;
+  }
+}

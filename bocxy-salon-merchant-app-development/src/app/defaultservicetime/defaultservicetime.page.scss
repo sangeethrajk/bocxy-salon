@@ -1,0 +1,35 @@
+:host {
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 5px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  ion-button {
+    font-size: 1em;
+  }
+  .bottom-info {
+    background: #f8f8f8;
+    min-height: 30px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    p {
+      font-size: 10px;
+    }
+  }
+  .field-err {
+    color: red;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: -2px;
+    font-size: 12px;
+    position: relative;
+  }
+}

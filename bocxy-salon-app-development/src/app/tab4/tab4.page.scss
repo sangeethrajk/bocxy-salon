@@ -1,0 +1,52 @@
+:host {
+  .account-banner {
+    position: relative;
+    width: 100%;
+    padding: 18px 0;
+    background: #222469;
+    .edit-btn {
+      position: relative;
+      float: right;
+      width: auto;
+    }
+  }
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    background: #222469;
+  }
+  .account-avatar {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+  }
+  ion-header {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+  }
+  .account-heading {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    h4 {
+      color: #fff;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+  .account-list {
+    ion-item {
+      color: #444;
+      ion-icon {
+        position: relative;
+        bottom: 2px;
+        font-size: 20px;
+        margin: 0 8px;
+      }
+    }
+  }
+}

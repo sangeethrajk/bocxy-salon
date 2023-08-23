@@ -1,0 +1,46 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{'SERVICES_ITEMS.SERVICES_TITLE' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Search for services"
+      (ionInput)="filterservice($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item
+      *ngFor="let item of services"
+      (click)="onServiceClick(item)"
+      detail="true"
+    >
+      <!-- <ion-avatar slot="start">
+        <img
+          [src]="item.serviceIconLocal ? sanitizer.bypassSecurityTrustResourceUrl(item.serviceIconLocal) : 'https://bocxy-merchant-new.s3.ap-south-1.amazonaws.com/'+item.icon"
+        />
+      </ion-avatar> -->
+      <span>
+        <ion-label>
+          <h2 class="service-item">{{item.name}}</h2>
+        </ion-label>
+      </span>
+    </ion-item>
+  </ion-list>
+</ion-content>

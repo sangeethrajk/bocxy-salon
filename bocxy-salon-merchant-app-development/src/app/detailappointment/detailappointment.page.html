@@ -1,0 +1,310 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Appointment Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf="appointment">
+  <!--Appointment Info-->
+  <ion-card class="flat-card card1">
+    <div class="color-bg">
+      <ion-row>
+        <ion-col size="12">
+          <ion-label
+            ><h3>Booking ID :</h3>
+            {{appointment.bookingId}}</ion-label
+          >
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="7">
+          <ion-label>Customer Name</ion-label>
+          <h3 class="bold">{{appointment.customerName}}</h3>
+        </ion-col>
+        <ion-col size="5">
+          <div class="v-divider"></div>
+          <ion-label>Mobile Number</ion-label>
+          <h3 class="bold">{{appointment.customerMobile}}</h3>
+        </ion-col>
+      </ion-row>
+      <div class="divider"></div>
+      <ion-row>
+        <ion-col size="7">
+          <ion-label>Booking Type</ion-label>
+          <h3 class="bold">{{appointment.type}}</h3>
+        </ion-col>
+        <ion-col size="5">
+          <ion-label>Created on</ion-label>
+          <h3 class="bold">
+            {{appointment.createdAt ? (appointment.createdAt.split(" ")[0] |
+            date:'MMM d y') + " " +
+            (dateService.timeConvert(appointment.createdAt.split(" ")[1])) :
+            ""}}
+          </h3>
+        </ion-col>
+      </ion-row>
+      <div class="divider"></div>
+      <ion-row>
+        <ion-col size="7">
+          <ion-label>Stylist</ion-label>
+          <h3 class="bold">{{appointment.stylistName}}</h3>
+        </ion-col>
+        <ion-col size="5">
+          <ion-label>Slot</ion-label>
+          <h3 class="bold">
+            {{appointment.bookingDate | date:'MMM d y'}}
+            {{dateService.timeConvert(appointment.slotName)}}
+          </h3>
+        </ion-col>
+        <div class="divider"></div>
+      </ion-row>
+      <ion-row>
+        <ion-col size="7">
+          <ion-label>Appointment Start</ion-label>
+          <h3 class="bold">{{appointmentStartTime}}</h3>
+        </ion-col>
+        <ion-col size="5">
+          <ion-label>Appointment End</ion-label>
+          <h3 class="bold">{{appointmentEndTime}}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="appointment.cancelReason">
+        <ion-col size="12">
+          <ion-label>Cancel Reason</ion-label>
+          <h3 class="bold">{{appointment.cancelReason}}</h3>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <!--//Appointment Info-->
+
+  <!--Appointment Status-->
+  <ion-item lines="none" color="light">
+    <ion-label class="bold font-14">Booking Status</ion-label>
+    <ion-select
+      *ngIf="!isReadOnly && !(this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+      placeholder="Pending"
+      class="custom-select"
+      interface="action-sheet"
+      [(ngModel)]="appointment.status"
+      (ionChange)="presentCancelAlertConfirm()"
+    >
+      <ion-select-option value="PENDING">Pending</ion-select-option>
+      <ion-select-option value="CONFIRMED">Confirmed</ion-select-option>
+      <!-- <ion-select-option value="COMPLETED">Completed</ion-select-option>
+      <ion-select-option value="CHECKIN">Check Out</ion-select-option> -->
+      <ion-select-option value="COMPLETED">Check Out</ion-select-option>
+      <ion-select-option value="CANCELED">Cancelled</ion-select-option>
+    </ion-select>
+    <h6
+      *ngIf="isReadOnly || (this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+    >
+      {{appointment.status}}
+    </h6>
+  </ion-item>
+  <!--//Appointment Status-->
+
+  <ion-card class="card1">
+    <ion-card-content>
+      <!--Service Card-->
+      <div
+        class="service-card"
+        *ngFor="let service of appointment.bookedServices"
+      >
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>Service</ion-label>
+            <h3 class="bold secondary-text">{{service.name}}</h3>
+          </ion-col>
+          <ion-col size="5">
+            <ion-label>Price</ion-label>
+            <h3 class="bold secondary-text">
+              <span>Rs.</span>{{service.price}}
+            </h3>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>Stylist</ion-label>
+            <h3 class="bold">{{service.stylist}}</h3>
+          </ion-col>
+          <ion-col size="5">
+            <ion-label>Duration</ion-label>
+            <h3 class="bold">{{service.totalDuration}}</h3>
+          </ion-col>
+          <div class="divider"></div>
+        </ion-row>
+      </div>
+      <!--//Service Card-->
+
+      <!--Total-->
+      <ion-row>
+        <ion-col size="7">
+          <h3 class="bold blue-text">
+            Total ({{appointment.bookedServices.length}})
+          </h3>
+        </ion-col>
+        <ion-col size="5">
+          <div class="v-divider"></div>
+          <ion-label class="bold">
+            <ion-badge color="primary">
+              <span>Rs.</span> {{appointment.totalPriceExpected}}</ion-badge
+            >
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <!--//Total-->
+    </ion-card-content>
+  </ion-card>
+  <div
+    *ngIf="!isReadOnly && !(this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+    class="add-service-btn"
+    (click)="addAnotherService(appointment.appointmentId)"
+  >
+    <ion-icon name="add-outline" class="icon-space"></ion-icon> Add another
+    service
+  </div>
+
+  <!-- <div class="mb-60">
+    <ion-card>
+      <ion-item>
+        <ion-label
+          ><span class="bold">Booking ID -</span>
+          {{appointment.bookingId}}</ion-label
+        >
+      </ion-item>
+
+      <ion-card-content>
+        <div class="list-item">
+          <ion-label>Customer Name</ion-label>
+          <h3 class="bold">{{appointment.customerName}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Mobile Number</ion-label>
+          <h3 class="bold">{{appointment.customerMobile}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Booking Type</ion-label>
+          <h3 class="bold">{{appointment.type}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Service</ion-label>
+          <h3 class="bold">{{bookedServices}}</h3>
+        </div>
+        <div class="list-item">
+          <ion-label>Created on</ion-label>
+          <h3 class="bold">{{appointment.createdAt | date:'MMM d EEEE y'}}</h3>
+        </div>
+
+        <div class="divider"></div>
+        <ion-row>
+          <ion-col size="9">
+            <div>
+              <ion-label>Slot</ion-label>
+              <h3 class="bold">
+                {{appointment.bookingDate | date:'MMM d y'}}
+                {{appointment.slotName}}
+              </h3>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div>
+              <ion-label>Price</ion-label>
+              <h3 class="bold">
+                <span>Rs.</span>{{appointment.totalPriceExpected}}
+              </h3>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-item lines="none">
+      <ion-icon name="people-outline" slot="start"></ion-icon>
+      <ion-label class="bold font-14">Stylist</ion-label>
+      <ion-select
+        placeholder="Stylist"
+        class="custom-select"
+        interface="action-sheet"
+      >
+        <ion-select-option selected> Mohan </ion-select-option>
+        <ion-select-option> Mahesh </ion-select-option>
+      </ion-select>
+      <h6>{{appointment.stylistName}}</h6>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon name="hourglass-outline" slot="start"></ion-icon>
+      <ion-label class="bold font-14">Booking Status</ion-label>
+      <ion-select
+        *ngIf="!isReadOnly"
+        placeholder="Pending"
+        class="custom-select"
+        interface="action-sheet"
+        [(ngModel)]="appointment.status"
+        (ionChange)="presentCancelAlertConfirm()"
+      >
+        <ion-select-option value="PENDING">Pending</ion-select-option>
+        <ion-select-option value="CONFIRMED">Confirmed</ion-select-option>
+        <ion-select-option value="COMPLETED">Completed</ion-select-option>
+        <ion-select-option value="CHECKIN">Check-In</ion-select-option>
+        <ion-select-option value="CANCELED">Cancel</ion-select-option>
+      </ion-select>
+      <h6 *ngIf="isReadOnly">{{appointment.status}}</h6>
+    </ion-item>
+  </div> -->
+  <div
+    class="wrap"
+    *ngIf="isReadOnly || (this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+  ></div>
+</ion-content>
+
+<ion-footer class="ion-no-border" *ngIf="appointment">
+  <ion-row
+    class="ion-text-center button-row"
+    *ngIf="!isReadOnly && !(this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+  >
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="light"
+        (click)="previous()"
+        >Cancel</ion-button
+      >
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button
+        expand="block"
+        color="primary"
+        shape="round"
+        type="submit"
+        [disabled]="appointment.status === lastStatus"
+        (click)="onSave()"
+        >Save</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row
+    class="ion-text-center button-row"
+    *ngIf="isReadOnly || (this.userData && this.userData.roleCodes.includes('ST') && !this.userData.roleCodes.includes('MR'))"
+  >
+    <ion-col size="12">
+      <ion-button
+        expand="block"
+        shape="round"
+        color="primary"
+        (click)="previous()"
+        >Back</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

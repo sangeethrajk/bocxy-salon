@@ -1,0 +1,24 @@
+:host {
+  ion-card-title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  ion-card-subtitle {
+    font-size: 18px;
+    padding-top: 5px;
+  }
+  ion-card-content.offer-valid-label {
+    padding: 0;
+    ion-item {
+      --background: transparent;
+      ion-label {
+        font-size: 12px;
+      }
+      ion-button {
+        height: 4vh;
+        font-size: 13px;
+        outline: none;
+      }
+    }
+  }
+}

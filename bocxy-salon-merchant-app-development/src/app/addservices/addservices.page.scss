@@ -1,0 +1,186 @@
+:host {
+  .form {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .input-block {
+    text-align: start;
+    padding: 0 5px;
+    width: 100%;
+    min-height: 5em;
+    display: block;
+    margin: 0px auto;
+    input.ng2-tel-input {
+      width: 100% !important;
+      border-radius: 5px;
+      height: 42px;
+      border: 1px solid #a8a6a6;
+      padding: 8px 8px 8px 80px;
+    }
+  }
+  .sub-text {
+    margin: 0 5px;
+    color: #737373;
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+    padding-left: 15px;
+  }
+  ion-textarea {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+  }
+  .heading {
+    width: 100%;
+    padding: 7px 14px;
+    font-size: 16px;
+    color: #071252;
+    border-bottom: 1px dashed #f679a3;
+  }
+  .offer-switch {
+    position: relative;
+    float: right;
+    bottom: 11px;
+  }
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .list-input {
+    input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid #a8a6a6;
+      border-radius: 5px;
+      padding-left: 10px !important;
+      margin-top: 5px;
+    }
+    input.input-highlight {
+      border: 1px solid #e40404;
+    }
+    input::-webkit-calendar-picker-indicator {
+      display: none;
+    }
+  }
+  .error-fix {
+    margin-top: 6px !important;
+  }
+
+  /*Error style*/
+  .field-err {
+    color: red;
+    padding: 0;
+    text-align: end;
+    margin-bottom: 0px;
+    margin-top: -2px;
+    font-size: 12px;
+    position: relative;
+  }
+  .banner-err {
+    color: red;
+    padding: 0 20px;
+    text-align: end;
+    margin-bottom: 6px;
+    font-size: 12px;
+    position: relative;
+  }
+  .avatar {
+    margin-right: 0;
+    width: 40px;
+    height: 40px;
+    ion-icon {
+      font-size: 22px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 10px 5px;
+      color: #737373;
+    }
+    ion-label {
+      font-size: 16px;
+    }
+  }
+  .grade-list {
+    border-bottom: 1px solid #f8f8f8;
+    ion-card {
+      box-shadow: none;
+    }
+  }
+  .grade-grid {
+    padding: 14px 10px;
+  }
+  .grade-label {
+    margin: 0 4px;
+    font-size: 14px;
+  }
+  .checkbox-container {
+    text-align: left;
+  }
+  ion-checkbox {
+    --border-color: #222469;
+  }
+  // .checkbox-container ion-label.ios {
+  //   margin-top: -3px !important;
+  // }
+  .category-items {
+    padding: 10px;
+  }
+  .banner-card {
+    padding: 5px;
+    width: 90%;
+    margin: 0px auto 14px auto;
+    img {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+  .upload-btn {
+    img {
+      width: 30px;
+      margin: 0 8px;
+      float: right;
+    }
+  }
+
+  .service-diable-error {
+    p {
+      padding: 10px;
+      color: #637177;
+      background: #f8f8f8;
+      margin: 0;
+    }
+  }
+  .disable-switch {
+    margin-bottom: 75px;
+    ion-toggle {
+      padding: 7px 5px;
+    }
+  }
+
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: #fff;
+    border: none;
+  }
+  ion-select.d-select {
+    border: none;
+  }
+  .duration-block {
+    text-align: start;
+    padding: 0 5px;
+    width: 100%;
+    min-height: 4em;
+    display: block;
+    margin: 0px auto;
+  }
+}

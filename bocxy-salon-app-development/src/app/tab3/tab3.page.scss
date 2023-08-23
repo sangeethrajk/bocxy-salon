@@ -1,0 +1,107 @@
+:host {
+  .heading {
+    width: 100%;
+    padding: 7px 14px;
+    font-size: 16px;
+    color: #444;
+    border-bottom: 1px dashed #444;
+  }
+  .report-list {
+    img {
+      width: 3.4vw;
+    }
+    ion-icon {
+      font-size: 6vw;
+    }
+  }
+  .check-in {
+    position: relative;
+    left: -23px;
+    ion-checkbox {
+      --border-color: #222469;
+      margin: 0 5px;
+    }
+    ion-label {
+      font-size: 4vw;
+      color: #797878;
+    }
+  }
+
+  .time-stamp {
+    font-size: 12px;
+    color: #797878;
+  }
+
+  .button-block {
+    display: inline-block;
+    min-width: 45vw;
+    margin-top: 5px;
+  }
+
+  .form {
+    width: 100%;
+    padding: 15px;
+  }
+  .input-block {
+    text-align: start;
+    width: 100%;
+    display: block;
+    margin: 5px auto;
+  }
+  .checkbox-container {
+    text-align: left;
+  }
+  .b-r {
+    border-left: 5px solid #5b52a3;
+  }
+  .list-header {
+    background: #f6f6f6;
+    color: #444;
+    font-weight: bold;
+  }
+  .list-card-header {
+    padding: 5px 20px;
+  }
+  .float-r {
+    float: right;
+  }
+  .title-icon {
+    padding-right: 10px;
+    // color: #e82264;
+    font-weight: bold;
+  }
+  .footer-content {
+    padding: 10px 15px;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+    color: #444;
+    ion-badge {
+      border-radius: 0;
+    }
+    ion-icon {
+      line-height: 1;
+    }
+    .policy-block {
+      display: flex;
+      align-items: center;
+      .booking-policy {
+        text-decoration: underline;
+      }
+    }
+  }
+  .store-title-item {
+    color: #646464;
+    font-weight: bold;
+  }
+  .detail-btn {
+    height: 30px;
+    --box-shadow: none;
+    border: 0.5px solid #ddd;
+    float: right;
+  }
+  .price-block {
+    ion-col {
+      padding: 0 5px 0 0;
+    }
+  }
+}

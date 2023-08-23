@@ -1,0 +1,57 @@
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <div>
+    <ion-slides
+      pager="true"
+      #introSlider
+      [options]="slideOpts"
+      (ionSlideDidChange)="slideChanged(slides)"
+      class="intro-slides"
+    >
+      <ion-slide>
+        <img src="./assets/img/scene-1.png" />
+        <h2 class="text-secondary">Welcome</h2>
+        <p>We unbox your <b>style</b>, beauty and body therapy!</p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/img/scene-2.png" />
+        <h2 class="text-secondary">What is Bocxy?</h2>
+        <p>
+          <b>Bocxy</b> is an online appointment booking app for Salons and Spas
+          near you with exclusive offers in real time.
+        </p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/img/scene-3.png" />
+        <h2 class="text-secondary">Why Bocxy?</h2>
+        <p>
+          Unbelievable offers, validate reviews before booking, choose your
+          favourite stylists, Home services, create your own style, zero waiting
+          time at outlets, and list goes on...
+        </p>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button
+    (click)="swipeNext()"
+    color="secondary"
+    expand="block"
+    shape="round"
+    *ngIf="slideIndex!==2"
+  >
+    Next
+  </ion-button>
+  <ion-button
+    color="secondary"
+    expand="block"
+    shape="round"
+    (click)="getStarted()"
+    *ngIf="slideIndex===2"
+  >
+    Get Started
+    <ion-icon slot="end" name="arrow-forward"></ion-icon>
+  </ion-button>
+</ion-footer>

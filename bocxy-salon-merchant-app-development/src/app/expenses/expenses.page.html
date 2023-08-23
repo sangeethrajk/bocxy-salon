@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-button (click)="previous()">
+                <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>My Expenses</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-toolbar>
+    <div class="heading animate__animated animate__fadeInDown">
+        <ion-icon name="cash-outline" color="secondary" class="icon-space"></ion-icon> Manage your expenses
+    </div>
+</ion-toolbar>
+
+<ion-content fullscreen>
+    <ion-grid fixed class="expense-grid ion-text-center animate__animated animate__fadeInDown">
+        <ion-row>
+            <ion-col size="4">
+                <ion-icon color="success" name="home-outline"></ion-icon>
+                <h5>Rental</h5>
+            </ion-col>
+            <ion-col size="4">
+                <ion-icon color="danger" name="bulb-outline"></ion-icon>
+                <h5>Electricity</h5>
+            </ion-col>
+            <ion-col size="4">
+                <ion-icon color="indigo" name="file-tray-full-outline"></ion-icon>
+                <h5>Others</h5>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="center-button animate__animated animate__fadeInDown">
+        <ion-button expand="block" color="primary" fill="outline" shape="round" routerLink="/quickreport">
+            <ion-icon name="reader-outline" class="space-around"></ion-icon> Get Quick Report
+        </ion-button>
+    </div>
+
+    <div class="heading animate__animated animate__fadeIn">
+        <ion-icon name="cash-outline" color="secondary" class="icon-space"></ion-icon> Last Month Expenses
+    </div>
+
+    <ion-list class="animate__animated animate__fadeIn">
+        <ion-item *ngFor="let expense of expenses">
+            <ion-label>
+                <h2>{{expense.item}}</h2>
+                <p>01 Sep 2020</p>
+            </ion-label>
+            <ion-label slot="end" class="ion-text-end">
+                <p>Amount</p>
+                <h2>{{expense.amount}}</h2>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

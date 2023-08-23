@@ -1,0 +1,23 @@
+:host {
+  // ion-fab {
+  //     margin-bottom: 20px;
+  // }
+  ion-tab-button.tab2 {
+    --padding-start: 0px;
+    --padding-end: 20px;
+  }
+  ion-tab-button.tab3 {
+    --padding-end: 0px;
+    --padding-start: 30px;
+  }
+  .tab-selected {
+    color: #e82264 !important;
+  }
+  .home-fab {
+    position: fixed;
+    bottom: 1.5vh;
+    img {
+      width: 12vw;
+    }
+  }
+}

@@ -1,0 +1,468 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/holidaylist')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Holiday Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!--Tag btn-->
+  <!-- <div class="scrolling-wrapper">
+    <div class="card">
+      <ion-item class="category-item" lines="none">
+        <ion-button
+          *ngFor="let item of categories; let i = index"
+          (click)="changeState(i)"
+          [ngClass]="selectedIndex === i  ? 'selected-btn' : ''"
+          expand="full"
+          size="small"
+          [color]="selectedIndex === i ? 'primary':'medium'"
+          [fill]="selectedIndex === i ? 'solid':'outline'"
+          shape="round"
+          class="category-button"
+          >{{item}}</ion-button
+        >
+      </ion-item>
+    </div>
+  </div> -->
+  <!--Tag btn end-->
+
+  <div class="heading">
+    <ion-icon
+      name="today-outline"
+      class="icon-space"
+      color="secondary"
+    ></ion-icon>
+    Holidays
+  </div>
+
+  <div class="form-card">
+    <form *ngIf="holidayForm" [formGroup]="holidayForm" (submit)="onSubmit()">
+      <div class="form">
+        <div class="input-block">
+          <ion-row>
+            <ion-col size="2">
+              <ion-label>Title </ion-label>
+            </ion-col>
+            <ion-col size="10" class="field-err">
+              <ion-label
+                *ngIf="(formSubmitted || holidayForm.get('title').dirty) &&  holidayForm.get('title').hasError('required')"
+              >
+                *Title required
+              </ion-label>
+              <ion-label
+                color="danger"
+                *ngIf="formSubmitted && holidayForm.get('title').value && !holidayForm.get('title').valid"
+              >
+                Title should not contain special characters, extra spaces and
+                numbers
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-input
+            type="text"
+            formControlName="title"
+            name="title"
+          ></ion-input>
+        </div>
+        <div class="input-block">
+          <ion-row>
+            <ion-col size="6">
+              <ion-label>Description</ion-label>
+            </ion-col>
+            <ion-col size="6" style="text-align: end">
+              <ion-label>(Optional)</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-textarea
+            formControlName="description"
+            name="description"
+          ></ion-textarea>
+        </div>
+        <!--Holiday Type-->
+        <ion-radio-group
+          [(ngModel)]="merchantHoliday.holidayType"
+          [ngModelOptions]="{standalone: true}"
+          (ionChange)="holidayTypeChange()"
+        >
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none" class="holiday-type">
+                <ion-radio value="PLANNED"></ion-radio>
+                <ion-label>Planned</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none" class="holiday-type">
+                <ion-radio value="UNPLANNED"></ion-radio>
+                <ion-label>Unplanned</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+        <!--Holiday Type End-->
+        <!--Planned Holidays Start-->
+        <!--Repeat Select-->
+        <div
+          class="input-block animate__animated animate__fadeIn"
+          *ngIf="merchantHoliday.holidayType === 'PLANNED'"
+        >
+          <ion-row>
+            <ion-col size="2">
+              <ion-label>Repeat</ion-label>
+            </ion-col>
+            <ion-col size="10" class="field-err">
+              <ion-label
+                *ngIf="(formSubmitted && ((repeatmode.value==='weeklysingle' && !this.merchantHoliday.startDay) || (repeatmode.value==='monthlysingle' && !holidayForm.get('monthlySingleStartDate').value)))"
+              >
+                *Please select a day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && repeatmode.value==='weeklymulti' && !this.merchantHoliday.startDay)"
+              >
+                *Please select start day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && repeatmode.value==='weeklymulti' && this.merchantHoliday.startDay && !this.merchantHoliday.endDay)"
+              >
+                *Please select end day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && (repeatmode.value==='monthlymulti') && !holidayForm.get('monthlyMultiStartDate').value )"
+              >
+                *Please select start day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && (repeatmode.value==='monthlymulti') && holidayForm.get('monthlyMultiStartDate').value && !holidayForm.get('monthlyMultiEndDate').value )"
+              >
+                *Please select end day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && (repeatmode.value==='yearly') && !holidayForm.get('yearlyStartDate').value)"
+              >
+                *Please select a date
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && (repeatmode.value==='yearlymulti') && !holidayForm.get('yearlyMultiStartDate').value )"
+              >
+                *Please select start date
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && (repeatmode.value==='yearlymulti') && holidayForm.get('yearlyMultiStartDate').value && !holidayForm.get('yearlyMultiEndDate').value)"
+              >
+                *Please select end date
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && repeatmode.value==='monthlymulti' && holidayForm.get('monthlyMultiStartDate').value && holidayForm.get('monthlyMultiEndDate').value && holidayForm.get('monthlyMultiStartDate').value >= (holidayForm.get('monthlyMultiEndDate').value))"
+              >
+                Start day must be less than end day
+              </ion-label>
+              <ion-label
+                *ngIf="(formSubmitted && repeatmode.value==='yearlymulti' && holidayForm.get('yearlyMultiStartDate').value && holidayForm.get('yearlyMultiEndDate').value && holidayForm.get('yearlyMultiStartDate').value >= (holidayForm.get('yearlyMultiEndDate').value))"
+              >
+                Start date must be less than end date
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-select
+            [(ngModel)]="repeatmode"
+            [ngModelOptions]="{standalone: true}"
+            interface="action-sheet"
+            placeholder="Select One"
+            (ionChange)="onRepeatModeChange()"
+          >
+            <ion-select-option *ngFor="let data of repeatData" [value]="data"
+              >{{data.display}}</ion-select-option
+            >
+          </ion-select>
+
+          <!--Repeat Slect End-->
+
+          <!--Days btn-->
+          <div
+            class="scrolling-wrapper"
+            *ngIf="repeatmode.value === 'weeklysingle'"
+          >
+            <div class="card">
+              <div class="category-item" lines="none">
+                <ion-button
+                  *ngFor="let item of repeatdays; let i = index"
+                  (click)="WeeklySingleSelect(item, i)"
+                  [ngClass]="selectedIndex === i  ? 'selected-btn' : ''"
+                  expand="full"
+                  size="small"
+                  [color]="selectedIndex === i ? 'primary':'medium'"
+                  [fill]="selectedIndex === i ? 'solid':'outline'"
+                  shape="round"
+                  class="category-button"
+                  >{{item.name}}</ion-button
+                >
+              </div>
+            </div>
+          </div>
+          <!--Days btn end-->
+
+          <!--Multi Days btn-->
+          <div
+            class="scrolling-wrapper"
+            *ngIf="repeatmode.value === 'weeklymulti'"
+          >
+            <div class="card">
+              <div class="category-item" lines="none">
+                <ion-button
+                  *ngFor="let item of repeatdays; let i = index"
+                  (click)="weeklyMultiSelect(item)"
+                  [ngClass]="item.isSelected ? 'selected-btn' : ''"
+                  expand="full"
+                  size="small"
+                  [color]="item.isSelected ? 'primary':'medium'"
+                  [fill]="item.isSelected ? 'solid':'outline'"
+                  shape="round"
+                  class="category-button"
+                  >{{item.name}}</ion-button
+                >
+              </div>
+            </div>
+          </div>
+          <!--Multi Days btn end-->
+
+          <!--Dates Btn-->
+          <div class="input-block">
+            <ion-item
+              lines="none"
+              class="mt-5 date-select-custom item-border"
+              *ngIf="repeatmode.value === 'monthlysingle'"
+            >
+              <ion-label>Select Date</ion-label>
+              <ion-select
+                placeholder="Select One"
+                interface="popover"
+                formControlName="monthlySingleStartDate"
+                name="monthlySingleStartDate"
+              >
+                <ion-select-option
+                  *ngFor="let date of repeatDate"
+                  [value]="date.value"
+                  >{{date.name}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <!--Dates Btn End-->
+
+          <!--Monthly Multiple-->
+          <ion-row *ngIf="repeatmode.value === 'monthlymulti'">
+            <ion-col size="6">
+              <!--Dates Btn-->
+              <ion-item
+                lines="none"
+                class="mt-5 date-select-custom item-border"
+              >
+                <ion-label>Start Date</ion-label>
+                <ion-select
+                  placeholder="00"
+                  interface="popover"
+                  formControlName="monthlyMultiStartDate"
+                  name="monthlyMultiStartDate"
+                >
+                  <ion-select-option
+                    *ngFor="let date of repeatDate"
+                    [value]="date.value"
+                    >{{date.name}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+
+              <!--Dates Btn End-->
+            </ion-col>
+            <ion-col size="6">
+              <!--Dates Btn-->
+              <ion-item
+                lines="none"
+                class="mt-5 date-select-custom item-border"
+              >
+                <ion-label>End Date</ion-label>
+                <ion-select
+                  placeholder="00"
+                  interface="popover"
+                  formControlName="monthlyMultiEndDate"
+                  name="monthlyMultiEndDate"
+                >
+                  <ion-select-option
+                    *ngFor="let date of repeatDate"
+                    [value]="date.value"
+                    >{{date.name}}</ion-select-option
+                  >
+                </ion-select>
+              </ion-item>
+              <!--Dates Btn End-->
+            </ion-col>
+          </ion-row>
+          <!--Monthly Multiple End-->
+
+          <!--Yearly Start-->
+
+          <div class="input-block" *ngIf="repeatmode.value === 'yearly'">
+            <ion-label>Select Date</ion-label>
+            <ion-input
+              type="date"
+              formControlName="yearlyStartDate"
+              name="yearlyStartDate"
+            ></ion-input>
+          </div>
+
+          <!--Yearly End-->
+
+          <!--Yearly Multi Start-->
+          <ion-row *ngIf="repeatmode.value === 'yearlymulti'">
+            <ion-col size="6">
+              <div class="input-block">
+                <ion-label>Start Date</ion-label>
+                <ion-input
+                  type="date"
+                  formControlName="yearlyMultiStartDate"
+                  name="yearlyMultiStartDate"
+                ></ion-input>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="input-block">
+                <ion-label>End Date</ion-label>
+                <ion-input
+                  type="date"
+                  formControlName="yearlyMultiEndDate"
+                  name="yearlyMultiEndDate"
+                ></ion-input>
+              </div>
+            </ion-col>
+          </ion-row>
+          <!--Yearly Multi End-->
+        </div>
+        <!--//Planned Holidays End-->
+
+        <!--Unplanned Start-->
+        <div *ngIf="merchantHoliday.holidayType === 'UNPLANNED'">
+          <div class="input-block">
+            <ion-row>
+              <ion-col size="2">
+                <ion-label>Type</ion-label>
+              </ion-col>
+              <ion-col size="10" class="field-err">
+                <ion-label
+                  *ngIf="(formSubmitted && merchantHoliday.dateType === 'SINGLE' && !holidayForm.get('UNStartDate').value)"
+                  >*Please select a date</ion-label
+                >
+                <ion-label
+                  *ngIf="(formSubmitted && merchantHoliday.dateType === 'MULTIPLE' && !holidayForm.get('UNMultiStartDate').value)"
+                  >*Please select start date</ion-label
+                >
+                <ion-label
+                  *ngIf="(formSubmitted && merchantHoliday.dateType === 'MULTIPLE' && holidayForm.get('UNMultiStartDate').value) && !holidayForm.get('UNMultiEndDate').value"
+                  >*Please select end date</ion-label
+                >
+                <ion-label
+                  *ngIf="(formSubmitted && merchantHoliday.dateType === 'MULTIPLE' && holidayForm.get('UNMultiStartDate').value && holidayForm.get('UNMultiEndDate').value && (holidayForm.get('UNMultiStartDate').value >= holidayForm.get('UNMultiEndDate').value))"
+                >
+                  Start date must be less than end date
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-select
+              [(ngModel)]="merchantHoliday.dateType"
+              [ngModelOptions]="{standalone: true}"
+              interface="action-sheet"
+              placeholder="Select One"
+              (ionChange)="holidayTypeChange()"
+            >
+              <ion-select-option value="SINGLE">Single</ion-select-option>
+              <ion-select-option value="MULTIPLE">Multiple</ion-select-option>
+            </ion-select>
+          </div>
+          <!--Single -->
+          <ion-row *ngIf="merchantHoliday.dateType === 'SINGLE'">
+            <ion-col>
+              <div class="input-block">
+                <ion-label>Select Date</ion-label>
+                <ion-input
+                  type="date"
+                  formControlName="UNStartDate"
+                  name="UNStartDate"
+                ></ion-input>
+              </div>
+            </ion-col>
+          </ion-row>
+          <!--Multiple-->
+          <ion-row *ngIf="merchantHoliday.dateType === 'MULTIPLE'">
+            <ion-col size="6">
+              <div class="input-block">
+                <ion-label>Start Date</ion-label>
+                <ion-input
+                  type="date"
+                  formControlName="UNMultiStartDate"
+                  name="UNMultiStartDate"
+                ></ion-input>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="input-block">
+                <ion-label>End Date</ion-label>
+                <ion-input
+                  type="date"
+                  formControlName="UNMultiEndDate"
+                  name="UNMultiEndDate"
+                ></ion-input>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+        <!--//Unplanned End-->
+      </div>
+      <!-- <ion-row>
+        <ion-col size="4"></ion-col>
+        <ion-col size="4">
+          <ion-button expand="block" shape="round" type="submit"
+            >Submit</ion-button
+          >
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row> -->
+      <ion-footer class="ion-no-border ion-padding-top">
+        <ion-row class="ion-text-center button-row ion-margin-bottom">
+          <ion-col size="6">
+            <ion-button
+              expand="block"
+              shape="round"
+              color="light"
+              (click)="goBack('/holidaylist')"
+              >Cancel</ion-button
+            >
+          </ion-col>
+
+          <ion-col size="6" *ngIf="!isEditable">
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              >Create</ion-button
+            >
+          </ion-col>
+          <ion-col size="6" *ngIf="isEditable">
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              >Update</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-footer>
+    </form>
+  </div>
+</ion-content>

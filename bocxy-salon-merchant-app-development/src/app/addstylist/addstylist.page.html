@@ -1,0 +1,249 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/stylistmgmt')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!title">Add Stylist</ion-title>
+    <ion-title *ngIf="title">Edit Stylist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animate__animated animate__fadeIn">
+  <form
+    *ngIf="stylistForm"
+    [formGroup]="stylistForm"
+    (keyup.enter)="formSubmit()"
+    (submit)="formSubmit()"
+  >
+    <ion-list class="ion-no-padding">
+      <div class="heading">
+        <p class="sub-text">
+          <ion-icon
+            name="person-outline"
+            color="secondary"
+            class="icon-space"
+          ></ion-icon>
+          Enter stylist details to create new stylist !
+        </p>
+      </div>
+
+      <div class="form">
+        <div class="input-block">
+          <ion-label
+            >Stylist name
+            <sup style="color: red">*</sup>
+          </ion-label>
+          <ion-input formControlName="firstName" type="text"></ion-input>
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || stylistForm.get('firstName').touched) &&  stylistForm.get('firstName').hasError('required')"
+          >
+            *Name is required
+          </p>
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || stylistForm.get('firstName').touched) &&  stylistForm.get('firstName').hasError('pattern')"
+          >
+            *Please enter valid name
+          </p>
+        </div>
+        <ion-row (ionChange)="checkboxvalidator()">
+          <ion-col>
+            <ion-item lines="none" color="light">
+              <ion-label for="ST">Stylist</ion-label>
+              <ion-checkbox
+                color="secondary"
+                id="ST"
+                formControlName="ST"
+                (ionChange)="onChange()"
+                slot="start"
+              ></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none" color="light">
+              <ion-label for="MG">Manager</ion-label>
+              <ion-checkbox
+                color="secondary"
+                id="MG"
+                formControlName="MG"
+                slot="start"
+              ></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- <div class="input-block">
+          <ion-checkbox
+            mode="ios"
+            id="ST"
+            formControlName="ST"
+            (ionChange)="onChange()"
+          >
+          </ion-checkbox>
+          <ion-label for="ST"> Stylist </ion-label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-checkbox mode="ios" id="MG" formControlName="MG"> </ion-checkbox>
+          <ion-label for="MG"> Manager </ion-label>
+        </div> -->
+        <div class="input-block" *ngIf="stylistVisbility">
+          <ion-label
+            >Profession
+            <sup style="color: red">*</sup>
+          </ion-label>
+          <ion-select
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            mode="ios"
+            placeholder="Select Profession"
+            formControlName="professionId"
+            class="ion-text-wrap"
+          >
+            <ion-select-option
+              *ngFor="let prof of professions"
+              [value]="prof.professionId"
+              >{{prof.name}}</ion-select-option
+            >
+          </ion-select>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || stylistForm.get('professionId').touched)  && stylistForm.get('professionId').hasError('required')"
+          >
+            *Profession is required
+          </p>
+        </div>
+        <p ion-text class="field-err error-fix" *ngIf="checkbox">
+          *At least one checkbox must be selected
+        </p>
+        <div class="input-block" *ngIf="stylistVisbility">
+          <ion-label
+            >Professionist grade
+            <sup style="color: red">*</sup>
+          </ion-label>
+          <ion-select
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
+            mode="ios"
+            placeholder="Select ProfessionistGrade"
+            formControlName="professionistGradeId"
+            class="ion-text-wrap"
+          >
+            <ion-select-option
+              *ngFor="let prof of professionsGrade"
+              [value]="prof.professionistGradeId"
+              >{{prof.name}}</ion-select-option
+            >
+          </ion-select>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || stylistForm.get('professionistGradeId').touched)  && stylistForm.get('professionistGradeId').hasError('required')"
+          >
+            *professionist grade is required
+          </p>
+        </div>
+        <div class="input-block sign-input">
+          <ion-label
+            >Contact number
+            <sup style="color: red">*</sup>
+          </ion-label>
+          <input
+            appBlockCopyPaste
+            class="ng2-tel-input"
+            type="tel"
+            ng2TelInput
+            [ng2TelInputOptions]="telInputOptions"
+            (hasError)="hasError($event)"
+            (ng2TelOutput)="getNumber($event)"
+            (intlTelInputObject)="telInputObject($event)"
+            (countryChange)="onCountryChange($event)"
+            formControlName="mobileNo"
+            name="mobileNo"
+            (input)="changePhone()"
+            (keypress)="numberValidate($event)"
+            #ngTelInput
+          />
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted ||stylistForm.get('mobileNo').touched)&& stylistForm.get('mobileNo').hasError('required')"
+          >
+            *Mobile number is required
+          </p>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="(formSubmitted || stylistForm.get('mobileNo').touched) && stylistForm.get('mobileNo').hasError('invalid_cell_phone')"
+          >
+            *Please enter valid mobile number
+          </p>
+          <p
+            ion-text
+            class="field-err error-fix"
+            *ngIf="exist === 1 && !stylistForm.get('mobileNo').hasError('required') && !stylistForm.get('mobileNo').hasError('invalid_cell_phone')"
+          >
+            *Mobile number already registered!
+          </p>
+        </div>
+
+        <div class="input-block">
+          <ion-label>Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+          <p
+            ion-text
+            class="field-err"
+            *ngIf="(formSubmitted || stylistForm.get('email').touched) &&  stylistForm.get('email').hasError('email')"
+          >
+            *Please enter valid email
+          </p>
+        </div>
+        <div class="input-block">
+          <ion-label>Address</ion-label>
+          <ion-textarea formControlName="address" type="text"></ion-textarea>
+        </div>
+
+        <div class="input-block disable-switch">
+          <ion-item lines="none">
+            <ion-label>Disable this stylist</ion-label>
+            <ion-toggle
+              [(ngModel)]="showDisable"
+              (ionChange)="disableToggle()"
+              color="secondary"
+              formControlName="disable"
+            ></ion-toggle>
+          </ion-item>
+          <div class="service-diable-error">
+            <p *ngIf="showDisable">
+              Please note : This Stylist will not be available for any future
+              Appointments until you enable it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+    <ion-footer class="ion-padding-top" *ngIf="isKeyboardHide">
+      <ion-row class="ion-text-center button-row">
+        <ion-col size="6">
+          <ion-button
+            expand="block"
+            color="light"
+            shape="round"
+            type="button"
+            (click)="goBack('/stylistmgmt')"
+            >Cancel</ion-button
+          >
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button expand="block" shape="round" color="primary" type="submit"
+            >Save</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </form>
+</ion-content>

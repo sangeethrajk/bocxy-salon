@@ -1,0 +1,14 @@
+:host {
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .search-items {
+    ion-item {
+      padding: 5px;
+    }
+  }
+}

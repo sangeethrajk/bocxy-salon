@@ -1,0 +1,257 @@
+<ion-toolbar color="light">
+  <ion-buttons slot="start">
+    <ion-button (click)="goBack('/calendarsettings')">
+      <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title *ngIf="!editData"> Create New Slot</ion-title>
+  <ion-title *ngIf="editData"> Edit Slot</ion-title>
+  <ion-title *ngIf="!isEditable">Slot Details</ion-title>
+</ion-toolbar>
+
+<ion-content fullscreen>
+  <div>
+    <ion-card class="slot-banner-card">
+      <img src="./assets/img/stylist-img.svg" />
+      <ion-card-header>
+        <ion-card-title>
+          <div class="icon-left">
+            <ion-icon
+              name="information-circle-outline"
+              color="secondary"
+            ></ion-icon>
+          </div>
+          Please provide your shop timing and slot duration for a service!
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <div class="validation-error errMsg">
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && !slotForm.get('name').value"
+    >
+      Please Enter Slot Name
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && slotForm.get('name').value && !isValidSlotName"
+    >
+      Slot config name should not contain special characters, space at start,
+      end and multiple space between words
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && slotForm.get('name').value && isValidSlotName && !slotForm.get('startDate').value"
+    >
+      Please Select Start Date
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotType === 'special' && slotFormSubmitted && slotForm.get('name').value && isValidSlotName && slotForm.get('startDate').value && !slotForm.get('endDate').value"
+    >
+      Please Select End Date
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotType === 'special' && slotFormSubmitted && slotForm.get('name').value && isValidSlotName && slotForm.get('startDate').value && slotForm.get('endDate').value && (dateTimeObjFromIonDateTime(slotForm.get('startDate').value) > dateTimeObjFromIonDateTime(slotForm.get('endDate').value))"
+    >
+      Start Date must be less than end date
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && ((slotType === 'permanent' && !isInvalidStartDate) || (slotType === 'special' && isValidspecialSlotDateRange && slotForm.get('endDate').value && (slotForm.get('startDate').value <= slotForm.get('endDate').value))) && slotForm.get('name').value && isValidSlotName && slotForm.get('startDate').value && !slotForm.get('openTime').value"
+    >
+      Please Select Shop Open time
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && !isInvalidStartDate && isValidspecialSlotDateRange && slotForm.get('startDate').value && (slotType === 'permanent' || (slotType === 'special' && slotForm.get('endDate').value && (slotForm.get('startDate').value <= slotForm.get('endDate').value))) && slotForm.get('openTime').value && !slotForm.get('closeTime').value"
+    >
+      Please Select Shop Close time
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="(slotFormSubmitted || slotForm.get('closeTime').touched || slotForm.get('closeTime').dirty) &&  slotForm.get('name').value && isValidSlotName && !isInvalidStartDate && isValidspecialSlotDateRange && slotForm.get('startDate').value && (slotType === 'permanent' || (slotType === 'special' && slotForm.get('endDate').value && (slotForm.get('startDate').value <= slotForm.get('endDate').value))) && slotForm.get('openTime').value && slotForm.get('closeTime').value && (slotForm.get('openTime').value >= slotForm.get('closeTime').value || !IsValidShopTime())"
+    >
+      Shop Close time must be greater than Open time
+    </ion-label>
+
+    <ion-label
+      color="danger"
+      *ngIf="slotForm.get('name').value && isValidSlotName && slotType === 'permanent' && slotForm.get('startDate').value && isInvalidStartDate"
+    >
+      There are exisiting appointments on this date. Please choose a later date.
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotForm.get('name').value && isValidSlotName && slotType === 'special' && !isValidspecialSlotDateRange && slotForm.get('startDate').value && slotForm.get('endDate').value && (slotForm.get('startDate').value <= slotForm.get('endDate').value)"
+    >
+      There are exisiting appointments on this date. Please choose a later date.
+    </ion-label>
+    <ion-label color="danger" *ngIf="exist">
+      Slot name alerady exist
+    </ion-label>
+  </div>
+  <form
+    [formGroup]="slotForm"
+    (keyup.enter)="onContinue()"
+    (submit)="onContinue()"
+  >
+    <ion-list class="ion-padding-top">
+      <ion-item lines="none">
+        <ion-label class="mr-5">
+          <ion-icon
+            name="clipboard-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          Slot Name</ion-label
+        >
+        <ion-input
+          *ngIf="isEditable"
+          formControlName="name"
+          name="name"
+          maxlength="50"
+          class="slot-name-input"
+          (keypress)="slotNameValidate($event)"
+          placeholder="e.g. New Slot"
+        ></ion-input>
+        <label *ngIf="!isEditable" class="slotName">{{slotInput.name}}</label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <ion-icon
+            name="calendar-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          Start Date</ion-label
+        >
+        <ion-datetime
+          mode="ios"
+          placeholder="DD MM YYYY"
+          displayFormat="DDDD MMM D, YYYY"
+          [min]="minStartDate"
+          [max]="maxstartDate"
+          formControlName="startDate"
+          name="startDate"
+          class="store-datetime-disabled"
+          (ionChange)="onStartDateSelect($event.target.value)"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item
+        lines="none"
+        *ngIf="slotType === 'special' || (!isEditable && slotForm.get('endDate').value)"
+      >
+        <ion-label>
+          <ion-icon
+            name="calendar-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          End Date</ion-label
+        >
+        <ion-datetime
+          mode="ios"
+          placeholder="DD MM YYYY"
+          displayFormat="DDDD MMM D, YYYY"
+          [min]="minEndDate"
+          [max]="maxEndDate"
+          formControlName="endDate"
+          name="endDate"
+          (ionChange)="onStartDateSelect($event.target.value)"
+          class="store-datetime-disabled"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <ion-icon
+            name="time-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          Shop open time</ion-label
+        >
+        <ion-input
+          class="ion-no-padding"
+          placeholder="HH:MM"
+          (click)="showTimepicker('openTime')"
+          formControlName="openTime"
+          name="openTime"
+          readonly
+        ></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <ion-icon
+            name="time-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          Shop close time</ion-label
+        >
+        <ion-input
+          class="ion-no-padding"
+          placeholder="HH:MM"
+          (click)="showTimepicker('closeTime')"
+          formControlName="closeTime"
+          name="closeTime"
+          readonly
+        ></ion-input>
+      </ion-item>
+
+      <!-- <ion-item lines="none">
+        <ion-label>
+          <ion-icon
+            name="hourglass-outline"
+            color="secondary"
+            class="icon-space store-lable-disabled"
+          ></ion-icon>
+          Duration per service (mins)</ion-label
+        >
+        <ion-select
+          mode="ios"
+          interface="action-sheet"
+          placeholder="Minutes"
+          formControlName="slotGroupId"
+          name="slotGroupId"
+          [ngClass]="{'store-select-disabled':true, 'selectRemoveIcon':isEditable == false}"
+          (ionChange)="onSlotDurationChange()"
+        >
+          <ion-select-option
+            *ngFor="let option of slotGroupList"
+            [value]="option"
+            >{{option.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item> -->
+    </ion-list>
+
+    <ion-row class="ion-text-center button-row">
+      <ion-col [size]="isEditable?'6':'12'">
+        <ion-button
+          expand="block"
+          shape="round"
+          color="light"
+          (click)="goBack('/calendarsettings')"
+          >Back</ion-button
+        >
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button
+          *ngIf="isEditable"
+          expand="block"
+          color="primary"
+          shape="round"
+          type="submit"
+          [disabled]="disableContinueBtn"
+          >Continue</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

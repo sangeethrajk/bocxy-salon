@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack('/home/tabs/storeconfig')">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Holiday List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item detail="true" *ngFor="let holiday of holidayList let i=index">
+      <ion-avatar slot="start">
+        <ion-icon name="today-outline" class="list-icons"></ion-icon>
+      </ion-avatar>
+      <ion-label routerLink="/holidaymgmt/{{holiday.merchantHolidayId}}"
+        >{{holiday.name}}</ion-label
+      >
+      <div class="grade-item-btn">
+        <ion-icon
+          name="trash-outline"
+          (click)="presentDeleteAlertConfirm(holiday, i)"
+        ></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll
+    *ngIf="page < totalPages"
+    threshold="100px"
+    (ionInfinite)="loadMoreData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div class="no-holidays" *ngIf="totalHolidayCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no holidays to show
+    </h5>
+  </div>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    routerLink="/holidaymgmt"
+  >
+    <ion-fab-button color="indigo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

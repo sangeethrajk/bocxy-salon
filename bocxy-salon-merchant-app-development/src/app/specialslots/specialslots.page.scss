@@ -1,0 +1,64 @@
+:host {
+  .grade-item-btn {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background: #e91e63;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    margin: 8px 2px;
+    padding: 0;
+    vertical-align: middle;
+    ion-icon {
+      font-size: 18px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6px;
+    }
+  }
+
+  .no-slots {
+    position: relative;
+    left: 0;
+    top: 20%;
+    text-align: center;
+    right: 0;
+    color: #6a6a6a;
+    vertical-align: middle;
+    bottom: 0;
+    ion-icon {
+      font-size: 25px;
+    }
+    h5 {
+      font-size: 16px !important;
+    }
+  }
+
+  .special-hours-card {
+    ion-card-header {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      ion-card-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #444;
+      }
+    }
+  }
+  .special-time-box {
+    width: 100%;
+    display: block;
+    min-height: 30px;
+    align-items: center;
+    ion-badge {
+      float: right;
+      border-radius: 0;
+      min-width: 65px;
+    }
+    ion-text {
+      font-size: 1em;
+      color: #444;
+    }
+  }
+}

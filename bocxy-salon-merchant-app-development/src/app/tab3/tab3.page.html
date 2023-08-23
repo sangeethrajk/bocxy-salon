@@ -1,0 +1,237 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Appointments</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        class="spl-book-btn"
+        size="small"
+        fill="clear"
+        color="secondary"
+        routerLink="/specialbooking"
+      >
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <div class="heading">Customer Details</div>
+  <div class="">
+    <div class="validation-error">
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && !appointmentForm.get('userName').value"
+      >
+        Please Enter Full Name
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="(formSubmitted) && appointmentForm.get('userName').value && !appointmentForm.get('contactNumber').value"
+      >
+        Please Enter Contact Number
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && appointmentForm.get('userName').value && (appointmentForm.get('contactNumber').touched || appointmentForm.get('contactNumber').dirty) && appointmentForm.get('contactNumber').value && appointmentForm.get('contactNumber').hasError('invalid_cell_phone')"
+      >
+        Please Enter Valid Contact Number
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && !appointmentForm.get('contactNumber').hasError('invalid_cell_phone') && !appointmentForm.get('service').value"
+      >
+        Please Select Service
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && isPickDateError"
+      >
+        Please Select Date
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && !isPickDateError && isStylistError"
+      >
+        Please Select Stylist
+      </ion-label>
+      <ion-label
+        color="danger"
+        *ngIf="formSubmitted && appointmentForm.get('userName').value && appointmentForm.get('contactNumber').value && appointmentForm.get('service').value && !isPickDateError && !isStylistError && isSlotSelectionError"
+      >
+        Please Select Time Slot
+      </ion-label>
+    </div>
+    <form
+      [formGroup]="appointmentForm"
+      (keyup.enter)="showBookingConfirmation()"
+      (submit)="showBookingConfirmation()"
+    >
+      <div class="form">
+        <div class="input-block sign-input">
+          <ion-label>Full name</ion-label>
+          <input
+            class="custom-input"
+            formControlName="userName"
+            name="userName"
+            placeholder="Full Name"
+            mode="ios"
+            type="text"
+            maxlength="50"
+            (keypress)="userNameValidate($event)"
+          />
+        </div>
+        <div class="input-block sign-input">
+          <ion-label>Contact number</ion-label>
+          <input
+            appBlockCopyPaste
+            class="ng2-tel-input"
+            type="tel"
+            ng2TelInput
+            [ng2TelInputOptions]="telInputOptions"
+            (hasError)="hasError($event)"
+            (ng2TelOutput)="getNumber($event)"
+            (intlTelInputObject)="telInputObject($event)"
+            (countryChange)="onCountryChange($event)"
+            formControlName="contactNumber"
+            name="contactNumber"
+            (input)="changePhone()"
+            (keypress)="numberValidate($event)"
+            #ngTelInput
+          />
+        </div>
+        <div
+          class="input-block sign-input"
+          (click)="showMerchantServiceModal()"
+        >
+          <ion-label>Services</ion-label>
+          <input
+            class="custom-input"
+            type="text"
+            mode="ios"
+            placeholder="Select Service"
+            formControlName="service"
+            name="service"
+          />
+        </div>
+      </div>
+
+      <div class="sub-heading">Pick Date</div>
+      <div
+        class="select-service-msg"
+        *ngIf="!appointmentForm.get('service').value"
+      >
+        <ion-label> Please select a service </ion-label>
+      </div>
+      <div
+        class="scrolling-wrapper"
+        *ngIf="appointmentForm.get('service').value"
+      >
+        <div class="card">
+          <div class="date-item" lines="none">
+            <ion-button
+              *ngFor="let date of datebuttons; let i = index"
+              (click)="OnDateSelect(date.date,i)"
+              [ngClass]="selectedIndex === i  ? 'selected-btn' : ''"
+              size="small"
+              expand="full"
+              class="date-button"
+              >{{date.name}}</ion-button
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-heading">Stylists</div>
+
+      <div class="scrolling-wrapper">
+        <div class="select-service-msg" *ngIf="selectedIndex === null">
+          <ion-label> Please select a date </ion-label>
+        </div>
+        <div
+          class="select-service-msg"
+          *ngIf="selectedIndex !== null && emptyStylist"
+        >
+          <ion-label> No Stylist assigned for this service or date </ion-label>
+        </div>
+
+        <div class="card" *ngIf="selectedIndex !== null">
+          <div class="stylist-item">
+            <!-- [disabled]="!this.appointmentBooking.bookingDate" -->
+            <ion-button
+              *ngFor="let stylist of stylists; let i = index"
+              (click)="OnStylistSelect(stylist.professionistAccountId,i)"
+              [ngClass]="selectedStylistIndex === i  ? 'selected-stylist' : ''"
+              [color]="stylistButtonColor"
+              size="small"
+              expand="full"
+              [disabled]="!appointmentBooking.bookingDate"
+              ><ion-icon name="checkmark-circle-outline"></ion-icon>
+              {{stylist.firstName}}</ion-button
+            >
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="sub-heading"
+        *ngIf="appointmentBooking.bookingDate && timeslots || emptySlotDuration"
+      >
+        <!-- <ion-icon
+          name="time-outline"
+          class="icon-space"
+          color="secondary"
+        ></ion-icon> -->
+        Timing
+      </div>
+      <div class="time-item ion-no-padding">
+        <div class="select-service-msg" *ngIf="emptySlotDuration">
+          <ion-label> Service duration is empty </ion-label>
+        </div>
+        <ion-grid *ngIf="appointmentBooking.bookingDate && timeslots">
+          <ion-row class="ion-text-center ion-margin-bottom ion-padding-bottom">
+            <ion-col size="2" *ngFor="let time of timeslots; let i = index">
+              <ion-button
+                size="small"
+                expand="full"
+                (click)="OnTimeSlotSelect(time.slotName,i)"
+                [disabled]="time.isDisabled == null || time.isDisabled"
+                [ngClass]="selectedTimeIndex === i  ? 'selected-timeslot' : ''"
+                >{{time.slotName}}</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <ion-footer class="ion-no-border">
+        <ion-row class="ion-text-center button-row ion-margin-bottom">
+          <ion-col size="6">
+            <ion-button
+              expand="block"
+              shape="round"
+              type="submit"
+              color="light"
+              (click)="previous()"
+              >Cancel</ion-button
+            >
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              [disabled]="disableBookingBtn"
+              type="submit"
+              >Book</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-footer>
+    </form>
+  </div>
+</ion-content>

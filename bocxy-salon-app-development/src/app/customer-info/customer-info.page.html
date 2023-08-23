@@ -1,0 +1,119 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <div id="container" class="">
+    <h4 class="ion-text-center">
+      {{'CUSTOMER_INFO_ITEMS.CUSTOMER_INFO_TITLE' | translate}}
+    </h4>
+    <div class="validation-error">
+      <ion-label color="danger" *ngIf="errCount == 1"
+        >{{fieldName}}{{' is '}}{{type}}</ion-label
+      >
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Invalid'">
+        Please Enter Valid Details</ion-label
+      >
+      <ion-label color="danger" *ngIf="errCount > 1 && type == 'Mandatory'">
+        Please Enter Mandatory Fields</ion-label
+      >
+    </div>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <form
+          [formGroup]="registerProfile"
+          (keyup.enter)="saveProfile()"
+          (submit)="saveProfile()"
+        >
+          <!--Register Block-->
+          <div class="form">
+            <div class="input-block">
+              <ion-label>
+                {{'CUSTOMER_INFO_ITEMS.FIRST_NAME' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-input
+                inputmode="text"
+                (ionChange)="onChangeFields()"
+                formControlName="firstName"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label
+                >{{'CUSTOMER_INFO_ITEMS.LAST_NAME' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-input
+                (ionChange)="onChangeFields()"
+                formControlName="lastName"
+              ></ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label>{{'CUSTOMER_INFO_ITEMS.EMAIL' | translate}}</ion-label>
+              <ion-input
+                (ionChange)="onChangeFields()"
+                formControlName="email"
+              ></ion-input>
+            </div>
+            <div class="input-block" (click)="openModal()">
+              <ion-label
+                >{{'CUSTOMER_INFO_ITEMS.ADDRESS' | translate}}</ion-label
+              ><sup style="color: red">*</sup>
+              <ion-textarea
+                rows="3"
+                (ionChange)="onChangeFields()"
+                formControlName="address"
+                [(ngModel)]="dataReturned.address"
+              ></ion-textarea>
+            </div>
+            <ion-item lines="none" class="termsconditions">
+              <ion-checkbox
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="acceptTc"
+                color="secondary"
+                slot="start"
+              ></ion-checkbox>
+              <ion-label
+                >{{'CUSTOMER_INFO_ITEMS.I_ACCEPT_THE' | translate}}
+                <a routerLink="/termscondition"
+                  >{{'CUSTOMER_INFO_ITEMS.TERMS_CONDITIONS' | translate}}</a
+                ></ion-label
+              >
+            </ion-item>
+            <ion-button
+              [disabled]="!acceptTc"
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+              >{{'COMMON.CONTINUE' | translate}}</ion-button
+            >
+            <!-- <ion-button expand="full" fill="clear" type="submit" (click)="goToHome()" class="custom-btn-gray ion-margin-top">Skip for now</ion-button> -->
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<ion-footer
+  class="ion-no-border"
+  *ngIf="isKeyboardHide"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar class="ion-text-center">
+    <p>
+      {{'LOGIN_ITEMS.ALREADY_USER' | translate}}
+      <span class="bold text-secondary" routerLink="/login">
+        {{'LOGIN_ITEMS.SIGN_IN' | translate}}</span
+      >
+    </p>
+  </ion-toolbar>
+</ion-footer>

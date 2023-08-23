@@ -1,0 +1,152 @@
+:host {
+  .customer-list {
+    width: 100%;
+    h2 {
+      color: #565656;
+    }
+    ion-icon {
+      font-size: 22px;
+      color: #757575;
+    }
+  }
+  .segment-item {
+    background: #f4f4f4;
+    margin: 0 auto;
+    width: 100%;
+    ion-label {
+      color: inherit;
+    }
+    ion-label.ios {
+      font-size: 16px;
+    }
+  }
+  ion-segment-button {
+    font-size: 1em;
+  }
+  .time-box {
+    display: block;
+    min-height: 30px;
+    align-items: center;
+    ion-badge {
+      float: right;
+      border-radius: 0;
+      min-width: 65px;
+    }
+    ion-text {
+      font-size: 1em;
+      color: #444;
+    }
+  }
+  .list-heading {
+    font-weight: bold;
+  }
+  .weekdays-col {
+    ion-badge {
+      border-radius: 0;
+      min-width: 65px;
+    }
+  }
+  .ml-10 {
+    margin-left: 10px;
+  }
+  .calendar-detail {
+    box-shadow: none;
+  }
+
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+  }
+  ion-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+  .regular-fab {
+    position: fixed;
+  }
+
+  //*Custom Fab*//
+  ion-fab-button[size="small"] {
+    --size: 32px;
+  }
+
+  .custom-fab {
+    display: flex;
+    align-items: center;
+  }
+  ion-fab[horizontal="start"] .custom-fab {
+    flex-direction: row-reverse;
+  }
+  .custom-fab ion-button {
+    --height: 25px;
+    text-transform: none;
+    color: #444;
+    --background: none;
+    font-weight: bold;
+    background: #f6f4f9;
+  }
+
+  ion-fab[vertical="center"][horizontal="start"] ion-fab-list {
+    left: 0;
+    align-items: flex-start;
+  }
+
+  ion-fab[vertical="center"][horizontal="end"] ion-fab-list {
+    right: 0;
+    align-items: flex-end;
+  }
+
+  ion-fab[vertical="bottom"][horizontal="start"] ion-fab-list {
+    left: 0;
+    align-items: flex-start;
+  }
+
+  ion-fab[vertical="bottom"][horizontal="end"] ion-fab-list {
+    right: 0;
+    align-items: flex-end;
+  }
+  .header-ios ion-toolbar:last-of-type {
+    --border-width: 0;
+  }
+  .special-hours-card {
+    ion-card-header {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      ion-card-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #444;
+      }
+    }
+  }
+  .special-time-box {
+    width: 100%;
+    display: block;
+    min-height: 30px;
+    align-items: center;
+    ion-badge {
+      float: right;
+      border-radius: 0;
+      min-width: 65px;
+    }
+    ion-text {
+      font-size: 1em;
+      color: #444;
+    }
+  }
+}

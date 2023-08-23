@@ -1,0 +1,226 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="slotHeader">Create Appointment Slots</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <div class="heading">
+        <div class="icon-left" slot="start">
+            <ion-icon name="information-circle-outline" color="secondary"></ion-icon>
+        </div>
+    </div> -->
+  <div>
+    <ion-card class="slot-banner-card">
+      <img src="./assets/img/stylist-img.svg" />
+      <ion-card-header>
+        <!-- <ion-card-subtitle> Enter your shop timing and slot duration for a service!</ion-card-subtitle> -->
+        <ion-card-title>
+          <div class="icon-left">
+            <ion-icon
+              name="information-circle-outline"
+              color="secondary"
+            ></ion-icon>
+          </div>
+          Please provide your shop timing and slot duration for a service!
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+  <div class="validation-error errMsg">
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && !slotDurationForm.get('configName').value"
+    >
+      Please Enter Slot Config Name
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && slotDurationForm.get('configName').value && !isValidConfigName"
+    >
+      Slot config name should not contain special characters, space at start,
+      end and multiple space between words
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && slotDurationForm.get('openTime').enabled && slotDurationForm.get('configName').value && !slotDurationForm.get('openTime').value"
+    >
+      Please Select Shop Open time
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="slotFormSubmitted && slotDurationForm.get('closeTime').enabled && slotDurationForm.get('openTime').value && !slotDurationForm.get('closeTime').value"
+    >
+      Please Select Shop Close time
+    </ion-label>
+    <ion-label
+      color="danger"
+      *ngIf="(slotFormSubmitted || slotDurationForm.get('closeTime').touched || slotDurationForm.get('closeTime').dirty) && slotDurationForm.get('openTime').value && slotDurationForm.get('closeTime').value && (slotDurationForm.get('openTime').value >= slotDurationForm.get('closeTime').value || !IsValidShopTime())"
+    >
+      Shop Close time must be greater than Open time
+    </ion-label>
+    <ion-label color="danger" *ngIf="isWeekDayError === true">
+      {{errorDay}}
+    </ion-label>
+  </div>
+  <form
+    [formGroup]="slotDurationForm"
+    (keyup.enter)="onContinue()"
+    (submit)="onContinue()"
+  >
+    <ion-card class="regular-bh">
+      <ion-card-content>
+        <ion-list class="ion-padding-top">
+          <ion-item lines="none">
+            <ion-label class="slotConfigNameLabel"
+              ><ion-icon
+                name="clipboard-outline"
+                color="secondary"
+                class="icon-space"
+              ></ion-icon>
+              Slot Name</ion-label
+            >
+            <ion-input
+              class="input-block"
+              formControlName="configName"
+              name="configName"
+              placeholder="e.g. Festival, Weekend"
+              mode="ios"
+              type="text"
+              maxlength="50"
+              (keypress)="configNameValidate($event)"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon
+                name="time-outline"
+                color="secondary"
+                class="icon-space"
+              ></ion-icon>
+              Shop open time</ion-label
+            >
+            <ion-input
+              placeholder="H:MM"
+              class="ion-no-padding"
+              formControlName="openTime"
+              (click)="showTimepicker(null,'openingTime')"
+              (ionChange)="IsValidShopTime()"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon
+                name="time-outline"
+                color="secondary"
+                class="icon-space"
+              ></ion-icon>
+              Shop close time</ion-label
+            >
+            <ion-input
+              placeholder="H:MM"
+              class="ion-no-padding"
+              formControlName="closeTime"
+              (click)="showTimepicker(null,'closingTime')"
+              (ionChange)="IsValidShopTime()"
+              readonly
+            ></ion-input>
+          </ion-item>
+
+          <!-- <ion-item lines="none">
+        <ion-label>
+          <ion-icon
+            name="hourglass-outline"
+            color="secondary"
+            class="icon-space"
+          ></ion-icon>
+          Slot duration</ion-label
+        >
+        <ion-select
+          mode="ios"
+          interface="action-sheet"
+          placeholder="Minutes"
+          formControlName="slotGroupId"
+          name="slotGroupId"
+          (ionChange)="onSlotDurationChange()"
+        >
+          <ion-select-option *ngFor="let group of slotGroupList" [value]="group"
+            >{{group.name}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item> -->
+          <ion-item
+            color="light"
+            lines="none"
+            class="toggle-item ion-text-wrap"
+          >
+            <ion-label>Business hours are not same</ion-label>
+            <ion-toggle
+              color="secondary"
+              (click)="toggleWeekdays()"
+            ></ion-toggle>
+          </ion-item>
+
+          <ion-grid
+            *ngIf="showDetails"
+            class="animate__animated animate__fadeIn"
+          >
+            <ion-row class="border-b">
+              <ion-col size="4" class="list-heading">Weekdays</ion-col>
+              <ion-col size="3" class="list-heading ion-text-center"
+                >Open</ion-col
+              >
+              <ion-col size="3" class="list-heading ion-text-center"
+                >Close</ion-col
+              >
+            </ion-row>
+            <div *ngFor="let item of timing">
+              <ion-row class="weekdays-col">
+                <ion-col size="4" class="days"
+                  >{{weekDayMapping[item.day]}}</ion-col
+                >
+                <ion-col size="3">
+                  <ion-input
+                    class="ion-no-padding"
+                    placeholder="HH:MM"
+                    (click)="showTimepicker(item,'openingTime')"
+                    [value]="item.openingTime"
+                    readonly
+                  ></ion-input>
+                </ion-col>
+                <ion-col size="3">
+                  <ion-input
+                    class="ion-no-padding"
+                    placeholder="HH:MM"
+                    (click)="showTimepicker(item,'closingTime')"
+                    [value]="item.closingTime"
+                    readonly
+                  ></ion-input>
+                </ion-col>
+                <ion-col size="2" class="v-center ion-no-padding">
+                  <div class="app-all-btn" (click)="applyToAllWeekDays(item)">
+                    Apply all
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-grid>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-row class="ion-text-center button-row">
+      <ion-col size="4"></ion-col>
+      <ion-col size="4">
+        <ion-button
+          expand="full"
+          color="primary"
+          [disabled]="disableContinueBtn"
+          type="submit"
+          >Continue</ion-button
+        >
+      </ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+  </form>
+</ion-content>

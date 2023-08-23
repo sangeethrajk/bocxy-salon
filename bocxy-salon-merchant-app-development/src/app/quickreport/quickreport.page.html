@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-button (click)="previous()">
+                <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Quick Report</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+    <div class="heading animate__animated animate__fadeInDown">
+        <ion-icon name="stats-chart-outline" color="secondary"></ion-icon> Expenses and Profits
+    </div>
+</ion-toolbar>
+
+<ion-content fullscreen>
+    <ion-list class="animate__animated animate__fadeInDown report-list">
+        <ion-item *ngFor="let expense of expenses">
+            <ion-label>
+                <p>{{expense.title}}</p>
+                <h2><img class="inr-icon" src="./assets/icon/rupee.svg"> {{expense.item}}
+                </h2>
+            </ion-label>
+            <ion-label slot="end" class="ion-text-end">
+                <h2>
+                    <ion-icon [color]="expense.color" [name]="expense.icon"></ion-icon>
+                </h2>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

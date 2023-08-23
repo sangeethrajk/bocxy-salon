@@ -1,0 +1,206 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="location-title" (click)="openLocationSearch()">
+      <div class="location-block">
+        <ion-icon
+          name="location-outline"
+          class="icon-space"
+          color="secondary"
+        ></ion-icon>
+        <ng-container *ngIf="storeName; else chooseBlock">
+          {{storeName}}
+        </ng-container>
+        <ng-template #chooseBlock> Choose Location </ng-template>
+      </div>
+    </ion-title>
+    <ion-buttons
+      slot="end"
+      id="notify-btn"
+      class="notification-btn"
+      (click)="gotToNotifications()"
+    >
+      <ion-button
+        size="small"
+        fill="clear"
+        [disabled]="skipLogin"
+        color="primary"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-badge
+          color="danger"
+          id="iosbadge"
+          class="notify-badge ion-text-center"
+          slot="end"
+          *ngIf="!skipLogin && totalNotficationsCount"
+        >
+          {{totalNotficationsCount}}
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-item lines="none" (click)="openServiceSearch()">
+      <ion-input placeholder="Search for services and packages">
+        <ion-icon
+          class="search-icon"
+          name="search-outline"
+          slot="end"
+        ></ion-icon>
+      </ion-input>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content
+  fullscreen
+  class="card-background-page"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="special-offers">
+    <ion-item lines="none" class="item-height">
+      <div class="heading">
+        <fa-layers [fixedWidth]="true">
+          <fa-icon [icon]="['fas', 'circle']"></fa-icon>
+          <fa-layers-text
+            content="%"
+            style="color: white"
+            transform="shrink-4"
+          ></fa-layers-text>
+        </fa-layers>
+        {{'HOME_ITEMS.SPECIAL_OFFER' | translate}}
+      </div>
+    </ion-item>
+
+    <ion-item lines="none" class="offer-slide">
+      <div class="scrolling-wrapper">
+        <div class="card" *ngFor="let slide of homeslides">
+          <ion-card class="offer-card">
+            <img [src]="slide.image" />
+            <ion-card-header class="ion-text-start">
+              <ion-card-subtitle
+                ><fa-icon icon="tag"></fa-icon> Save upto 50%</ion-card-subtitle
+              >
+              <ion-card-title>{{slide.servicename}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="ion-text-start">
+              {{slide.description}}
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+
+      <!-- <ion-slides #homeSlider [options]="slideOpts">
+        <ion-slide *ngFor="let slide of homeslides">
+          <ion-card class="offer-card">
+            <img [src]="slide.image" />
+            <ion-card-header class="ion-text-start">
+              <ion-card-title>{{slide.servicename}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="ion-text-start">
+              {{slide.description}}
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides> -->
+    </ion-item>
+  </div>
+  <ion-list class="ion-no-padding">
+    <ion-item lines="none" class="item-height">
+      <div class="heading">{{'HOME_ITEMS.SERVICES' | translate}}</div>
+      <!-- <div class="see-more-btn" routerLink="/seemoreservice">
+        <ion-label slot="end">
+          {{'HOME_ITEMS.SEE_MORE' | translate}}
+          <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+        </ion-label>
+      </div> -->
+    </ion-item>
+
+    <!-- <div>
+      <div class="service-buttons">
+        <ion-card class="icon-card" *ngFor="let service of serviceGroups">
+          <span (click)="goForward('/seemoreservice/'+service.serviceGroupId)">
+            <img
+              [src]="'https://bocxy-merchant-new.s3.ap-south-1.amazonaws.com/'+service.icon"
+            />
+
+            <div class="card-title">{{service.name}}</div>
+          </span>
+        </ion-card>
+
+      </div>
+    </div> -->
+    <div>
+      <div class="service-buttons">
+        <ion-card
+          class="icon-card"
+          *ngFor="let service of serviceGroups"
+          (click)="goForward('/seemoreservice/'+service.serviceGroupId)"
+        >
+          <div class="container-s">
+            <img
+              [src]="'https://bocxy-merchant-new.s3.ap-south-1.amazonaws.com/'+service.icon"
+            />
+            <div class="title-s">{{service.name}}</div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- <div>
+      <ion-item lines="none" class="item-height">
+        <div class="heading">Popular Services (04)</div>
+        <div class="see-more-btn" routerLink="/seemoreservice">
+          <ion-label slot="end">
+            See More <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+          </ion-label>
+        </div>
+      </ion-item>
+
+      <ion-list>
+        <ion-item *ngFor="let item of popularservices">
+          <ion-avatar slot="start">
+            <img [src]="item.icon" />
+          </ion-avatar>
+          <ion-label>
+            <h3>{{item.name}}</h3>
+          </ion-label>
+
+          <ion-button
+            shape="round"
+            color="secondary"
+            expand="full"
+            size="small"
+          >
+            Book
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-slides
+        #brandSlider
+        class="brand-slides"
+        pager="false"
+        loop="false"
+        [options]="brandslideOpts"
+      >
+        <ion-slide>
+          <img src="./assets/img/tng.png" />
+        </ion-slide>
+        <ion-slide>
+          <img src="./assets/img/naturals.png" />
+        </ion-slide>
+        <ion-slide>
+          <img src="./assets/img/gt.png" />
+        </ion-slide>
+      </ion-slides>
+    </div> -->
+  </ion-list>
+</ion-content>

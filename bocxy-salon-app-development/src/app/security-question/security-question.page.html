@@ -1,0 +1,113 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <img class="logo" src="./assets/icon/bocxy-logo.svg" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="">
+    <h4 class="ion-text-center bold">Security Center</h4>
+    <div class="validation-error">
+      <ion-label color="danger" *ngIf="errorQueVal"
+        >Please Select Security Questions</ion-label
+      >
+      <ion-label color="danger" *ngIf="errorVal"
+        >Please Enter Answers</ion-label
+      >
+    </div>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <form
+          [formGroup]="securityForm"
+          (keyup.enter)="saveSecurityQueAns()"
+          (submit)="saveSecurityQueAns()"
+        >
+          <div class="form">
+            <div class="input-block">
+              <ion-label>Select your security question</ion-label>
+              <ion-select
+                (ionChange)="onChangeQuestionOne($event)"
+                formControlName="securityQueOne"
+                placeholder="Select Question"
+                class="ion-text-wrap"
+                interface="action-sheet"
+              >
+                <!-- <ion-select-option selected>What is your Nickname?</ion-select-option>
+                <ion-select-option selected>Which is your favorite city?</ion-select-option> -->
+                <ion-select-option
+                  *ngFor="let questionOne of securityQuestionOne"
+                  value="{{questionOne.securityQuestionId}}"
+                >
+                  {{questionOne.question}}</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <div class="input-block">
+              <ion-label>Your Answer</ion-label>
+              <ion-input
+                (ionChange)="onChangeAnswer($event)"
+                inputmode="text"
+                formControlName="securityAnsOne"
+              >
+              </ion-input>
+            </div>
+            <div class="input-block">
+              <ion-label>Select your security question</ion-label>
+              <ion-select
+                (ionChange)="onChangeQuestionTwo($event)"
+                [(ngModel)]="questionTwo"
+                formControlName="securityQueTwo"
+                placeholder="Select Question"
+                class="ion-text-wrap"
+                interface="action-sheet"
+              >
+                <!-- <ion-select-option value="1" selected>What is your Nickname?</ion-select-option>
+                  <ion-select-option value="2" selected>Which is your favorite city?</ion-select-option> -->
+                <ion-select-option
+                  *ngFor="let questionTwo of securityQuestionTwo"
+                  value="{{questionTwo.securityQuestionId}}"
+                  >{{questionTwo.question}}</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <div class="input-block">
+              <ion-label>Your Answer</ion-label>
+              <ion-input
+                (ionChange)="onChangeAnswer($event)"
+                inputmode="text"
+                formControlName="securityAnsTwo"
+              >
+              </ion-input>
+            </div>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+              >Submit
+            </ion-button>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="light"
+              type="button"
+              (click)="previous()"
+              class="ion-margin-top"
+              >Back</ion-button
+            >
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border" *ngIf="isKeyboardHide">
+  <ion-toolbar class="ion-text-center">
+    <p>
+      Don't have an account? <span class="bold text-secondary">Sign Up</span>
+    </p>
+
+  </ion-toolbar>
+</ion-footer> -->

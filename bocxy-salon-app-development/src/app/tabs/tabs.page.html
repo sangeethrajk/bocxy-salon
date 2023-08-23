@@ -1,0 +1,52 @@
+<ion-tabs
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-tab-bar color="light" slot="bottom">
+    <ion-tab-button tab="tab1" class="tab-home">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>{{'TAB_MENU_ITEMS.HOME' | translate}}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="openServiceSearch()" class="tab-explore">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-label>{{'TAB_MENU_ITEMS.EXPLORE' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tab0" disabled="true"> </ion-tab-button>
+
+    <ng-container *ngIf="skipLogin;else enableTab3">
+      <ion-tab-button (click)="gotoLogin($event)" class="tab-mybookings">
+        <!-- <ion-tab-button [disabled]="true" tab="tab3"> -->
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>{{'TAB_MENU_ITEMS.BOOKINGS' | translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="gotoLogin($event)" class="tab-profile">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>{{'TAB_MENU_ITEMS.PROFILE' | translate}}</ion-label>
+      </ion-tab-button>
+    </ng-container>
+    <ng-template #enableTab3>
+      <ion-tab-button tab="tab3">
+        <!-- <ion-tab-button [disabled]="true" tab="tab3"> -->
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-label>{{'TAB_MENU_ITEMS.BOOKINGS' | translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="tab4">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>{{'TAB_MENU_ITEMS.PROFILE' | translate}}</ion-label>
+      </ion-tab-button>
+    </ng-template>
+  </ion-tab-bar>
+  <ion-fab
+    vertical="bottom"
+    horizontal="center"
+    mode="ios"
+    slot="fixed"
+    class="home-fab"
+  >
+    <ion-fab-button color="light">
+      <img src="./assets/icon/bocxy_icon.svg" />
+    </ion-fab-button>
+  </ion-fab>
+</ion-tabs>

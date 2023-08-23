@@ -1,0 +1,126 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-title
+      ><ion-icon name="search-outline" class="icon-space"></ion-icon>
+      {{'EXPLORE_ITEMS.SEARCH_SERVICES' | translate}}</ion-title
+    >
+    <ion-buttons
+      slot="end"
+      id="notify-btn"
+      class="notification-btn"
+      (click)="dismiss()"
+    >
+      <ion-button size="small" fill="clear" color="primary">
+        {{'EXPLORE_ITEMS.CLOSE' | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-radio-group
+    class="store-location-radio"
+    [(ngModel)]="locatestore"
+    value="store"
+  >
+    <ion-row>
+      <ion-col class="ion-padding">
+        <ion-item lines="none" class="border">
+          <ion-label>{{'EXPLORE_ITEMS.BY_STORE' | translate}}</ion-label>
+          <ion-radio slot="start" value="store"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-padding">
+        <ion-item lines="none" class="border">
+          <ion-label>{{'EXPLORE_ITEMS.BY_LOCATION' | translate}}</ion-label>
+          <ion-radio slot="start" value="location"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-radio-group>
+  <!--Search by Selection-->
+  <ion-toolbar>
+    <ion-item lines="none" *ngIf="locatestore === 'store'">
+      <ion-searchbar
+        placeholder="i.e. Toni & Guy"
+        (ionInput)="filterStore($event)"
+        [(ngModel)]="storeName"
+      ></ion-searchbar>
+    </ion-item>
+    <ion-item lines="none" *ngIf="locatestore === 'location'">
+      <ion-searchbar
+        [(ngModel)]="autocomplete.input"
+        (ionInput)="UpdateSearchResults()"
+        placeholder="Search for a place"
+        (ionClear)="ClearAutocomplete()"
+      ></ion-searchbar>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <div *ngIf="locatestore === 'location'">
+    <ion-item lines="none">
+      <ion-button
+        class="current-location-btn"
+        (click)="loadMap()"
+        shape="round"
+        fill="outline"
+      >
+        <ion-icon slot="start" name="locate"></ion-icon>
+        {{'EXPLORE_ITEMS.CURRENT_LOCATION' | translate}}
+      </ion-button>
+    </ion-item>
+  </div>
+  <div>
+    <ion-list *ngIf="locatestore === 'location'">
+      <ion-item *ngFor="let store of stores" (click)="storeSelected(store)">
+        {{address}}
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="locatestore === 'store'">
+      <ion-item *ngFor="let store of stores" (click)="storeSelected(store)">
+        {{store.display}}
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-list
+    *ngIf="locatestore === 'location'"
+    class="autocomplete-list"
+    [hidden]="autocompleteItems.length == 0"
+  >
+    <ion-item
+      *ngFor="let item of autocompleteItems"
+      tappable
+      (click)="SelectSearchResult(item)"
+    >
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-text-center button-row ion-margin-bottom">
+    <ion-col size="12">
+      <ion-button
+        expand="block"
+        shape="round"
+        type="submit"
+        color="light"
+        (click)="dismiss()"
+        >{{'COMMON.CANCEL' | translate}}</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

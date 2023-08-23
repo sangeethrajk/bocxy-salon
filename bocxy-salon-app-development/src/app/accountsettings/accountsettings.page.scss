@@ -1,0 +1,183 @@
+:host {
+  .account-banner {
+    position: relative;
+    width: 100%;
+    min-height: 8em;
+    background: #222469;
+    .edit-btn {
+      position: absolute;
+      float: right;
+      width: auto;
+      right: 0;
+    }
+  }
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    background: #222469;
+  }
+  .account-avatar {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    min-width: 60px;
+    min-height: 60px;
+    img {
+      margin-top: 5vw;
+    }
+  }
+  .bg-trans {
+    --background: none;
+    .switch-avatar {
+      position: relative;
+      margin: 0 auto;
+      display: flex;
+      min-height: 90px;
+      font-size: 10px;
+      text-align: center;
+      color: #fff;
+      ion-avatar {
+        margin: 14px;
+      }
+    }
+  }
+  ion-header {
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+  }
+  .account-heading {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    h4 {
+      color: #fff;
+    }
+  }
+  .account-list {
+    ion-item {
+      color: #444;
+      ion-icon {
+        position: relative;
+        bottom: 2px;
+        font-size: 20px;
+        margin: 0 8px;
+      }
+      line-height: 26px;
+    }
+    #container p {
+      font-size: 16px;
+      line-height: 22px;
+      color: #8c8c8c;
+      margin: 0;
+    }
+    #container a {
+      text-decoration: none;
+    }
+    .form {
+      width: 100%;
+      padding: 10px;
+    }
+    .input-block {
+      text-align: start;
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+    .form-card {
+      width: 100%;
+      margin: 0 auto;
+    }
+    ion-card.ac-setting-card {
+      box-shadow: none;
+      background: transparent;
+    }
+  }
+  #container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    // transform: translateY(-50%);
+  }
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+  }
+  #container a {
+    text-decoration: none;
+  }
+  .form {
+    width: 100%;
+    padding: 10px;
+  }
+  .input-block {
+    text-align: start;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  ion-card.ac-setting-card {
+    box-shadow: none;
+    background: transparent;
+  }
+  ion-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .button-row {
+      padding: 0 15px;
+      ion-button {
+        max-width: 200px;
+        padding: 0;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.input-block {
+  text-align: start;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  input.ng2-tel-input {
+    width: 100% !important;
+    border-radius: 5px;
+    height: 42px;
+    background: #fff !important;
+    border-color: transparent;
+    border: 1px solid #a8a6a6;
+  }
+}
+
+ion-textarea {
+  border: 1px solid #b6b4b4;
+  border-radius: 5px;
+  padding-left: 3px;
+  margin-top: 5px;
+}
+
+.field-err {
+  color: red !important;
+  padding: 0;
+  margin-bottom: 0px;
+  margin-top: -2px;
+  font-size: 12px;
+  position: relative;
+}
+ion-select {
+  border: 1px solid #b6b4b4;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

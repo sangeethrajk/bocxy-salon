@@ -1,0 +1,162 @@
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+<ion-card>
+  <ion-item>
+    <ion-label>
+      <div class="time-box">
+        <ion-text>Name </ion-text>
+        <ion-badge class="v-center" color="light"
+          >{{currentSlot.name}}</ion-badge
+        >
+      </div>
+      <div class="time-box">
+        <ion-text>Start Date </ion-text>
+        <ion-badge class="v-center" color="light"
+          >{{currentSlot.startDate | date:'dd/MM/yyyy'}}</ion-badge
+        >
+      </div>
+      <div *ngIf="currentSlot.openingTime" class="time-box">
+        <ion-text>Opening Time </ion-text>
+        <ion-badge class="v-center" color="light"
+          >{{currentSlot.openingTime}}</ion-badge
+        >
+      </div>
+      <div *ngIf="currentSlot.closingTime" class="time-box">
+        <ion-text>Closing Time </ion-text>
+        <ion-badge class="v-center" color="light"
+          >{{currentSlot.closingTime}}</ion-badge
+        >
+      </div>
+      <div *ngIf="currentSlot.endDate" class="time-box">
+        <ion-text>End Date </ion-text>
+        <ion-badge class="v-center" color="success"
+          >{{currentSlot.endDate | date:'dd/MM/yyyy'}}</ion-badge
+        >
+      </div>
+    </ion-label>
+    <!-- <ion-button fill="outline" slot="end" routerLink="/createregularbh"
+      ><ion-icon name="create-outline"></ion-icon
+    ></ion-button> -->
+  </ion-item>
+  <div *ngIf="currentSlot.weekdayFlag === 'Y'">
+    <div class="divider"></div>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="border-b">
+          <ion-col size="6" class="list-heading">Weekdays</ion-col>
+          <ion-col size="3" class="list-heading ion-text-center">Open</ion-col>
+          <ion-col size="3" class="list-heading ion-text-center">Close</ion-col>
+        </ion-row>
+        <div *ngFor="let item of currentSlot.weekdays">
+          <ion-row class="weekdays-col">
+            <ion-col size="6" class="days"
+              >{{weekDayMapping[item.day]}}</ion-col
+            >
+            <ion-col size="3" class="ion-text-center">
+              <ion-badge class="v-center" color="light"
+                >{{getAMPM(item.openingTime)}}</ion-badge
+              ></ion-col
+            >
+            <ion-col size="3" class="ion-text-center">
+              <ion-badge class="v-center" color="light"
+                >{{getAMPM(item.closingTime)}}</ion-badge
+              ></ion-col
+            >
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-card-content>
+  </div>
+  <ion-card-content>
+    <ion-row class="footer-content">
+      <ion-col size="8" class="v-center"> This is your regular slot </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <ion-button color="light" routerLink="/createregularbh">
+          Change
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+<div *ngFor="let upcomingSlot of upcomingSlots">
+  <ion-list>
+    <ion-item color="light" lines="none" (click)="toggleDetails(upcomingSlot)">
+      <ion-icon
+        [name]="upcomingSlot.toggle ? 'chevron-down-outline' :'chevron-forward-outline' "
+        slot="end"
+      ></ion-icon>
+      <ion-label slot="start" class="ml-10">Upcoming</ion-label>
+    </ion-item>
+    <ion-card
+      class="calendar-detail ion-no-margin animate__animated animate__fadeIn"
+      *ngIf="upcomingSlot.toggle"
+    >
+      <ion-item lines="none">
+        <ion-label class="ml-10">
+          <div class="time-box">
+            <ion-text>Name </ion-text>
+            <ion-badge class="v-center" color="light"
+              >{{upcomingSlot.name}}</ion-badge
+            >
+          </div>
+          <div class="time-box">
+            <ion-text>Start Date </ion-text>
+            <ion-badge class="v-center" color="light"
+              >{{upcomingSlot.startDate}}</ion-badge
+            >
+          </div>
+          <div *ngIf="upcomingSlot.openingTime" class="time-box">
+            <ion-text>Opening Time </ion-text>
+            <ion-badge class="v-center" color="light"
+              >{{getAMPM(upcomingSlot.openingTime)}}</ion-badge
+            >
+          </div>
+          <div *ngIf="upcomingSlot.closingTime" class="time-box">
+            <ion-text>Closing Time </ion-text>
+            <ion-badge class="v-center" color="light"
+              >{{getAMPM(upcomingSlot.closingTime)}}</ion-badge
+            >
+          </div>
+          <div *ngIf="upcomingSlot.endDate" class="time-box">
+            <ion-text>End Date </ion-text>
+            <ion-badge class="v-center" color="light"
+              >{{upcomingSlot.endDate}}</ion-badge
+            >
+          </div>
+        </ion-label>
+      </ion-item>
+      <!--If weekdays-->
+      <ion-card-content *ngIf="upcomingSlot.weekdayFlag === 'Y'">
+        <ion-grid>
+          <ion-row class="border-b">
+            <ion-col size="6" class="list-heading">Weekdays</ion-col>
+            <ion-col size="3" class="list-heading ion-text-center"
+              >Open</ion-col
+            >
+            <ion-col size="3" class="list-heading ion-text-center"
+              >Close</ion-col
+            >
+          </ion-row>
+          <div *ngFor="let item of upcomingSlot.weekdays">
+            <ion-row class="weekdays-col">
+              <ion-col size="6" class="days"
+                >{{weekDayMapping[item.day]}}</ion-col
+              >
+              <ion-col size="3" class="ion-text-center">
+                <ion-badge class="v-center" color="light"
+                  >{{getAMPM(item.openingTime)}}</ion-badge
+                ></ion-col
+              >
+              <ion-col size="3" class="ion-text-center">
+                <ion-badge class="v-center" color="light"
+                  >{{getAMPM(item.closingTime)}}</ion-badge
+                ></ion-col
+              >
+            </ion-row>
+          </div>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</div>

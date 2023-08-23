@@ -1,0 +1,41 @@
+<ion-tabs>
+  <ion-tab-bar class="ion-no-border" slot="bottom">
+    <ion-tab-button tab="tab1">
+      <span class="icon-home tab-icon"></span>
+      <!-- <ion-icon name="home-outline"></ion-icon> -->
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="storeconfig" class="tab2" [disabled]="disableStore">
+      <span class="icon-shop tab-icon"></span>
+      <!-- <ion-icon name="briefcase-outline"></ion-icon> -->
+      <ion-label>My store</ion-label>
+    </ion-tab-button>
+    <ion-tab-button
+      tab="tab3"
+      class="tab3"
+      [disabled]="false"
+      (click)="onTab3Select()"
+    >
+      <span class="icon-calendar tab-icon"></span>
+      <!-- <ion-icon name="calendar-outline"></ion-icon> -->
+      <ion-label>Appointment</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tab4" [disabled]="disableCustomer">
+      <span class="icon-users-1 tab-icon"></span>
+      <!-- <ion-icon name="people-outline"></ion-icon> -->
+      <ion-label>Customers</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="light">
+            <img src="./assets/icon/bocxy_icon.svg" />
+        </ion-fab-button>
+    </ion-fab> -->
+</ion-tabs>
+<!-- <div class="my-overlay" padding [hidden]="overlayHidden">
+  <h2>Check appointment status</h2>
+  <div class="btn-block">
+    <ion-button expand="full" (click)="hideOverlay()"> Got it </ion-button>
+  </div>
+</div> -->

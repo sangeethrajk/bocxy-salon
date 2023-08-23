@@ -1,0 +1,214 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-img class="logo" src="./assets/icon/bocxy-logo.svg"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="">
+    <h4
+      class="ion-text-center bold"
+      *ngIf="!reqOTP"
+      [ngClass]="
+    translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+    >
+      {{'LOGIN_ITEMS.REGISTER' | translate}}
+    </h4>
+    <h4
+      class="ion-text-center"
+      *ngIf="reqOTP"
+      [ngClass]="
+    translate.currentLang ? 'font-' + translate.currentLang : ''
+  "
+    >
+      {{'LOGIN_ITEMS.ENTER_VERIFICATION_CODE' | translate}}
+    </h4>
+    <div class="form-card">
+      <ion-card class="signup-card">
+        <!--Register Validation Errors-->
+        <div *ngIf="!reqOTP" class="validation-error">
+          <ion-label
+            color="danger"
+            *ngIf="exist === 1 && !onSignUpForm.get('mobileNumber').hasError('required') && !onSignUpForm.get('mobileNumber').hasError('invalid_cell_phone')"
+          >
+            Mobile number already registered!
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted || onSignUpForm.get('mobileNumber').touched) && onSignUpForm.get('mobileNumber').hasError('invalid_cell_phone')"
+          >
+            Please enter the valid mobile number
+          </ion-label>
+          <ion-label
+            color="danger"
+            *ngIf="(formSubmitted ||onSignUpForm.get('mobileNumber').touched)&& onSignUpForm.get('mobileNumber').hasError('required')"
+          >
+            Please enter mobile number
+          </ion-label>
+        </div>
+        <!--OTP Validation Errors-->
+        <div *ngIf="reqOTP" class="validation-error">
+          <ion-label color="danger" *ngIf="otpError">
+            Please enter valid OTP
+          </ion-label>
+        </div>
+
+        <form
+          [formGroup]="onSignUpForm"
+          (keyup.enter)="goToOtp()"
+          (submit)="goToOtp()"
+          *ngIf="!reqOTP"
+        >
+          <!--Register Block-->
+          <div class="form animate__animated animate__fadeIn">
+            <div class="input-block sign-input">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                >{{'PLACEHOLDER_MSG.MOBILE_NUMBER' | translate}}</ion-label
+              >
+              <input
+                appBlockCopyPaste
+                class="ng2-tel-input"
+                type="tel"
+                ng2TelInput
+                [ng2TelInputOptions]="telInputOptions"
+                (hasError)="hasError($event)"
+                (ng2TelOutput)="getNumber($event)"
+                (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)"
+                formControlName="mobileNumber"
+                name="mobileNumber"
+                (input)="changePhone()"
+                (keypress)="numberValidate($event)"
+                #ngTelInput
+              />
+            </div>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              class="ion-margin-top"
+              [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+            >
+              {{'LOGIN_ITEMS.REGISTER' | translate}}
+            </ion-button>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="secondary"
+              type="button"
+              class="ion-margin-top"
+              (click)="gotoLogin()"
+              [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+            >
+              {{'LOGIN_ITEMS.SIGN_IN' | translate}}
+            </ion-button>
+          </div>
+        </form>
+        <!--OTP Block-->
+        <form
+          [formGroup]="onOtpForm"
+          (keyup.enter)="verifyOtp()"
+          (submit)="verifyOtp()"
+          *ngIf="reqOTP"
+        >
+          <div class="form animate__animated animate__fadeInDown">
+            <p>{{'LOGIN_ITEMS.OTP_INSTRUCTION_MSG' | translate}}</p>
+            <div class="otp-block">
+              <ng-otp-input
+                (onInputChange)="onOtpChange($event)"
+                [config]="config"
+              ></ng-otp-input>
+            </div>
+
+            <p class="ion-text-center otp-time-text" *ngIf="timeLeft">
+              {{dateService.secondsToTimeFormat(timeLeft)}}
+            </p>
+            <div class="ion-text-center" item-center>
+              <a *ngIf="resendOtpEnable" href="#">
+                <span class="resend-btn" (click)="resend()">Resend</span>
+              </a>
+            </div>
+
+            <ion-button
+              expand="block"
+              shape="round"
+              color="primary"
+              type="submit"
+              [disabled]="verifyBtnEnable"
+              class="ion-margin-top"
+            >
+              Verify
+            </ion-button>
+            <ion-button
+              expand="block"
+              shape="round"
+              color="light"
+              type="submit"
+              class="ion-margin-top"
+              (click)="sendOtp()"
+              >Back
+            </ion-button>
+          </div>
+        </form>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" *ngIf="isKeyboardHide">
+  <ion-toolbar class="ion-text-center">
+    <div class="language-opt">
+      <div
+        class="language-title ion-text-center"
+        [ngClass]="
+      translate.currentLang ? 'font-' + translate.currentLang : ''
+    "
+      >
+        -- {{'COMMON.SELECT_LANGUAGE' | translate}} --
+      </div>
+      <div class="divider"></div>
+      <ion-radio-group
+        mode="ios"
+        value="en"
+        [(ngModel)]="lang"
+        (ionChange)="switchLanguage()"
+      >
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none" color="light">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                [color]="lang === 'en' ? 'secondary':'medium '"
+                >{{'COMMON.ENGLISH' | translate}}</ion-label
+              >
+              <ion-radio color="secondary" slot="start" value="en"></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none" color="light">
+              <ion-label
+                [ngClass]="
+              translate.currentLang ? 'font-' + translate.currentLang : ''
+            "
+                [color]="lang === 'ta' ? 'secondary':'medium '"
+                >தமிழ்</ion-label
+              >
+              <ion-radio color="secondary" slot="start" value="ta"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </div>
+  </ion-toolbar>
+</ion-footer>

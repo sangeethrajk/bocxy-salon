@@ -1,0 +1,30 @@
+:host {
+  .special-hours-card {
+    ion-card-header {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      ion-card-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #444;
+      }
+    }
+  }
+  .special-time-box {
+    width: 100%;
+    display: block;
+    min-height: 30px;
+    align-items: center;
+    ion-badge {
+      float: right;
+      border-radius: 0;
+      min-width: 65px;
+      border: 1px solid #ddd;
+      color: #444;
+    }
+    ion-text {
+      font-size: 1em;
+      color: #444;
+    }
+  }
+}

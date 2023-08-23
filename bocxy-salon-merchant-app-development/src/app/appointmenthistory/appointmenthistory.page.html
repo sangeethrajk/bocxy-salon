@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="previous()">
+        <ion-icon class="back-btn-size" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Appointments History</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+    <div class="form">
+      <div class="input-block">
+        <ion-input
+          type="date"
+          (input)="filterChange($event.target.value)"
+          [max]="maxFilterDate"
+          [value]="selectedAppointmentDate"
+          [(ngModel)]="dateFilter"
+          [ngClass]="dateFilter ? ' ' : 'placeholder'"
+        ></ion-input>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="totalAppointmentCount > 0">
+    <div class="list-heading" *ngIf="appointmentDate">{{appointmentDate}}</div>
+    <div *ngFor="let item of appointments let i=index">
+      <!--List Block-->
+      <div class="appointment-list">
+        <ion-item lines="none" (click)="openDetail(item.appointmentId)">
+          <ion-label>
+            <h2>
+              <div class="wrap-content ion-text-wrap">
+                <ion-text class="ion-text-start customer-name"
+                  >{{item.customerName}}</ion-text
+                >
+              </div>
+
+              <ion-text class="time-stamp">
+                {{calculateBookingtime(item.createdAt)}}</ion-text
+              >
+            </h2>
+            <h3>
+              <div class="wrap-content ion-text-wrap">
+                {{item.bookedServicesList}}
+              </div>
+            </h3>
+            <h3>
+              <span>
+                Booking Date : {{item.bookingDate| date:'dd/MM/yyyy'}}</span
+              >
+            </h3>
+            <h3>
+              <span> Time Slot : {{getAMPM(item.slotName)}}</span>
+              <div class="price-tag">
+                <ion-badge color="medium"
+                  >Rs. {{item.totalPriceExpected}}</ion-badge
+                >
+              </div>
+            </h3>
+            <h3 *ngIf="item.stylistName">
+              <span> Styist : {{item.stylistName}}</span>
+            </h3>
+          </ion-label>
+        </ion-item>
+      </div>
+      <!--List Block End-->
+    </div>
+    <ion-infinite-scroll
+      *ngIf="page < totalPages"
+      threshold="100px"
+      (ionInfinite)="loadMoreData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <!-- <div >
+  <ion-col size="12">No Appoinments available</ion-col>
+</div> -->
+
+  <!--Show If No Appointments-->
+  <div class="no-appointments" *ngIf="totalAppointmentCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no appointments to show
+    </h5>
+  </div>
+</ion-content>

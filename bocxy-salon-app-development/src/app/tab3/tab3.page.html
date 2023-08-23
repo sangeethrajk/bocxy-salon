@@ -1,0 +1,130 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="
+translate.currentLang ? 'font-' + translate.currentLang : ''
+"
+>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{'MY_BOOKINGS_ITEMS.MY_BOOKINGS_TITLE' | translate}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="totalAppointmentCount > 0">
+    <ion-list-header class="list-header">Today</ion-list-header>
+    <div *ngFor="let item of appointmentsList">
+      <ion-card class="my-booking-card">
+        <ion-item class="store-title-item">
+          <span class="icon-shop title-icon"></span>
+          <ion-label>{{item.storeName}}</ion-label>
+        </ion-item>
+        <ion-card-header class="list-card-header">
+          <ion-card-subtitle>{{item.serviceName}}</ion-card-subtitle>
+          <ion-card-subtitle>
+            Time Slot -
+            <span>{{dateService.timeConvert(item.slotName)}} </span>
+            <span class="text-gray">|</span> {{item.location}}
+          </ion-card-subtitle>
+          <ion-card-subtitle *ngIf="item.stylistName">
+            Stylist -
+            <span>{{item.stylistName}} </span>
+          </ion-card-subtitle>
+          <ion-card-subtitle>
+            {{dateService.dateFormat(item.bookingDate).split(' ')[0]}}
+          </ion-card-subtitle>
+          <ion-card-subtitle class="price-block">
+            <ion-row>
+              <ion-col size="8">
+                <div *ngIf="item.totalAmount">
+                  Price -
+                  <ion-text [color]="item.color"
+                    >Rs.{{item.totalAmount}}
+                  </ion-text>
+                  <span>+ GST</span>
+                </div>
+                <!--If no price-->
+                <div *ngIf="!item.totalAmount">
+                  <ion-badge class="no-price ion-text-wrap" color="secondary"
+                    >Price depends after consulting</ion-badge
+                  >
+                </div>
+                <!--//If no price-->
+              </ion-col>
+              <ion-col size="4">
+                <ion-badge [color]="item.color" class="ion-text-end float-r"
+                  >{{item.status}}</ion-badge
+                >
+              </ion-col>
+            </ion-row>
+          </ion-card-subtitle>
+
+          <ion-card-subtitle
+            *ngIf="item.status === 'CANCELED' && item.cancelReason"
+          >
+            Cancel Reason -
+            <ion-text [color]="item.color">{{item.cancelReason}}</ion-text>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="footer-content">
+          <ion-row
+            [ngClass]="
+          translate.currentLang ? 'font-' + translate.currentLang : ''
+          "
+          >
+            <ion-col size="6" class="policy-block">
+              <div class="booking-policy" (click)="bookingPolicy()">
+                {{'MY_BOOKINGS_ITEMS.BOOKING_POLICY_TEXT' | translate}}
+                <ion-icon
+                  name="help-circle-outline"
+                  class="icon-space"
+                ></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button
+                class="detail-btn"
+                color="light"
+                (click)="goTo('/detailappointment/'+item.appointmentId)"
+              >
+                {{'MY_BOOKINGS_ITEMS.DETAILS' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <!-- <ion-infinite-scroll
+      *ngIf="page < totalPages"
+      threshold="100px"
+      (ionInfinite)="loadMoreData($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading..."
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
+  </div>
+  <div class="no-service" *ngIf="totalAppointmentCount === 0">
+    <h5>
+      <div class="nothing-to-show"></div>
+      <br />
+      Currently no appointments to show
+    </h5>
+  </div>
+
+  <!-- <div class="no-grade" *ngIf="totalAppointmentCount == 0">
+    <h5>
+      <ion-icon name="sad-outline" class="icon-space"></ion-icon><br />
+      Currently no bookings to show
+    </h5>
+  </div> -->
+</ion-content>

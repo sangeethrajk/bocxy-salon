@@ -1,0 +1,33 @@
+:host {
+  .button-row {
+    padding: 0 15px;
+    ion-button {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .form {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 50px;
+  }
+  ion-select {
+    border: 1px solid #b6b4b4;
+    border-radius: 5px;
+    top: 4px;
+  }
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+  ion-datetime {
+    border: 1px solid #9e9e9e;
+    padding: 5px 10px;
+    border-radius: 4px;
+    position: absolute;
+    right: 0;
+  }
+}
